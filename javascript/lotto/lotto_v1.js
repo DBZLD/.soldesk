@@ -3,60 +3,52 @@ var bonusComNum;
 var arrPlayerNum = Array(6);
 var bonusSame;
 var sameNum = 0;
-var isError;
 
-var getMyNum;
 var getLottoScreen;
 var getResultScreen;
 var getResultBall;
 var getResultPrice;
+var getCheckBox;
+var checkBoxCount;
 
 window.onload = function(){
-    getMyNum = document.getElementsByClassName("inputLottoNum");
     getLottoScreen = document.getElementById("lottoScreen");
     getResultScreen = document.getElementById("resultScreen");
     getResultBall = document.getElementsByClassName("resultBall");
     getResultPrice = document.getElementById("resultPriceScreen");
+    getCheckBox = document.getElementsByName("checkBoxNumber")
 }
-
+//체크된 체크박스 개수 카운트
+function CountCheckBox(checkBox){
+    var query = 'input[name="checkBoxNumber"]:checked';
+    var checkedBox = document.querySelectorAll(query);
+    checkBoxCount = checkedBox.length;
+    
+    if(checkBoxCount > 6){
+        alert("6개를 초과해서 선택할 수 없습니다.");
+        checkBox.checked = false;
+    }
+}
 //버튼 클릭 이벤트
 function RollLotto(){
-    isError = false;
 
-    for(var i = 0; i < getMyNum.length; i++){
-        if(isError == true) { break; }
-            arrPlayerNum[i] = getMyNum[i].value;
-        for(var j = 0; j < i; j++){
-            if(isError == true) { break; }
-            while(true){
-                if(isError == true) { break; }
-                if(getMyNum[i].value == 0 || getMyNum[i].value == null){
-                        alert("번호를 입력하지 않았습니다");
-                        isError = true;
-                        break;
-                }
-                if(!(getMyNum[i].value >= 1 && getMyNum[i].value <= 45)){
-                    alert("잘못된 값을 입력했습니다.");
-                    isError = true;
-                    break;
-                }
-                if(getMyNum[j].value != getMyNum[i].value){
-                    break;
-                }
-                alert("중복된 번호가 존재합니다.");
-                isError = true;
-                break;
-            }
-        }
+    if(checkBoxCount < 6){
+        alert("6개를 선택해야 합니다.");
+        return;
     }
-    if(isError == true) { return; }
-
+    SetMyNumber();
     SetComNumber();
     FindSame();
     getLottoScreen.style.display = "none";
     getResultScreen.style.display = "flex";
     SetResultBall();
     SetResultPrice();
+}
+function SetMyNumber(){
+    var selectCheckBox = document.querySelectorAll('input[name="checkBoxNumber"]:checked');
+    for(var i = 0; i < selectCheckBox.length; i++){
+        arrPlayerNum[i] = selectCheckBox[i].value;
+    }
 }
 //컴퓨터 랜덤 번호 만들기
 function SetComNumber(){
@@ -140,6 +132,7 @@ function SetResultPrice() {
             break;
     }
 }
+//공 색깔 정하기
 function SetBallColor(number){
     if(number >= 1 && number < 10){
         return "orange";
@@ -160,9 +153,10 @@ function SetBallColor(number){
         return "black";
     }
 }
+//로또 선택 화면으로 돌아가기
 function Resume(){
-    for(var i = 0; i<6; i++){
-        getMyNum[i].value = null;
+    for(var i = 0; i < getCheckBox.length; i++){
+        getCheckBox[i].checked = false;
     }
     getLottoScreen.style.display = "flex";
     getResultScreen.style.display = "none";

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Lotto</title>
+    <script src="lotto_v1.js"></script>
+    <link rel="stylesheet" href="lotto_v1.css">
+</head>
+<body>
+    <div id="box">
+        <div id="infoScreen"></div>
+        <div id="lottoScreen">
+            <h1 id="">L O T T O</h1>
+            <div id="checkBoxScreen">
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox1" type="checkbox" onclick="CountCheckBox();" value="1"><label for="checkBox1">1</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox2" type="checkbox" onclick="CountCheckBox();" value="2"><label for="checkBox2">2</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox3" type="checkbox" onclick="CountCheckBox();" value="3"><label for="checkBox3">3</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox4" type="checkbox" onclick="CountCheckBox();" value="4"><label for="checkBox4">4</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox5" type="checkbox" onclick="CountCheckBox();" value="5"><label for="checkBox5">5</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox6" type="checkbox" onclick="CountCheckBox();" value="6"><label for="checkBox6">6</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox7" type="checkbox" onclick="CountCheckBox();" value="7"><label for="checkBox7">7</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox8" type="checkbox" onclick="CountCheckBox();" value="8"><label for="checkBox8">8</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox9" type="checkbox" onclick="CountCheckBox();" value="9"><label for="checkBox9">9</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox10" type="checkbox" onclick="CountCheckBox(this);" value="10"><label for="checkBox10">10</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox11" type="checkbox" onclick="CountCheckBox(this);" value="11"><label for="checkBox11">11</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox12" type="checkbox" onclick="CountCheckBox(this);" value="12"><label for="checkBox12">12</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox13" type="checkbox" onclick="CountCheckBox(this);" value="13"><label for="checkBox13">13</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox14" type="checkbox" onclick="CountCheckBox(this);" value="14"><label for="checkBox14">14</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox15" type="checkbox" onclick="CountCheckBox(this);" value="15"><label for="checkBox15">15</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox16" type="checkbox" onclick="CountCheckBox(this);" value="16"><label for="checkBox16">16</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox17" type="checkbox" onclick="CountCheckBox(this);" value="17"><label for="checkBox17">17</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox18" type="checkbox" onclick="CountCheckBox(this);" value="18"><label for="checkBox18">18</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox19" type="checkbox" onclick="CountCheckBox(this);" value="19"><label for="checkBox19">19</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox20" type="checkbox" onclick="CountCheckBox(this);" value="20"><label for="checkBox20">20</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox21" type="checkbox" onclick="CountCheckBox(this);" value="21"><label for="checkBox21">21</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox22" type="checkbox" onclick="CountCheckBox(this);" value="22"><label for="checkBox22">22</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox23" type="checkbox" onclick="CountCheckBox(this);" value="23"><label for="checkBox23">23</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox24" type="checkbox" onclick="CountCheckBox(this);" value="24"><label for="checkBox24">24</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox25" type="checkbox" onclick="CountCheckBox(this);" value="25"><label for="checkBox25">25</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox26" type="checkbox" onclick="CountCheckBox(this);" value="26"><label for="checkBox26">26</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox27" type="checkbox" onclick="CountCheckBox(this);" value="27"><label for="checkBox27">27</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox28" type="checkbox" onclick="CountCheckBox(this);" value="28"><label for="checkBox28">28</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox29" type="checkbox" onclick="CountCheckBox(this);" value="29"><label for="checkBox29">29</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox30" type="checkbox" onclick="CountCheckBox(this);" value="30"><label for="checkBox30">30</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox31" type="checkbox" onclick="CountCheckBox(this);" value="31"><label for="checkBox31">31</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox32" type="checkbox" onclick="CountCheckBox(this);" value="32"><label for="checkBox32">32</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox33" type="checkbox" onclick="CountCheckBox(this);" value="33"><label for="checkBox33">33</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox34" type="checkbox" onclick="CountCheckBox(this);" value="34"><label for="checkBox34">34</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox35" type="checkbox" onclick="CountCheckBox(this);" value="35"><label for="checkBox35">35</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox36" type="checkbox" onclick="CountCheckBox(this);" value="36"><label for="checkBox36">36</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox37" type="checkbox" onclick="CountCheckBox(this);" value="37"><label for="checkBox37">37</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox38" type="checkbox" onclick="CountCheckBox(this);" value="38"><label for="checkBox38">38</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox39" type="checkbox" onclick="CountCheckBox(this);" value="39"><label for="checkBox39">39</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox40" type="checkbox" onclick="CountCheckBox(this);" value="40"><label for="checkBox40">40</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox41" type="checkbox" onclick="CountCheckBox(this);" value="41"><label for="checkBox41">41</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox42" type="checkbox" onclick="CountCheckBox(this);" value="42"><label for="checkBox42">42</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox43" type="checkbox" onclick="CountCheckBox(this);" value="43"><label for="checkBox43">43</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox44" type="checkbox" onclick="CountCheckBox(this);" value="44"><label for="checkBox44">44</label>
+                </div>
+                <div class="checkBoxSet">
+                    <input name="checkBoxNumber" id="checkBox45" type="checkbox" onclick="CountCheckBox(this);" value="45"><label for="checkBox45">45</label>
+                </div>
+            </div>
+            <input id="lottoButton" type="submit" onclick="RollLotto();" value="완료">
+        </div>
+        <div id="resultScreen">
+            <div id="myResultScreen">
+                <h2 id="resultText">내 번호</h2>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+            </div>
+            <div id="comResultScreen">
+                <h2 id="resultText">당첨 번호</h2>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <h2>+</h2>
+                <div class="resultBall"></div>
+            </div>
+            <div id="resultPriceScreen"></div>
+            <input id="resumeButton" type="submit" onclick="Resume();" value="다시하기">
+        </div>
+    </div>
+</body>
+</html>
