@@ -1,0 +1,23 @@
+/* * { color: pink; background-color: gray; } */
+
+h1 {
+    background: red;
+    width: 100px;
+
+    /* transition-property: width, background-color; */
+
+
+    transition-property: width, background-color;
+    transition-duration: 3s;
+
+
+}
+h1::first-letter{
+    background-color: green;
+}
+h1:hover {
+
+    background-color: blue;
+
+    width: 400px;
+}

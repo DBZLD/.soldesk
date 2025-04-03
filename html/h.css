@@ -1,0 +1,21 @@
+body{
+    background-color:khaki;
+}
+main{
+    background-color: gray;
+}
+header{
+    background-color: gold;
+}
+table{
+    border-width : 5px;
+    border-style: inset;
+    border-color: rgba(100, 65, 182, 0.603);
+}
+tr,td {
+    border-width : 2px;
+    border-style: solid;
+    border-color: black;
+    
+    padding: 7px;
+}

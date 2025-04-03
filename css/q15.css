@@ -1,0 +1,26 @@
+#m{
+    display: flex;
+    width : 500px;
+    height : 100px;
+    background-color: black;
+}
+#a{
+    flex-basis: 10%;
+    background-color: red;
+}
+#b{
+    flex-basis: 30%;
+    background-color: orange;
+}
+#c{
+    flex-basis: 20%;
+    background-color: yellow;
+}
+#d{
+    flex-basis: 20%;
+    background-color: green;
+}
+#e{
+    flex-basis: 20%;
+    background-color: blue;
+}

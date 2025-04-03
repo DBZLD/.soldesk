@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="lotto_v1.js"></script>
+    <link rel="stylesheet" href="lotto_v1.css">
+</head>
+<body>
+    <div id="box">
+        <div id="lottoScreen">
+        <h1 id="">L O T T O</h1>
+        <input class="inputLottoNum" type="text" placeholder="1~45까지의 번호를 입력해주세요.">
+        <input class="inputLottoNum" type="text" placeholder="1~45까지의 번호를 입력해주세요.">
+        <input class="inputLottoNum" type="text" placeholder="1~45까지의 번호를 입력해주세요.">
+            <input class="inputLottoNum" type="text" placeholder="1~45까지의 번호를 입력해주세요.">
+            <input class="inputLottoNum" type="text" placeholder="1~45까지의 번호를 입력해주세요.">
+            <input class="inputLottoNum" type="text" placeholder="1~45까지의 번호를 입력해주세요.">
+            <input id="lottoButton" type="submit" onclick="RollLotto();" value="완료">
+        </div>
+        <div id="resultScreen">
+            <div id="myResultScreen">
+                <h2 id="resultText">내 번호</h2>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+            </div>
+            <div id="comResultScreen">
+                <h2 id="resultText">당첨 번호</h2>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <div class="resultBall"></div>
+                <h2>+</h2>
+                <div class="resultBall"></div>
+            </div>
+            <div id="resultPriceScreen"></div>
+            <input id="resumeButton" type="submit" onclick="Resume();" value="다시하기">
+        </div>
+    </div>
+</body>
+</html>

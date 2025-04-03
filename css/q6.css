@@ -1,0 +1,54 @@
+.m{
+    display: flex;
+}
+.ml{
+    width: 700px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+}
+.lt{
+    display: flex;
+    height: 100px;
+    border-width: 2px;
+    border-style: solid;
+}
+.ltl{
+    width: 200px;
+    background-color: red;
+}
+.ltr{
+    width: 500px;
+    background-color: yellow;
+}
+.lm{
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    border-width: 2px;
+    border-style: solid;
+}
+.lmm{
+    height: 100px;
+    background-color: orange;
+}
+.lb{
+    display: flex;
+    height: 200px;
+    border-width: 2px;
+    border-style: solid;
+}
+.lbl{
+    width: 300px;
+    background-color: green;
+}
+.lbr{
+    width: 400px;
+    background-color: blue;
+}
+.mr{
+    width: 300px;
+    height: 800px;
+    display: flex;
+    background-color: pink;
+}

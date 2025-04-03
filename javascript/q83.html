@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>숫자만 입력
+        <input type="text" name="patternValue" pattern = "^[0-9]+$">
+        <input type="submit">
+    </form>
+    <form>영문 대소문자만
+        <input type="text" name="patternValue" pattern = "^[a-zA-Z]+$">
+        <input type="submit">
+    </form>
+    <form>영문 대소문자만(띄어쓰기 공백 가능)
+        <input type="text" name="patternValue" pattern = "^[a-zA-Z\s]+$">
+        <input type="submit">
+    </form>
+    <form>숫자, 영문 대소문자만
+        <input type="text" name="patternValue" pattern="^[a-zA-Z0-9]+$">
+        <input type="submit">
+    </form>
+    <form>"최소 8자리에서 최대 16자리까지 숫자, 영문, 
+        특수문자 각 1개 이상 포함 (암호 유효성 검사에 유용)"
+        <input type="text" name="patternValue" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$">
+        <input type="submit">
+    </form>
+</body>
+
+</html>

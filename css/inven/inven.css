@@ -1,0 +1,315 @@
+body{
+    background-image: url('https://i.namu.wiki/i/8ms_9LQMrNJIjg7TbVtzQjy4P6fDrcQwotd8NdLKqh7Gs7FTj6uvNdRPlq9YGOdqdZ8T0OWLyEQ0BAo3z4C2Tw.webp');
+    background-size: contain;
+    background-position: center top;
+    background-repeat: repeat-y;
+    display: flex;
+    flex-direction: column;
+}
+a{
+    text-decoration-line: none;
+}
+div{
+    font-family: "IBM Plex Sans KR", sans-serif;
+}
+td{
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+/* 최상단 */
+#HighBackground{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 90px;
+}
+    /* 최상단 배너 */
+    #HighTopBackground{
+        height: 60px;
+        background-color: black;
+    }
+    /* 최상단 메뉴 */
+    #HighBottomBackground{
+        height: 50px;
+    }
+    
+/* 최상단 제외 영역 */
+#Background{
+    display: flex;
+    width: 1200px;
+    height: 1350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+    /* 좌측,센터 메뉴 */
+    #LeftBackground{
+        display: flex;
+        flex-direction: column;
+        width: 900px;
+        height: 1000px;
+    }
+        /* 상단 */
+        #TopBackground{
+            display: flex;
+            height: 130px;
+            margin-bottom: 10px;
+        }
+            /* 상단 로고 */
+            #TopLeft{
+                display: flex;
+                width: 200px;
+                justify-content: center;
+                align-items: center;
+            }
+            /* 상단 배너 */
+            #TopRight{
+                width: 700px;
+            }
+        /* 중단 */
+        #MiddleBackground{
+            display: flex;
+        }
+            /* 중단 메뉴 */
+            #MiddleMenu{
+                width: 100px;
+                height: 30px;
+                background-color: rgb(112, 2, 2);
+                border-top: 1px;
+                border-bottom: 1px;
+                border-style: solid;
+                text-align: center;
+                color: rgb(230, 203, 169);
+                line-height: 30px;
+                font-size: 12px;
+                font-weight:bold;
+            }
+            /* 중단 메뉴 호버 */
+            :hover#MiddleMenuA{
+               color: red;
+            }
+        /* 하단 */
+        #BottomBackground{
+            height: auto;
+            display: flex;
+        }
+            /* 좌하단 */
+            #BottomLeft{
+                width: 180px;
+                display: flex;
+                flex-direction: column;
+            }
+                /* 좌하단 정보 */
+                #BottomLeftInfo{
+                    width: 180px;
+                    height: 150px;
+                    display: flex;
+                    flex-direction: column;
+                    background-color:rgb(43, 0, 0);
+                }
+                    /* 좌하단 글자 */
+                    #BottomLeftText{
+                        position: relative;
+                        left: 45px;
+                        top: 15px;
+                        width: auto;
+                        height: 16px;
+                        color: white;
+                        font-size: 15px;
+                        font-weight: bold;
+                    }
+                    /* 좌하단 id입력창 */
+                    #BottomLeftId{
+                        position: relative;
+                        width: 110px;
+                        height: 15px;
+                        left: 15px;
+                        top: 30px;
+                    }
+                    /* 좌하단 pw입력창 */
+                    #BottomLeftPw{
+                        position: relative;
+                        width: 110px;
+                        height: 15px;
+                        left: 15px;
+                        top: 10px;
+                    }
+                    /* 좌하단 로그인 버튼 */
+                    #BottomLeftLogin{
+                        position: relative;
+                        width: 35px;
+                        height: 55px;
+                        left: 18px;
+                        top: 10px;
+                        writing-mode: vertical-lr;
+                    }
+                    /* 좌하단 계정생성 텍스트 */
+                    #BottomLeftCA{
+                        position: relative;
+                        width: 45px;
+                        height: 13px;
+                        left: 20px;
+                        top: 20px;
+                        color: rgb(185, 145, 145);
+                        font-size: 12px;
+                    }
+                    /* 좌하단 분리선 */
+                    #BottomLeftLine{
+                        position: relative;
+                        width: 5px;
+                        height: 13px;
+                        left: 80px;
+                        top: 7px;
+                        color: rgb(185, 145, 145);
+                    }
+                    /* 좌하단 id/pw찾기 텍스트 */
+                    #BottomLeftFind{
+                        position: relative;
+                        display: inline;
+                        width: auto;
+                        height: auto;
+                        left: 102px;
+                        bottom: 8px;
+                        color: rgb(185, 145, 145);
+                        font-size: 12px;
+                    }
+
+                /* 좌하단 메뉴 */
+                #BottomLeftMenu{
+                    width: 180px;
+                    height: 30px;
+                    position: relative;
+                    background-color:rgb(43, 0, 0);
+                    color:rgb(185, 145, 145);
+                    font-size: 12px;
+                    line-height: 30px;
+                    text-indent: 15px;
+                }
+                /* 좌하단 제목 */
+                #BottomLeftTitle{
+                    width: 180px;
+                    height: 35px;
+                    background-color:rgb(133, 0, 0);
+                    border-top: 1px;
+                    border-style: solid;
+                    border-color: rgb(252, 209, 154);
+                    color:burlywood;
+                    font-size: 14px;
+                    font-weight: bold;
+                    line-height: 35px;
+                    text-indent: 10px;
+                }
+                :hover#LeftMenuA{
+                    color: rgb(185, 145, 145);
+                    text-decoration-line:underline;
+                }
+            /* 센터 하단 */
+            #BottomRight{
+                width: 720px;
+                display: flex;
+                flex-direction: column;
+            }
+            /* 센터 하단 정보 */
+            #BottomRightInfo{
+                display: flex;
+                flex-direction: column;
+                width: 720px;
+                height: 140px;
+                background-color: white;
+            }
+            /* 센터 하단 제목 */
+            #BottomRightInfoTitle{
+                width: auto;
+                height: 40px;
+                background-color: rgb(112, 2, 2);
+                margin: 10px;
+                border-radius: 10px;
+                font-size: 20px;
+                color: white;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                padding-left: 20px;
+            }
+            /* 센터 하단 셀렉트 박스 */
+            #BottomRightInfoSelect{
+                margin-left: 10px;
+            }
+            /* 센터 하단 텍스트 */
+            #BottomRightInfoText{
+                width: auto;
+                height: 40px;
+                background-color: rgb(201, 201, 201);
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-top: 5px;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                padding-left: 15px;
+            }
+            /* 센터 하단 메뉴 */
+            #BottomRightMenu{
+                display: flex;
+                    width: 720px;
+                    height: 140px;
+                    background-color: white;
+                    border-bottom: 1px;
+                    border-style: solid;
+                    border-color: rgb(185, 185, 185);
+                }   
+                    /* 센터 하단 메뉴 이미지 */
+                    #BottomRightImg{
+                        width: 160px;
+                        height: 110px;
+                        padding: 10px;
+                    }
+                    /* 센터 하단 메뉴 텍스트 */
+                    #bottomRightText{
+                        width: 560px;
+                        flex-direction: column;
+                    }
+                        /* 센터 하단 제목 */
+                        #BottomRightTitle{
+                            width: 500px;
+                            height: 40px;
+                            display: flex;
+                            align-items: center;
+                            font-weight: bold;
+                            font-size: 14px;
+                            padding-left: 5px;
+                        }
+                        /* 센터 하단 내용 */
+                        #BottomRightContent{
+                            width: 500px;
+                            height: 60px;
+                            font-size: 12px;
+                            padding-left: 3px;
+                            padding-right: 5px;
+                            line-height: 17px;
+                        }
+    /* 우측 배너 */
+    #RightBackground{
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+        height: 1000px;
+        margin-left: 10px;
+    }
+/* 상단 배너 이미지 */
+#ImgTopAds{
+    width: 700px;
+    height: 130px;
+}
+/* 상단 로고 이미지 */
+#ImgLogo{
+    width: 150px;
+    height: 100px;
+}
+/* 우측 배너 이미지 */
+#ImgRightAds{
+    width: 250px;
+    height: 250px;
+}

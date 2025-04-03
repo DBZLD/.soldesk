@@ -1,0 +1,12 @@
+#m{
+    display: flex;
+    width : 1000px;
+    height : 100px;
+    justify-content: center;
+    background-color: black;
+}
+#a{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}

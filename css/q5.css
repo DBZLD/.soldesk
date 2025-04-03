@@ -1,0 +1,28 @@
+.top{
+    display: flex;
+    height: 200px;
+}
+.topr{
+    width: 250px;
+    background-color: red;
+}
+.topl{
+    width: 250px;
+    background-color: orange;
+}
+.mid{
+    width: 500px;
+    height: 200px;
+    background-color: yellow;
+}
+.bot{
+    display: flex;
+    height: 200px;
+}
+.botr{
+    width: 250px;
+    background-color: green;
+}.botl{
+    width: 250px;
+    background-color: blue;
+}

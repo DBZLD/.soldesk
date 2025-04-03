@@ -1,0 +1,12 @@
+#timer{
+    width: 600px;
+    height: 300px;
+    background-color: aqua;
+    font-size: 20px;
+}
+#clock{
+    width: 600px;
+    height: 300px;
+    background-color: pink;
+    font-size: 20px;
+}

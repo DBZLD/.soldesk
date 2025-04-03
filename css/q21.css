@@ -1,0 +1,22 @@
+body{
+    background-color: pink;
+}
+
+#bg{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+    
+    width : 800px;
+    height : 800px;
+}
+.block{
+    width : 100px;
+    height : 100px;
+}
+#b{
+    background-color: black;
+}
+#w{
+    background-color: white;
+}

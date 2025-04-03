@@ -1,0 +1,12 @@
+.bimg{
+    position: relative;
+    left: 100px;
+    top: 100px;
+    width: 600px;
+    height: 600px;
+    background-image: url('cat.jpg');
+    background-position: center center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
