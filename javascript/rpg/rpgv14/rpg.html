@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="common.js"></script>
+    <script src="rpgfunction.js"></script>
+    <script src="rpgcharacter.js"></script>
+    <script src="rpgmonster.js"></script>
+    <script src="rpg.js"></script>
+    <link rel="stylesheet" href="rpg.css">
+</head>
+<body>
+    <div id="textareaScreen">
+        <textarea id = "rpgScreen" readonly></textarea>
+        <div id="infoScreen">
+            <textarea id = "playerScreen" readonly></textarea>
+            <textarea id = "objectScreen" readonly></textarea>
+        </div>
+    </div>
+    <input id = "turnButton" type="button" onclick="TurnOver();" value="턴 진행">
+    <input id = "turnText" type="text" readonly>
+</body>
+</html>

@@ -4,9 +4,10 @@ function Monster(name, hp, attack){
     this.attack;
 
     this.info = function(){
-        document.write("이름 : " + name + '\n');
-        document.write("체력 : " + hp + '\n');
-        document.write("공격력 : " + attack + '\n');
+        document.write("이름 : " + name);
+        document.write("&nbsp;&nbsp;체력 : " + hp);
+        document.write("&nbsp;&nbsp;공격력 : " + attack);
+        br();
     }
 }
 function Character(name, hp, attack){
@@ -15,9 +16,10 @@ function Character(name, hp, attack){
     this.attack;
 
     this.info = function(){
-        document.write("이름 : " + name + '\n');
-        document.write("체력 : " + hp + '\n');
-        document.write("공격력 : " + attack + '\n');
+        document.write("이름 : " + name);
+        document.write("&nbsp;&nbsp;체력 : " + hp);
+        document.write("&nbsp;&nbsp;공격력 : " + attack);
+        br();
     }
 }
 
