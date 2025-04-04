@@ -7,6 +7,7 @@
     <script src="rpgfunction.js"></script>
     <script src="rpgcharacter.js"></script>
     <script src="rpgmonster.js"></script>
+    <script src="rpgroom.js"></script>
     <script src="rpg.js"></script>
     <link rel="stylesheet" href="rpg.css">
 </head>
@@ -16,13 +17,16 @@
         <div id="infoScreen">
             <textarea id = "playerScreen" readonly></textarea>
             <textarea id = "objectScreen" readonly></textarea>
+            <textarea id = "roomScreen" readonly></textarea>
         </div>
     </div>
-    <input id = "turnButton" type="button" onclick="TurnOver();" value="턴 진행">
-    <input id = "turnText" type="text" readonly>
-    <input id="moveButton" type="button" onclick="clickMoveEast();" value="동">
-    <input id="moveButton" type="button" onclick="clickMoveWest();"value="서">
-    <input id="moveButton" type="button" onclick="clickMoveSouth();"value="남">
-    <input id="moveButton" type="button" onclick="clickMoveNorth();"value="북">
+    <div id="buttonScreen">
+        <input id = "turnButton" type="button" onclick="TurnOver();" value="턴 진행">
+        <input id = "turnText" type="text" readonly>
+        <input id="moveButton" type="button" onclick="clickMoveEast();" value="동">
+        <input id="moveButton" type="button" onclick="clickMoveWest();"value="서">
+        <input id="moveButton" type="button" onclick="clickMoveSouth();"value="남">
+        <input id="moveButton" type="button" onclick="clickMoveNorth();"value="북">
+    </div>
 </body>
 </html>

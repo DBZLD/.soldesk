@@ -4,6 +4,7 @@ var elf = new Character("플레이어", 200, 10);
 var getRpgTextarea;
 var getPlayerTextarea;
 var getObjectTextarea;
+var getRoomTextarea;
 var getTurnText;
 var stRpgTextarea = "";
 var stPlayerTextarea = "";
@@ -15,6 +16,7 @@ window.onload = function() {
 	getRpgTextarea = document.getElementById("rpgScreen");
 	getPlayerTextarea = document.getElementById("playerScreen");
 	getObjectTextarea = document.getElementById("objectScreen");
+	getRoomTextarea = document.getElementById("roomScreen");
 	getTurnText = document.getElementById("turnText");
 
 	getTurnText.value = nTurn + "턴";

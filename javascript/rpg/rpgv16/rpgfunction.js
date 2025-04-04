@@ -53,25 +53,25 @@ function PrintFightInfo(){
 }
 function clickMoveEast(){
 	stRpg("동쪽으로 이동");
-	br();
+	br(); br();
 	nTurn++;
 	getTurnText.value = nTurn + "턴";
 }
 function clickMoveWest(){
 	stRpg("서쪽으로 이동");
-	br();
+	br(); br();
 	nTurn++;
 	getTurnText.value = nTurn + "턴";
 }
 function clickMoveSouth(){
 	stRpg("남쪽으로 이동");
-	br();
+	br(); br();
 	nTurn++;
 	getTurnText.value = nTurn + "턴";
 }
 function clickMoveNorth(){
 	stRpg("북쪽으로 이동");
-	br();
+	br(); br();
 	nTurn++;
 	getTurnText.value = nTurn + "턴";
 }
