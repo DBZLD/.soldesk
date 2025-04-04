@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Lotto</title>
-    <script src="lotto_v2.js"></script>
-    <link rel="stylesheet" href="lotto_v2.css">
+    <script src="lotto_v3.js"></script>
+    <link rel="stylesheet" href="lotto_v3.css">
 </head>
 <body>
     <div id="box">
@@ -148,7 +148,10 @@
                     <input name="checkBoxNumber" id="checkBox45" type="checkbox" onclick="CountCheckBox(this);" value="45"><label for="checkBox45">45</label>
                 </div>
             </div>
-            <input id="lottoButton" type="submit" onclick="RollLotto();" value="완료">
+            <div id="buttonScreen">
+                <input id="lottoButton" type="submit" onclick="RollLotto();" value = "입력 완료">
+                <input id="lottoAutoButton" type="submit" onclick="RollAutoLotto();" value ="자동 입력">
+            </div>
         </div>
         <div id="resultScreen">
             <div id="myResultScreen">
@@ -172,7 +175,9 @@
                 <div class="resultBall"></div>
             </div>
             <div id="resultPriceScreen"></div>
-            <input id="resumeButton" type="submit" onclick="Resume();" value="다시하기">
+            <div id="buttonResultScreen">
+                <input id="resumeButton" type="submit" onclick="Resume();" value="다시하기">
+            </div>
         </div>
     </div>
 </body>

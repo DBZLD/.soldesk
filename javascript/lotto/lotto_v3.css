@@ -7,12 +7,14 @@
     align-items: center;
     }
     #infoScreen{
-        width: auto;
+        width: 100%;
         height: 100px;
         background-color: yellowgreen;
-        font-size: 20px;
+        font-size: 30px;
         font-weight: bold;
-        align-items: start;
+        text-align: center;
+        line-height: 100px;
+        margin-bottom: 10px;
     }
     #lottoScreen{
         width: 400px;
@@ -23,7 +25,7 @@
         border-color: black;
         border-width: 2px;
         border-style: solid;
-        border-radius: 10%;
+        border-radius: 5%;
         align-items: center;
     }
         #checkBoxScreen{
@@ -45,10 +47,26 @@
             color: rgb(255, 108, 108);
             font-weight: bold;
         }
+    #buttonScreen{
+        height: 50px;
+    }
         #lottoButton{
             margin-top: 30px;
+            margin-right: 10px;
+            margin-left: 10px;
             width: 150px;
             height: 50px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #lottoAutoButton{
+            margin-top: 30px;
+            margin-right: 10px;
+            margin-left: 10px;
+            width: 150px;
+            height: 50px;
+            font-size: 20px;
+            font-weight: bold;
         }
     #resultScreen{
         display: none;
@@ -93,9 +111,15 @@
             margin: 20px;
             justify-content: center;
         }
+        #buttonResultScreen{
+            width: auto;
+            height: 50px;
+            margin: 10px;
+        }
         #resumeButton{
-            width: 200px;
-            height: 100px;
+            width: 700px;
+            font-size: 30px;
+            font-weight: bold;
         }
         .inputLottoNum{
             width: 250px;
