@@ -1,17 +1,17 @@
 function br(){
     stRpgTextarea += "\n";
     getRpgTextarea.value = stRpgTextarea;
-    screenMessageBoxScrollToBot()
+    TextareaAutoScroll()
 }
 function hr(){
     stRpgTextarea += "\n------------------------------------------------------\n"
     getRpgTextarea.value = stRpgTextarea;
-    screenMessageBoxScrollToBot()
+    TextareaAutoScroll()
 }
 function stRpg(str){
     stRpgTextarea += str;
     getRpgTextarea.value = stRpgTextarea;
-    screenMessageBoxScrollToBot();
+    TextareaAutoScroll();
 }
 function stPlayer(str){
     getPlayerTextarea.value = "";
@@ -24,4 +24,9 @@ function stObject(str){
 function stRoom(str){
     getRoomTextarea.value = "";
     getRoomTextarea.value = str;
+}
+function stTurn(str){
+    getTurnText.value = "";
+    nTurn++;
+    getTurnText.value = str + "턴";
 }

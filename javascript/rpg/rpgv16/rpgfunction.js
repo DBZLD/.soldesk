@@ -3,12 +3,12 @@ function TurnOver(){
 	if(playerState == "전투"){
 		PrintFightInfo();
 		br();
-		if (elf.nowHp <= 0 || orc.nowHp <= 0) {
-			elf.nowExp += 100;
-			stRpg(orc.name + "가 " + elf.name + "에게 경험치를 " + "100만큼 줬습니다.");
+		if (player.nowHp <= 0 || orc.nowHp <= 0) {
+			player.nowExp += 100;
+			stRpg(orc.name + "가 " + player.name + "에게 경험치를 " + "100만큼 줬습니다.");
 			br();
-			elf.nowMoney += 10;
-			elf.Info();
+			player.nowMoney += 10;
+			player.Info();
 			hr();
 			stRpg("전투 종료");
 			hr();
@@ -31,7 +31,7 @@ function GetRandomAttackValue(attack){
 }
 // 정보 화면 출력
 function PrintInfo(){
-	elf.Info();
+	player.Info();
 	if(orc.nowHp > 0){
 		orc.Info();
 	}
@@ -41,13 +41,13 @@ function PrintInfo(){
 }
 // 전투 화면 출력
 function PrintFightInfo(){
-	var elfdamage = GetRandomAttackValue(elf.attack);
-	var orcdamage = GetRandomAttackValue(orc.attack);
-	elf.nowHp -= orcdamage;
-	orc.nowHp -= elfdamage;
-	stRpg(elf.name + "가 " + orc.name + "에게 데미지를 " + elfdamage + "만큼 입혔습니다.");
+	var playerDamage = GetRandomAttackValue(player.attack);
+	var orcDamage = GetRandomAttackValue(orc.attack);
+	player.nowHp -= orcDamage;
+	orc.nowHp -= elfDamage;
+	stRpg(elf.name + "가 " + orc.name + "에게 데미지를 " + playerDamage + "만큼 입혔습니다.");
 	br(); br();
-	stRpg(orc.name + "가 " + elf.name + "에게 데미지를 " + orcdamage + "만큼 입혔습니다.");
+	stRpg(orc.name + "가 " + elf.name + "에게 데미지를 " + orcDamage + "만큼 입혔습니다.");
 	br(); br();
 	PrintInfo();
 }
