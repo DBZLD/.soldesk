@@ -1,4 +1,3 @@
-
 var player = new Character("플레이어", 200, 10);
 
 var getRpgTextarea;
