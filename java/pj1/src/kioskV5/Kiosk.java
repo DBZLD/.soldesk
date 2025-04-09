@@ -1,20 +1,21 @@
-package kioskV4;
+package kioskV5;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
-	public static void main(String[] args) {
+public class Kiosk {
+	Scanner sc;
+	String userChoice;
+	Product espresso = new Product("에스프레소", 2000);
+	Product americano = new Product("아메리카노", 1000);
+	Product cake = new Product("케이크", 5000);
+	Product cookie = new Product("쿠키", 4000);
+	ArrayList<Product> choiceMenu = new ArrayList<Product>();
+	
+	public void Run() {
 		System.out.println("============================================");
 		System.out.println("==============       카페       ==============");
 		System.out.println("============================================");
-		Scanner sc;
-		String userChoice;
-		Product espresso = new Product("에스프레소", 2000);
-		Product americano = new Product("아메리카노", 1000);
-		Product cake = new Product("케이크", 5000);
-		Product cookie = new Product("쿠키", 4000);
-		ArrayList<Product> choiceMenu = new ArrayList<Product>();
 		loopMain:
 		while(true) {
 			System.out.print("1.음료\n2.디저트\n3.주문 내역 보기\n4.나가기\n선택 : ");
@@ -62,12 +63,15 @@ public class Main {
 					}
 				break;
 			case "3":
+				int nTotalPrice = 0;
 				if(choiceMenu.size() <= 0) {
 					System.out.println("\n주문내역이 없습니다.\n");
 				}
 				for(int i = 0; i < choiceMenu.size(); i++) {
-					System.out.println(choiceMenu.get(i).Info());
+					System.out.println(choiceMenu.get(i).stName);
+					nTotalPrice += choiceMenu.get(i).nPrice;
 				}
+				System.out.println("총 주문 금액 : " + nTotalPrice);
 				break;
 			case "4":
 				break loopMain;
