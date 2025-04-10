@@ -8,10 +8,10 @@ public class Kiosk {
 			System.out.print("1.음료\n2.디저트\n3.주문 내역 보기\n4.나가기\n선택 : ");
 			switch (Function.SearchChoice()) {
 			case "1":
-				ProcDrink.OrderDrink();
+				Function.OrderDrink();
 				break;
 			case "2":
-				ProcFood.OrderFood();
+				Function.OrderFood();
 				break;
 			case "3":
 				if (Function.orderList.size() <= 0) {

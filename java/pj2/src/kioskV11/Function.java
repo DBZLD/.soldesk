@@ -31,6 +31,38 @@ public class Function {
 		return userChoice;
 	}
 
+	public static void OrderDrink() {
+		while (true) {
+			Display.DrinkMenuDisplay();
+			switch (Function.SearchChoice()) {
+			case "1":
+				OrderMenu(espresso);
+				break;
+			case "2":
+				OrderMenu(americano);
+				break;
+			case "3":
+				return;
+			}
+		}
+	}
+
+	public static void OrderFood() {
+		while (true) {
+			Display.FoodMenuDisplay();
+			switch (SearchChoice()) {
+			case "1":
+				OrderMenu(cake);
+				break;
+			case "2":
+				OrderMenu(cookie);
+				break;
+			case "3":
+				return;
+			}
+		}
+	}
+
 	public static void OrderMenu(Product pro) {
 		System.out.println(pro.stName + " 을(를)주문 내역에 추가");
 		orderList.add(pro);

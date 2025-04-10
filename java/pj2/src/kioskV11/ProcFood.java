@@ -3,22 +3,6 @@ package kioskV11;
 public class ProcFood extends Product {
 	boolean isSpoon;
 
-	public static void OrderFood() {
-		loopFood: while (true) {
-			Display.FoodMenuDisplay();
-			switch (Function.SearchChoice()) {
-			case "1":
-				Function.OrderMenu(Function.cake);
-				break;
-			case "2":
-				Function.OrderMenu(Function.cookie);
-				break;
-			case "3":
-				break loopFood;
-			}
-		}
-	}
-
 	public String Info() {
 		String shortInfo;
 		shortInfo = stName + "(" + nPrice + "원)";

@@ -4,22 +4,6 @@ public class ProcDrink extends Product {
 
 	boolean isHot;
 
-	public static void OrderDrink() {
-		loopDrink: while (true) {
-			Display.DrinkMenuDisplay();
-			switch (Function.SearchChoice()) {
-			case "1":
-				Function.OrderMenu(Function.espresso);
-				break;
-			case "2":
-				Function.OrderMenu(Function.americano);
-				break;
-			case "3":
-				break loopDrink;
-			}
-		}
-	}
-
 	public String Info() {
 		String shortInfo;
 		shortInfo = stName + "(" + nPrice + "원)";
