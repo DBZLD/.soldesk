@@ -1,0 +1,5 @@
+package extend2;
+
+public class Object {
+	String stName;
+}

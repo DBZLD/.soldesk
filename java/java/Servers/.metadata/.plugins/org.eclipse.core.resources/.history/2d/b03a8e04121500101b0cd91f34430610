@@ -1,0 +1,23 @@
+package kioskV10;
+
+import java.util.Scanner;
+
+public class ProcDrink {
+
+	public static void OrderDrink() {
+		loopDrink: while (true) {
+			Display.DrinkMenuDisplay();
+			Function.SearchChoice();
+			switch (Product.userChoice) {
+			case "1":
+				Product.OrderMenu(Product.espresso);
+				break;
+			case "2":
+				Product.OrderMenu(Product.americano);
+				break;
+			case "3":
+				break loopDrink;
+			}
+		}
+	}
+}

@@ -1,0 +1,6 @@
+package lotto;
+
+public class Lotto {
+	int nPlayerNum[] = new int[6];
+	int nComNum[] = new int[6];
+}

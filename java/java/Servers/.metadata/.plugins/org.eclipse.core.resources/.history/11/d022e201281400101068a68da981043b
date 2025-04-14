@@ -1,0 +1,11 @@
+package class1;
+
+public class Cat {
+	int nAge;
+	int nWeight;
+	String stName;
+	
+	public void Info() {
+		System.out.println("이름 " + stName + " 나이 : " + nAge + " 몸무게 : " + nWeight);
+	}
+}

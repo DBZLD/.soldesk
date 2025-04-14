@@ -1,0 +1,10 @@
+package extend;
+
+public class Character extends GameObject {
+	int nHp;
+	int nDamage;
+
+	void Info() {
+		System.out.println(String.format("이름 : %s\n 체력 : %d\n 데미지 : %d", stName, nHp, nDamage));
+	}
+}

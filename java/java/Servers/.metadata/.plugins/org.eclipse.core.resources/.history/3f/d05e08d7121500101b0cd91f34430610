@@ -1,0 +1,24 @@
+package kioskV10;
+
+public class ProcDrink extends Product {
+
+	public static void OrderDrink() {
+		loopDrink: while (true) {
+			Display.DrinkMenuDisplay();
+			switch (Function.SearchChoice()) {
+			case "1":
+				Product.OrderMenu(Product.espresso);
+				break;
+			case "2":
+				Product.OrderMenu(Product.americano);
+				break;
+			case "3":
+				break loopDrink;
+			}
+		}
+	}
+
+	ProcDrink(String name, int price) {
+		super(name, price);
+	}
+}

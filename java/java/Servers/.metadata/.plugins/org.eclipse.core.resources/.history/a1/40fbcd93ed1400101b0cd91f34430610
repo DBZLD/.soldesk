@@ -1,0 +1,26 @@
+package kioskV9;
+
+import java.util.Scanner;
+
+public class ProcFood {
+	public static void OrderFood() {
+		loopFood: while (true) {
+			System.out.println("\n디저트 선택\n1." + (Product.GetProduct("케이크")).Info() + "\n2."
+					+ (Product.GetProduct("쿠키")).Info() + "\n3.이전 메뉴로\n선택 : ");
+			Product.sc = new Scanner(System.in);
+			Product.userChoice = Product.sc.next();
+			switch (Product.userChoice) {
+			case "1":
+				System.out.println(Product.cake.stName + " 을(를)주문 내역에 추가");
+				Product.choiceMenu.add(Product.cake);
+				break;
+			case "2":
+				System.out.println(Product.cookie.stName + " 을(를)주문 내역에 추가");
+				Product.choiceMenu.add(Product.cookie);
+				break;
+			case "3":
+				break loopFood;
+			}
+		}
+	}
+}

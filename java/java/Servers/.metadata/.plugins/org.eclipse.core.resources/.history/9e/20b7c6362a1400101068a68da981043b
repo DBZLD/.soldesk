@@ -1,0 +1,7 @@
+package dice;
+
+public class Main {
+public static void main(String[] args) {
+	Dice.roll(100);
+}
+}

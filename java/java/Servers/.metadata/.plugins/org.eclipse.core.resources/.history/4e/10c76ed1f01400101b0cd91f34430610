@@ -1,0 +1,15 @@
+package kioskV9;
+
+public class Display {
+	public static void TitleDisplay() {
+		System.out.println("============================================");
+		System.out.println("==============       카페       ==============");
+		System.out.println("============================================");
+	}
+
+	public static void TotalMenuDisplay() {
+		System.out.println(String.format("주문 내역\n에스프레소 : %d\n아메리카노 : %d\n케이크 : %d\n쿠키 : %d\n", Product.nCountEspresso,
+				Product.nCountAmericano, Product.nCountCake, Product.nCountCookie));
+		System.out.println(String.format(""));
+	}
+}

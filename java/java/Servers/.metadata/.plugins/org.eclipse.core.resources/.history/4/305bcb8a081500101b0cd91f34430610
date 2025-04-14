@@ -1,0 +1,12 @@
+package extend2;
+
+public class Human extends Unit {
+	int nHuman;
+
+	Human(String name, int n) {
+		super(name);
+		nHuman = n;
+
+	}
+
+}

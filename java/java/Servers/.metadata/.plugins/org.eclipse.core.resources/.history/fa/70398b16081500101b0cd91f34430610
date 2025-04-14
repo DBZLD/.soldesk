@@ -1,0 +1,12 @@
+package extend2;
+
+public class Human extends Unit {
+	int nHuman;
+
+	Human(int n) {
+		nHuman = n;
+	}
+	Human(){
+		
+	}
+}

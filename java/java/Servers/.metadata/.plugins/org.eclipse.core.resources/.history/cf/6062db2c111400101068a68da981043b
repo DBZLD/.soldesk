@@ -1,0 +1,7 @@
+package rpc1;
+
+public class rpc1 {
+	public static void main(String[] args) {
+		
+	}
+}

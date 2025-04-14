@@ -1,0 +1,33 @@
+package kioskV10;
+
+public class Function {
+	public static void SetProductList() {
+		productList.add(espresso);
+		productList.add(americano);
+		productList.add(cake);
+		productList.add(cookie);
+	}
+
+	public static void OrderMenu(Product pro) {
+		System.out.println(pro.stName + " 을(를)주문 내역에 추가");
+		Product.orderList.add(pro);
+	}
+
+	public static void CountTotalMenu() {
+		for (Product pro : orderList) {
+			if (pro.stName.equals("에스프레소")) {
+				nCountEspresso++;
+				nTotalPrice += Product.espresso.nPrice;
+			} else if (pro.stName.equals("아메리카노")) {
+				nCountAmericano++;
+				nTotalPrice += Product.americano.nPrice;
+			} else if (pro.stName.equals("케이크")) {
+				nCountCake++;
+				nTotalPrice += Product.cake.nPrice;
+			} else if (pro.stName.equals("쿠키")) {
+				nCountCookie++;
+				nTotalPrice += Product.cookie.nPrice;
+			}
+		}
+	}
+}

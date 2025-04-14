@@ -1,0 +1,26 @@
+package kioskV6;
+
+import java.util.Scanner;
+
+public class ProcDrink {
+
+	public static void OrderDrink() {
+		loopDrink: while (true) {
+			System.out.println("\n음료 선택\n1." + espresso.Info() + "\n2." + americano.Info() + "\n3.이전 메뉴로\n선택 : ");
+			sc = new Scanner(System.in);
+			userChoice = sc.next();
+			switch (userChoice) {
+			case "1":
+				System.out.println(espresso.stName + " 을(를)주문 내역에 추가");
+				choiceMenu.add(espresso);
+				break;
+			case "2":
+				System.out.println(americano.stName + " 을(를)주문 내역에 추가");
+				choiceMenu.add(americano);
+				break;
+			case "3":
+				break loopDrink;
+			}
+		}
+	}
+}

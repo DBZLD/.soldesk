@@ -1,0 +1,33 @@
+package rpc1;
+import java.util.Scanner;
+
+public class rpc1 {
+	public static void main(String[] args) {
+		System.out.println("가위, 바위, 보 중에 하나를 입력해주세요");
+		
+		Scanner sc = new Scanner(System.in);
+		String stPlayerRpc = sc.next();
+		String stComRpc;
+		int nPlayerRpc;
+		int nComRpc = (int)(Math.random() * 3);
+		
+		if(nComRpc == 0) {
+			stComRpc = "가위";
+		}
+		else if(nComRpc == 1)
+		{
+			stComRpc = "바위";
+		}
+		else if(nComRpc == 2)
+		{
+			stComRpc = "보";
+		}
+		else
+		{
+			System.out.println("올바른 값을 입력해주세요");
+			return;
+		}
+		
+		if()
+	}
+}

@@ -1,0 +1,18 @@
+package kioskV3;
+
+public class Product {
+	String stName;
+	int nPrice;
+	
+	public void Info() {
+		System.out.println(stName + "\n가격 : " + nPrice);
+	}
+	Product(String stName, int nPrice){
+		this.stName = stName;
+		this.nPrice = nPrice;
+	}
+	Product(int nPrice, String stName){
+		this.stName = stName;
+		this.nPrice = nPrice;
+	}
+}

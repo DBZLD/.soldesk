@@ -1,0 +1,19 @@
+package kioskV10;
+
+public class ProcFood {
+	public static void OrderFood() {
+		loopFood: while (true) {
+			Display.FoodMenuDisplay();
+			switch (Function.SearchChoice()) {
+			case "1":
+				Product.OrderMenu(Product.cake);
+				break;
+			case "2":
+				Product.OrderMenu(Product.cookie);
+				break;
+			case "3":
+				break loopFood;
+			}
+		}
+	}
+}

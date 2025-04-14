@@ -1,0 +1,17 @@
+package lotto;
+
+import java.util.Scanner;
+
+public class Lotto {
+	int nPlayerNum[] = new int[6];
+	int nComNum[] = new int[6];
+	
+	public void SetPlayerNum() {
+		Scanner sc;
+		for(int i = 0; i < 6; i++) {
+			System.out.println("번호를 입력해주세요 (" + i+1 + "/6)");
+			sc = new Scanner(System.in);
+			nPlayerNum[i] = Integer.valueOf(sc.next());		
+		}
+	}
+}

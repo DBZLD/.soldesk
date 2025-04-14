@@ -1,0 +1,9 @@
+package boardV5.copy;
+
+public class Post {
+	String stContent;
+
+	Post(String content) {
+		this.stContent = content;
+	}
+}

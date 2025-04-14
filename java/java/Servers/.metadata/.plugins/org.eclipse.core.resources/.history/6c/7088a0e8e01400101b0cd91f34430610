@@ -1,0 +1,13 @@
+package extend;
+
+public class Main {
+	public static void main(String[] args) {
+		GameObject go = new GameObject();
+		go.stName = "게임오브젝트";
+		Character ch = new Character();
+		Item i = new Item();
+		Sword s = new Sword();
+
+		go.Info();
+	}
+}

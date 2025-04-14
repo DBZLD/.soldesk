@@ -1,0 +1,10 @@
+package extend2;
+
+public class Unit extends Object {
+	int nUnit;
+
+	Unit(String name, int unit) {
+		super(name);
+		nUnit = unit;
+	}
+}

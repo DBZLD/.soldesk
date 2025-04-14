@@ -1,0 +1,11 @@
+package board;
+
+public class Main {
+	public static void main(String[] args) {
+		Display.TitleDisplay();
+		Display.staticA = 1;
+
+		Display display2 = new Display();
+		display2.TitleDisplaya();
+	}
+}

@@ -1,0 +1,6 @@
+package lotto;
+
+public class Main {
+	Lotto lotto = new Lotto();
+	lotto.SetPlayerNum();
+}

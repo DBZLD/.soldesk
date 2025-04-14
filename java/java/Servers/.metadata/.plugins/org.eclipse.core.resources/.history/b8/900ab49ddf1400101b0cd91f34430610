@@ -1,0 +1,6 @@
+package extend;
+
+public class Character extends GameObject {
+	int nHp;
+	int nDamage;
+}

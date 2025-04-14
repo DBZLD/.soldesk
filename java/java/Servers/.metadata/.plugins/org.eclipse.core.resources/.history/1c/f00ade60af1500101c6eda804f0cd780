@@ -1,0 +1,14 @@
+package board;
+
+public class Display {
+	
+	static int staticA;
+	int B;
+	static void TitleDisplay() {
+		System.out.println("1.글쓰기\n2.글리스트\n3.나가기\n입력 : ");
+	}
+
+	public void TitleDisplaya() {
+		System.out.println("1.글쓰기\n2.글리스트\n3.나가기\n입력 : ");
+	}
+}

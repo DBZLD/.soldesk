@@ -1,0 +1,18 @@
+package extend2;
+
+public class Unit extends Object {
+	int nUnit;
+
+	void Info() {
+		System.out.println("이름 : " + this.stName + "\n유닛 : " + nUnit);
+	}
+
+	Unit(String name, int unit) {
+		super();
+		nUnit = unit;
+	}
+
+	Unit(int unit) {
+		nUnit = unit;
+	}
+}
