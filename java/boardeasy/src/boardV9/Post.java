@@ -2,11 +2,16 @@ package boardV9;
 
 public class Post {
 	private String stTitle;
+	private String stWriter;
 	private String stContent;
 	private String stDate;
 
 	public String GetTitle() {
 		return stTitle;
+	}
+
+	public String GetWriter() {
+		return stWriter;
 	}
 
 	public String GetContent() {
@@ -21,6 +26,10 @@ public class Post {
 		this.stTitle = text;
 	}
 
+	public void SetWriter(String text) {
+		this.stWriter = text;
+	}
+
 	public void SetContent(String text) {
 		this.stContent = text;
 	}
@@ -29,8 +38,13 @@ public class Post {
 		this.stDate = text;
 	}
 
-	Post(String title, String content, String date) {
+	public void ReadPost() {
+		System.out.println(String.format("\n%s(%s) [%s]\n%s", GetTitle(), GetWriter(), GetDate(), GetContent()));
+	}
+
+	Post(String title, String writer, String content, String date) {
 		this.stTitle = title;
+		this.stWriter = writer;
 		this.stContent = content;
 		this.stDate = date;
 	}
