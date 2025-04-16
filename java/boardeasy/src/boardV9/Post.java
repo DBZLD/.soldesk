@@ -39,7 +39,7 @@ public class Post {
 	}
 
 	public void ReadPost() {
-		System.out.println(String.format("\n%s(%s) [%s]\n%s", GetTitle(), GetWriter(), GetDate(), GetContent()));
+		System.out.println(String.format("\n%s(%s) [%s]\n%s\n", GetTitle(), GetWriter(), GetDate(), GetContent()));
 	}
 
 	Post(String title, String writer, String content, String date) {

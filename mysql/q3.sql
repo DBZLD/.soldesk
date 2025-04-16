@@ -1,4 +1,4 @@
-#create database q3 default character set utf8mb4;
+create database q3 default character set utf8mb4;
 use q3;
 
 create table member(
@@ -16,4 +16,4 @@ insert into member(_no, id, _name, age, gender, phone_number, hobby) value(2, "B
 insert into member(_no, id, _name, age, gender, phone_number, hobby) value(3, "C", "박", 27, "여", "010-7899-0011", "none");
 
 select*from member;
-#delete from member;
+delete from member;
