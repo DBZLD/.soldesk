@@ -1,7 +1,0 @@
-package overriding;
-
-public class Father {
-	void kimch() {
-		System.out.println("종가집 전통 김치");
-	}
-}

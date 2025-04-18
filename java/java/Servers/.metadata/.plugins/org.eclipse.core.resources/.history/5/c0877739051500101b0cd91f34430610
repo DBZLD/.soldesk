@@ -1,5 +1,0 @@
-package extend2;
-
-public class Human extends Unit{
-	int nHuman;
-}

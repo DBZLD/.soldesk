@@ -1,9 +1,0 @@
-package extend;
-
-public class GameObject {
-	String stName;
-
-	void Info() {
-		System.out.println(String.format("이름 : %s", stName));
-	}
-}

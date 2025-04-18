@@ -1,9 +1,0 @@
-package extend2;
-
-public class Unit extends Object {
-	int nUnit;
-
-	Unit(int unit) {
-		nUnit = unit;
-	}
-}

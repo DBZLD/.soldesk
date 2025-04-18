@@ -1,9 +1,0 @@
-package extend;
-
-public class Item extends GameObject {
-	int nPrice;
-
-	public void Info() {
-		System.out.println(String.format("이름 : %s\n 가격 : %d", stName, nPrice));
-	}
-}

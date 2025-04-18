@@ -1,9 +1,0 @@
-package extend;
-
-public class Item {
-	int nDamage;
-
-	void Info() {
-		System.out.println(String.format("데미지 : %d", nDamage));
-	}
-}
