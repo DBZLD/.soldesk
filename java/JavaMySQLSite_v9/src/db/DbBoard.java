@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import display.Display;
+import util.board.BoardMain;
 
 public class DbBoard {
 	static final int PER_PAGE = 3;
@@ -16,11 +17,9 @@ public class DbBoard {
 	static final String DB_PW = "root";
 	static Connection conBoard = null;
 	static Statement stBoard = null;
-	static Connection conComments = null;
-	static Statement stComments = null;
 	static ResultSet result = null;
 
-	static public void DbInit() {
+	static public void DbBoardInit() {
 		try {
 			conBoard = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DB_NAME, DB_ID, DB_PW);
 			stBoard = conBoard.createStatement();
@@ -43,7 +42,12 @@ public class DbBoard {
 		try {
 			result = stBoard.executeQuery(String.format("select*from board where b_title = '%s'", title));
 			if (result.next()) {
-				stBoard.executeUpdate(String.format("delete from board where b_title = '%s'", title));
+				if (result.getString("b_id").equals(BoardMain.MyId)) {
+					stBoard.executeUpdate(String.format("delete from board where b_title = '%s'", title));
+				} else {
+					System.out.println("본인의 글만 삭제할 수 있습니다.");
+					return;
+				}
 			} else {
 				System.out.println("제목과 일치하는 글이 없습니다.");
 			}
@@ -81,7 +85,6 @@ public class DbBoard {
 						String b_id = result.getString("b_id");
 						String b_datetime = result.getString("b_datetime");
 						Display.BoardInfo(b_title, b_id, b_datetime);
-
 					}
 				}
 				System.out.print("입력 : ");
@@ -136,8 +139,13 @@ public class DbBoard {
 		try {
 			result = stBoard.executeQuery(String.format("select*from board where b_title = '%s'", title));
 			if (result.next()) {
-				stBoard.executeUpdate(
-						String.format("update board set b_text = '%s' where b_title = '%s'", text, title));
+				if (result.getString("b_id").equals(BoardMain.MyId)) {
+					stBoard.executeUpdate(
+							String.format("update board set b_text = '%s' where b_title = '%s'", text, title));
+				} else {
+					System.out.println("본인의 글만 수정할 수 있습니다.");
+					return;
+				}
 			} else {
 				System.out.println("제목과 일치하는 글이 없습니다.");
 			}
@@ -149,10 +157,13 @@ public class DbBoard {
 	static public void DbAllBoardInfo() {
 		try {
 			result = stBoard.executeQuery("select*from board");
-			if (result.next()) {
+			int i = 0;
+			while (result.next()) {
 				Display.BoardInfo(result.getString("b_title"), result.getString("b_id"),
 						result.getString("b_datetime"));
-			} else {
+				i++;
+			}
+			if (i == 0) {
 				System.out.println("게시된 글이 없습니다.");
 			}
 		} catch (Exception e) {

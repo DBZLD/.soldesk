@@ -1,18 +1,20 @@
-package util;
+package util.board;
 
 import java.util.Scanner;
 
 import db.DbBoard;
 import db.DbSign;
 import display.Display;
+import util.market.MarketMain;
 
 public class BoardMain {
 	static Scanner sc;
 	static String stInput;
 	public static String MyId = null;
+	public static boolean isAdmin = false;
 
 	public void run() {
-		DbBoard.DbInit();
+		DbBoard.DbBoardInit();
 		MainLoop();
 	}
 
@@ -20,17 +22,32 @@ public class BoardMain {
 		while (true) {
 			Display.ShowSiteTitle();
 			Display.MainMenu();
+
 			sc = new Scanner(System.in);
 			stInput = sc.nextLine();
 			switch (stInput) {
 			case "1":
-				SignUp();
+				if (MyId != null) {
+					SignOut();
+				} else {
+					SignUp();
+				}
 				break;
 			case "2":
 				if (MyId != null) {
 					BoardLoop();
 				} else {
 					SignIn();
+				}
+				break;
+			case "3":
+				if (MyId != null) {
+					MarketMain.MarketLoop();
+				}
+				break;
+			case "4":
+				if (isAdmin == true) {
+					MarketMain.ChangeMatcketName();
 				}
 				break;
 			case "e":
@@ -77,6 +94,20 @@ public class BoardMain {
 			return;
 		}
 		DbSign.DbSignIn(stId, stPw);
+	}
+
+	void SignOut() {
+		System.out.println("\n\n□□□□□□□   로그인   □□□□□□□");
+		System.out.println("로그아웃 하시겠습니까?[y/n]");
+		sc = new Scanner(System.in);
+		stInput = sc.next();
+		if (stInput.equals("y")) {
+			MyId = null;
+			isAdmin = false;
+		} else {
+			System.out.println("메인메뉴로 나가기");
+			return;
+		}
 	}
 
 	void BoardLoop() {

@@ -1,6 +1,6 @@
 package db;
 
-import util.BoardMain;
+import util.board.BoardMain;
 
 public class DbSign {
 	static public void DbSignUp(String id, String pw) {
@@ -18,6 +18,7 @@ public class DbSign {
 			if (DbBoard.result.next()) {
 				System.out.println(DbBoard.result.getString("b_id") + "님 환영합니다.");
 				BoardMain.MyId = id;
+				BoardMain.isAdmin = DbBoard.result.getBoolean("b_admin");
 			} else {
 				System.out.println("아이디 또는 비밀번호가 일치하지 않습니다.");
 			}

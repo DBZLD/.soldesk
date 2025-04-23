@@ -1,4 +1,4 @@
-package util;
+package util.board;
 
 import db.DbBoard;
 
