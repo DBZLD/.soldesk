@@ -7,7 +7,7 @@ public class FunctionMain {
 	public Scanner sc;
 	public String stInput;
 	String MyId = null;
-	boolean isAdmin = false;
+	int nPosition = 0;
 
 	public void Run() {
 		boolean isAgain = true;
@@ -15,8 +15,7 @@ public class FunctionMain {
 			if (MyId != null) {
 				isAgain = SignInT();
 			} else {
-				// isAgain = SignInF();
-				isAgain = SignInT();
+				isAgain = SignInF();
 			}
 		}
 	}
@@ -96,8 +95,33 @@ public class FunctionMain {
 		MyId = id;
 	}
 
-	public void SetIsAdmin(boolean admin) {
-		isAdmin = admin;
+	public void SetnPosition(String position) {
+		switch (position) {
+		case "사원":
+			nPosition = 1;
+			break;
+		case "주임":
+			nPosition = 2;
+			break;
+		case "대리":
+			nPosition = 3;
+			break;
+		case "과장":
+			nPosition = 4;
+			break;
+		case "차장":
+			nPosition = 5;
+			break;
+		case "부장":
+			nPosition = 6;
+			break;
+		case "사장":
+			nPosition = 7;
+			break;
+		case "":
+			nPosition = 0;
+			break;
+		}
 	}
 
 	private FunctionMain() {

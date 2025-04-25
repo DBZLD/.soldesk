@@ -6,7 +6,7 @@ create table employee(
 	e_no int primary key auto_increment,
 	e_name char(20),
     e_age int,
-    e_postion char(10),
+    e_position char(10),
     e_annual_income int,
     e_gender char(2),
     e_evaluations text,
@@ -15,3 +15,4 @@ create table employee(
 select*from employee;
 drop table employee;
 delete from employee;
+insert into employee(e_name) value("가나다");
