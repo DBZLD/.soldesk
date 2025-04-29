@@ -2,22 +2,23 @@ package db;
 
 import java.sql.ResultSet;
 
-public class DbAccounts {
-	static public String aPosition;
-	static public String aId;
+public class DbAccount {
+	static String aPosition = "";
+	static String aId = "";
 
 	static public boolean DbSignIn(String id, String pw) {
 		boolean bReturn = false;
 		try {
-			aPosition = "";
 			DbMain.result = DbMain.stEmployee.executeQuery(
 					String.format("select*from employee_account where e_id = '%s' and e_pw = '%s'", id, pw));
 			if (DbMain.result.next()) {
 				ResultSet nameResult = DbMain.stEmployee
 						.executeQuery(String.format("select*from employee where e_name = '%s'", id));
-				bReturn = true;
-				aPosition = nameResult.getString("e_position");
-				aId = nameResult.getString("e_name");
+				if (nameResult.next()) {
+					aPosition = nameResult.getString("e_position");
+					aId = nameResult.getString("e_name");
+					bReturn = true;
+				}
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -39,5 +40,13 @@ public class DbAccounts {
 			e.getStackTrace();
 		}
 		return bReturn;
+	}
+
+	static public String GetId() {
+		return aId;
+	}
+
+	static public String GetPosition() {
+		return aPosition;
 	}
 }

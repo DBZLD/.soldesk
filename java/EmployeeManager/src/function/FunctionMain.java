@@ -2,6 +2,8 @@ package function;
 
 import java.util.Scanner;
 
+import display.Display;
+
 public class FunctionMain {
 	private static FunctionMain singletonObject;
 	public Scanner sc;
@@ -21,36 +23,42 @@ public class FunctionMain {
 	}
 
 	boolean SignInF() {
-		System.out.println("직원 관리 프로그램");
+		Display.Line();
+		System.out.println("직원 관리 프로그램\n");
 		System.out.print("1.회원가입/2.로그인/e.나가기\n입력 : ");
 		sc = new Scanner(System.in);
 		stInput = sc.next();
 		if (stInput.equals("1")) {
-			FunctionSign.SignUp();
+			FunctionAccount.SignUp();
 		} else if (stInput.equals("2")) {
-			FunctionSign.SignIn();
+			FunctionAccount.SignIn();
 		} else if (stInput.equals("e")) {
+			Display.Line();
 			System.out.println("프로그램 종료");
 			return false;
 		} else {
+			Display.Line();
 			System.out.println("잘못된 입력입니다.");
 		}
 		return true;
 	}
 
 	boolean SignInT() {
-		System.out.println("직원 관리 프로그램");
+		Display.Line();
+		System.out.println("직원 관리 프로그램\n");
 		System.out.print("1.메인 메뉴/2.로그아웃/e.나가기\n입력 : ");
 		sc = new Scanner(System.in);
 		stInput = sc.next();
 		if (stInput.equals("1")) {
 			LoopMain();
 		} else if (stInput.equals("2")) {
-			FunctionSign.SignOut();
+			FunctionAccount.SignOut();
 		} else if (stInput.equals("e")) {
+			Display.Line();
 			System.out.println("프로그램 종료");
 			return false;
 		} else {
+			Display.Line();
 			System.out.println("잘못된 입력입니다.");
 		}
 		return true;
@@ -58,6 +66,7 @@ public class FunctionMain {
 
 	void LoopMain() {
 		while (true) {
+			Display.Line();
 			System.out.println("메인 메뉴");
 			System.out.print("1.직원 리스트/2.직원 검색/3.직원 추가/4.직원 평가/5.직원 정보 수정/6.직원 제외/e.나가기\n입력 : ");
 			sc = new Scanner(System.in);
@@ -70,21 +79,43 @@ public class FunctionMain {
 				EmployeeSearch.ESearch();
 				break;
 			case "3":
+				if (nPosition < 6) {
+					Display.Line();
+					System.out.println("부장 이상부터 사용할 수 있는 기능입니다.");
+					break;
+				}
 				EmployeeInsert.EInsert();
 				break;
 			case "4":
+				if (nPosition < 4) {
+					Display.Line();
+					System.out.println("과장 이상부터 사용할 수 있는 기능입니다.");
+					break;
+				}
 				EmployeeEvaluations.EEvaluations();
 				break;
 			case "5":
+				if (nPosition < 5) {
+					Display.Line();
+					System.out.println("차장 이상부터 사용할 수 있는 기능입니다.");
+					break;
+				}
 				EmployeeEdit.EEdit();
 				break;
 			case "6":
+				if (nPosition < 6) {
+					Display.Line();
+					System.out.println("부장 이상부터 사용할 수 있는 기능입니다.");
+					break;
+				}
 				EmployeeDelete.EDelete();
 				break;
 			case "e":
+				Display.Line();
 				System.out.println("초기 화면으로 돌아가기");
 				return;
 			default:
+				Display.Line();
 				System.out.println("잘못된 입력입니다.");
 				break;
 			}
