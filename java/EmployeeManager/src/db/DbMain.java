@@ -60,11 +60,8 @@ public class DbMain {
 			result = stEmployee.executeQuery("select*from employee");
 			Display.Line();
 			while (result.next()) {
-				DecimalFormat df = new DecimalFormat("#,###");
-				int nIncome = Integer.parseInt(result.getString("e_annual_income"));
-				System.out.println(String.format("%s %s | 나이 %s세(%s) | 입사일 %s | 연봉 %s원", result.getString("e_name"),
-						result.getString("e_position"), result.getString("e_age"), result.getString("e_gender"),
-						result.getString("e_join_date"), df.format(nIncome)));
+				System.out.println(String.format("%s %s | 나이 %s세(%s)", result.getString("e_name"),
+						result.getString("e_position"), result.getString("e_age"), result.getString("e_gender")));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,5 +78,53 @@ public class DbMain {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	static public boolean DbSearchEmployee(String name) {
+		boolean bReturn = false;
+		try {
+			result = stEmployee.executeQuery(String.format("select from employee where e_name = '%s'", name));
+			if (result.next()) {
+				Display.Line();
+				DecimalFormat df = new DecimalFormat("#,###");
+				int nIncome = Integer.parseInt(result.getString("e_annual_income"));
+				System.out.println(String.format("%s %s(%s세) | 입사일 %s | 연봉 %s", result.getString("e_name"),
+						result.getString("e_position"), result.getString("e_age"), result.getString("e_join_date"),
+						df.format(nIncome)));
+				ResultSet sResult = stEmployee
+						.executeQuery(String.format("select from evaluations where e_name = '%s'", name));
+				while (sResult.next()) {
+					Display.Line();
+					System.out.println(String.format("인사 평가\n"));
+					String stPositive = "";
+					if (sResult.getBoolean("e_positive") == true) {
+						stPositive = "긍정적";
+					} else {
+						stPositive = "부정적";
+					}
+					System.out.println(String.format("%s %s | %s 평가 | %s", sResult.getString("e_writer"),
+							sResult.getString("e_writer_position"), stPositive, sResult.getString("e_text")));
+				}
+				bReturn = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bReturn;
+	}
+
+	static public boolean DbEditEmployee(String name, String text, String element) {
+		boolean bReturn = false;
+		int nChange;
+		try {
+			nChange = stEmployee.executeUpdate(
+					String.format("update employee set %s = '%s' where e_name = '%s'", element, text, name));
+			if (nChange > 0) {
+				bReturn = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bReturn;
 	}
 }

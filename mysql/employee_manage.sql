@@ -8,8 +8,7 @@ create table employee(
     e_gender char(10) not null,
     e_join_date date not null,
     e_position char(10) not null,
-    e_annual_income int not null,
-    e_evaluations text default null
+    e_annual_income int not null
 );
 select*from employee;
 drop table employee;

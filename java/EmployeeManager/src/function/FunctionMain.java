@@ -23,8 +23,7 @@ public class FunctionMain {
 	}
 
 	boolean SignInF() {
-		Display.Line();
-		System.out.println("직원 관리 프로그램\n");
+		Display.ProgramTitle();
 		System.out.print("1.회원가입/2.로그인/e.나가기\n입력 : ");
 		sc = new Scanner(System.in);
 		stInput = sc.next();
@@ -44,8 +43,7 @@ public class FunctionMain {
 	}
 
 	boolean SignInT() {
-		Display.Line();
-		System.out.println("직원 관리 프로그램\n");
+		Display.ProgramTitle();
 		System.out.print("1.메인 메뉴/2.로그아웃/e.나가기\n입력 : ");
 		sc = new Scanner(System.in);
 		stInput = sc.next();
@@ -66,8 +64,7 @@ public class FunctionMain {
 
 	void LoopMain() {
 		while (true) {
-			Display.Line();
-			System.out.println("메인 메뉴");
+			Display.MainMenuTitle();
 			System.out.print("1.직원 리스트/2.직원 검색/3.직원 추가/4.직원 평가/5.직원 정보 수정/6.직원 제외/e.나가기\n입력 : ");
 			sc = new Scanner(System.in);
 			stInput = sc.next();
