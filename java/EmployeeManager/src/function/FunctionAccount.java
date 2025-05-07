@@ -63,7 +63,7 @@ public class FunctionAccount {
 			System.out.println("회원가입 성공");
 		} else {
 			Display.Line();
-			System.out.println("알맞지 않은 아이디입니다.");
+			System.out.println("알맞지 않거나 중복되는 아이디입니다.");
 		}
 	}
 

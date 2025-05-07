@@ -58,7 +58,6 @@ public class DbMain {
 	static public void DbListEmployee() {
 		try {
 			result = stEmployee.executeQuery("select*from employee");
-			Display.Line();
 			while (result.next()) {
 				System.out.println(String.format("%s %s | 나이 %s세(%s)", result.getString("e_name"),
 						result.getString("e_position"), result.getString("e_age"), result.getString("e_gender")));
