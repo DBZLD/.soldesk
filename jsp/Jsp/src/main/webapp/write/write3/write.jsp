@@ -12,6 +12,7 @@
 	제목 : <input name = "title"> <br>
 	작성자 : <input name = "id"><br>
 	내용 : <textarea name = "content" rows = "5" cols = "30"></textarea><br>
+	<input type="submit">
 	</form>
 </body>
 </html>
