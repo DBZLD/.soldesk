@@ -13,6 +13,6 @@ public class Db {
 	
 	/* table들 */
 	////	게시판
-	public static final String TABLE_CAT_BOARD = "cat_board";
+	public static final String TABLE_CAT_BOARD = "cat_board_dao";
 
 }

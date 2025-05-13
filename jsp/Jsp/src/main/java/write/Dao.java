@@ -69,14 +69,14 @@ public class Dao {
 			ResultSet rs = st.executeQuery(sql);
 			rs.next();
 			post = new Dto(
-					rs.getString("B_NO"),
-					rs.getString("B_TITLE"),
-					rs.getString("B_ID"),
-					rs.getString("B_DATETIME"),
-					rs.getString("B_HIT"),
-					rs.getString("B_TEXT"),
-					rs.getString("B_REPLY_COUNT"),
-					rs.getString("B_REPLY_ORI")
+					rs.getString("b_no"),
+					rs.getString("b_title"),
+					rs.getString("b_id"),
+					rs.getString("b_datetime"),
+					rs.getString("b_hit"),
+					rs.getString("b_text"),
+					rs.getString("b_reply_count"),
+					rs.getString("b_reply_ori")
 					);
 			st.close();		// [고정-4]
 			con.close();	// [고정-5]
@@ -103,14 +103,14 @@ public class Dao {
 			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()) {				
 				posts.add(new Dto(
-						rs.getString("B_NO"),
-						rs.getString("B_TITLE"),
-						rs.getString("B_ID"),
-						rs.getString("B_DATETIME"),
-						rs.getString("B_HIT"),
-						rs.getString("B_TEXT"),
-						rs.getString("B_REPLY_COUNT"),
-						rs.getString("B_REPLY_ORI")
+						rs.getString("b_no"),
+						rs.getString("b_title"),
+						rs.getString("b_id"),
+						rs.getString("b_datetime"),
+						rs.getString("b_hit"),
+						rs.getString("b_text"),
+						rs.getString("b_reply_count"),
+						rs.getString("b_reply_ori")
 						));
 			}
 			st.close();		// [고정-4]
