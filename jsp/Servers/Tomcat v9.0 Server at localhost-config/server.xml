@@ -160,7 +160,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="Jsp" path="/Jsp" reloadable="true" source="org.eclipse.jst.jee.server:Jsp"/><Context docBase="JspDaoDtoBoard3" path="/JspDaoDtoBoard3" reloadable="true" source="org.eclipse.jst.jee.server:JspDaoDtoBoard3"/><Context docBase="JspDaoDtoBoard4" path="/JspDaoDtoBoard4" reloadable="true" source="org.eclipse.jst.jee.server:JspDaoDtoBoard4"/><Context docBase="JspDaoDtoBoard5" path="/JspDaoDtoBoard5" reloadable="true" source="org.eclipse.jst.jee.server:JspDaoDtoBoard5"/><Context docBase="JspDaoDtoBoard6" path="/JspDaoDtoBoard6" reloadable="true" source="org.eclipse.jst.jee.server:JspDaoDtoBoard6"/></Host>
+      <Context docBase="Jsp" path="/Jsp" reloadable="true" source="org.eclipse.jst.jee.server:Jsp"/><Context docBase="JspDaoDtoBoard3" path="/JspDaoDtoBoard3" reloadable="true" source="org.eclipse.jst.jee.server:JspDaoDtoBoard3"/><Context docBase="JspDaoDtoBoard4" path="/JspDaoDtoBoard4" reloadable="true" source="org.eclipse.jst.jee.server:JspDaoDtoBoard4"/><Context docBase="JspDaoDtoBoard5" path="/JspDaoDtoBoard5" reloadable="true" source="org.eclipse.jst.jee.server:JspDaoDtoBoard5"/><Context docBase="JspDaoDtoBoard6" path="/JspDaoDtoBoard6" reloadable="true" source="org.eclipse.jst.jee.server:JspDaoDtoBoard6"/><Context docBase="BoardPagingBlock" path="/BoardPagingBlock" reloadable="true" source="org.eclipse.jst.jee.server:BoardPagingBlock"/></Host>
     </Engine>
   </Service>
 </Server>
