@@ -1,7 +1,6 @@
-package servlet;
+package db;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Servlet13")
-public class Servlet13 extends HttpServlet {
+@WebServlet("/ServletEdit")
+public class ServletEdit extends HttpServlet {
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		PrintWriter out = response.getWriter();
-		out.println("Hello World !!! ");
+		Dto dto = new Dto(
+				request.getParameter("title"),
+				request.getParameter("text")
+				);
+		Dao dao = new Dao();
+		dao.edit(dto,request.getParameter("no"));
+		response.sendRedirect("list.jsp");
 	}
 }
