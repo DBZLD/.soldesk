@@ -9,7 +9,7 @@ create table board(
     b_datetime date,
     b_text text not null
 );
-
+ 
 delete from board;
 select*from board;
 drop table board;
