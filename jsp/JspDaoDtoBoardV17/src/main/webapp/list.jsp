@@ -1,3 +1,4 @@
+<%@page import="db.BoardListProcessor"%>
 <%@page import="db.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="db.Dto"%>
@@ -14,11 +15,10 @@
 글번호, 제목, 작성자<hr>
 <a href="write.jsp">쓰기</a><hr><hr>
 <%
-Dao dao=new Dao();
-ArrayList<Dto> posts = null;
-posts=dao.list();
+BoardListProcessor blp =(BoardListProcessor)request.getAttribute("blp"); 
+ArrayList<Dto> posts = blp.posts;
 
-for(int i=0;i<posts.size();i=i+1){
+for(int i = 0; i < posts.size(); i++){
 %>
 
 <%=posts.get(i).no%>
