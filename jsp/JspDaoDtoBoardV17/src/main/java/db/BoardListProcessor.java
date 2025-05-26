@@ -3,13 +3,14 @@ package db;
 import java.util.ArrayList;
 
 public class BoardListProcessor {
-	Dao dao;
+	private Dao dao;
 	public ArrayList<Dto> posts;
 	
 	public void GetList() {
-		posts = dao.list();
+		this.posts = dao.list();
 	}
-	public BoardListProcessor() {
+	public BoardListProcessor(Dao dao) {
+		this.dao = dao;
 		GetList();
 	}
 }

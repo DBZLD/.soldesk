@@ -1,5 +1,6 @@
 package db;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Dao extends Da{
@@ -41,12 +42,11 @@ public class Dao extends Da{
 		super.close();	
 		return post;
 	}	
-	public ArrayList<Dto> list() {
+	public ArrayList<Dto> list(int currentPage, int startIndex) {
 		super.connect();
 		ArrayList<Dto> posts = new ArrayList<>();
 		try {
-//			int startIndex = ((Integer.parseInt(page))-1)*Board.LIST_AMOUNT;
-			String sql = String.format("select*from %s",Db.TABLE_NAME);
+			String sql = String.format("select*from %s limit %d, %d", Db.TABLE_NAME, startIndex, Board.POST_PER_PAGE);
 			System.out.println("sql:"+sql);
 			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()) {				
@@ -72,5 +72,25 @@ public class Dao extends Da{
 		super.update(sql);
 		super.close();	
 	}
-
+	public int count() {
+		int totalPage = 0;
+		super.connect();	
+		String sql = String.format(
+				"select count(*) from %s"
+				,Db.TABLE_NAME);
+		try {
+			ResultSet result = st.executeQuery(sql);
+			result.next();
+			if(result.getInt("count(*)")%Board.POST_PER_PAGE == 0) {
+				totalPage = result.getInt("count(*)")/Board.POST_PER_PAGE;				
+			}
+			else {
+				totalPage = result.getInt("count(*)")/Board.POST_PER_PAGE + 1;				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		super.close();
+		return totalPage;
+	}
 }

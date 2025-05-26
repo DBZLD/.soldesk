@@ -16,7 +16,7 @@ public class ServiceBoard {
 		dao.edit(dto, no);
 	}
 	public BoardListProcessor ListBoard() {
-		BoardListProcessor blp = new BoardListProcessor();
+		BoardListProcessor blp = new BoardListProcessor(dao);
 		return blp;
 	}
 }

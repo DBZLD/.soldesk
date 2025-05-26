@@ -24,7 +24,7 @@ public class ControllerBoard extends HttpServlet {
 		if(action != null) {
 			switch(action) {
 			case"/del":
-				service.DeleteBoard(request.getParameter("no"));
+				service.deleteBoard(request.getParameter("no"));
 				nextPage = "/board/list";
 				break;
 			case"/write":
@@ -33,7 +33,7 @@ public class ControllerBoard extends HttpServlet {
 						request.getParameter("id"),
 						request.getParameter("text")
 						);
-				service.WriteBoard(dto);
+				service.writeBoard(dto);
 				nextPage = "/board/list";
 				break;
 			case"/read":
@@ -49,11 +49,11 @@ public class ControllerBoard extends HttpServlet {
 						request.getParameter("title"),
 						request.getParameter("text")
 						);
-				service.EditBoard(dto2, request.getParameter("no"));
+				service.editBoard(dto2, request.getParameter("no"));
 				nextPage = "/list.jsp";
 				break;
 			case"/list":
-				request.setAttribute("blp", service.ListBoard());
+				request.setAttribute("blp", service.listBoard(request.getParameter("currentPage")));
 				nextPage = "/list.jsp";
 				break;
 			}
