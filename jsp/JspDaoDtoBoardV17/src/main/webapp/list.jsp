@@ -1,4 +1,4 @@
-<%@page import="db.boardListProcessor"%>
+<%@page import="db.BoardListProcessor"%>
 <%@page import="db.Board"%>
 <%@page import="db.Dto"%>
 <%@page import="db.Dao"%>
@@ -15,9 +15,8 @@
 글번호, 제목, 작성자<hr>
 <a href="write.jsp">쓰기</a><hr><hr>
 <%
-p
 
-boardListProcessor blp =(boardListProcessor)request.getAttribute("blp"); 
+BoardListProcessor blp =(BoardListProcessor)request.getAttribute("blp"); 
 ArrayList<Dto> posts = blp.posts;
 
 for(int i = 0; i < posts.size(); i++){
