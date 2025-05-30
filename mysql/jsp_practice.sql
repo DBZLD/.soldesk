@@ -27,8 +27,3 @@ insert into cat_board_dao(b_title, b_id, b_text) value("1", "1", "1");
 select*from cat_board_dao;
 drop table cat_board_dao;
 delete from cat_board_dao;
-
-create table tbl_test (		
-	no int,	
-	str_data varchar(50)	
-);		
