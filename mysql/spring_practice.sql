@@ -31,4 +31,12 @@ insert into tbl_test_del values(1, '개');
 insert into tbl_test_del values(2, '고양이');				
 insert into tbl_test_del values(3, '너굴맨');				
 				
-select * from tbl_test_del ;
+select * from tbl_test_del;
+
+create table tbl_guest(
+	bno int auto_increment primary key,
+	btext text
+);
+
+insert into tbl_guest(btext) value('개');
+insert into tbl_guest(btext) value('고양이');
