@@ -56,9 +56,14 @@
 	
 	<mybatis-spring:scan
 		base-package="com.spring.mapper" /><!-- 본인의 프로젝트 패키지명에 맞게 수정 -->
-	
+
+	<!-- 내가 추가한거 -->
+	<!-- <context:component-scan base-package="org.zerock.sample"> </context:component-scan> -->
+		
 	<!-- 내가 추가한거 -->
 
 	<context:component-scan base-package="com.spring.service">
 	</context:component-scan>
+
+	
 </beans>

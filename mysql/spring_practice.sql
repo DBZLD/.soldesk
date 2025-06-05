@@ -40,3 +40,5 @@ create table tbl_guest(
 
 insert into tbl_guest(btext) value('개');
 insert into tbl_guest(btext) value('고양이');
+
+select*from tbl_guest;

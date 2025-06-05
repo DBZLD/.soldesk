@@ -15,13 +15,4 @@
 	<select id="getData4" resultType="com.spring.dto.TestDto">
 		SELECT * from tbl_test where no = 4
 	</select>
-	<update id="updateVisitantCount">					
-		update tbl_visitant_count set count = 200				
-	</update>
-	<insert id="insertDoodle">	
-		insert into tbl_doodle values ("aaaaaaaa")
-	</insert>	
-	<delete id="delTest">
-		delete from tbl_test_del where no = 1
-	</delete>
 </mapper>

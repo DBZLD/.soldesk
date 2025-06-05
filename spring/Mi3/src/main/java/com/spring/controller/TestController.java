@@ -32,26 +32,4 @@ public class TestController {
 		
 		model.addAttribute("sum",sum);
 	}
-	
-	@GetMapping("/updateVisitantCount")
-	public void updateVisitantCount() {
-		log.info("========================================== : 컨트롤러에서 updateVisitantCount() 실행중");
-		service.updateVisitantCount();
-		
-		log.info("(여기 컨트롤러임) 업데이트 잘 됐음");
-	}
-	
-	@GetMapping("/insertDoodle")
-	public void insertDoodle() {
-		log.info("========================================== : 컨트롤러에서 insertDoodle() 실행중");
-		service.insertDoodle();
-		log.info("(여기 컨트롤러임) insert 잘 됐음");
-	}
-	
-	@GetMapping("/delTest")
-	public void delTest() {
-		log.info("========================================== : 컨트롤러에서 delTest() 실행중");
-		service.delTest();
-		log.info("(여기 컨트롤러임) delete 잘 됐음");
-	}
 }

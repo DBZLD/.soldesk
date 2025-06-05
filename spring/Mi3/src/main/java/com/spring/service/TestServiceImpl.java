@@ -33,19 +33,6 @@ public class TestServiceImpl implements TestService{
 		return two;
 	}
 	
-	@Override
-	public void updateVisitantCount() {
-		mapper.updateVisitantCount();
-	}	
 	
-	@Override
-	public void insertDoodle() {
-		mapper.insertDoodle();
-	}	
-	
-	@Override
-	public void delTest() {
-		mapper.delTest();
-	}
 
 }
