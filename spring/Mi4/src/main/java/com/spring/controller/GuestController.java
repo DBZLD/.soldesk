@@ -27,8 +27,7 @@ public class GuestController {
 	
 	@GetMapping("/getList")	// 프로젝트 루트 경로 이하 /guest/getList url 진입 시 여기로 진입하게 됨.
 	public void getList(@RequestParam(value = "currentPage", defaultValue = "1")int currentPage, Model model) {	// 매개변수에 Model m 식으로 작성하게 되면, 스프링이 알아서 모델 객체를 만들어서 넘겨줌.
-		int startIndex = (currentPage - 1) * 5;
-		model.addAttribute("list",service.getList(startIndex));
+		model.addAttribute("blp", service.getList(currentPage));
 	}	
 	// 위 /getList 와 동일한 jsp파일을 염. 상위 경로 포함(/guest). 즉 PJ루트/guest/getList.jsp 파일을 염.
 	// 그리고 이 파일은 

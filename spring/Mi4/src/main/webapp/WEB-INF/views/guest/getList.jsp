@@ -1,3 +1,4 @@
+<%@page import="com.spring.service.BoardListProcessor"%>
 <%@page import="com.spring.dto.GuestDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -21,11 +22,12 @@
 	</tr>
 	
 <%
-	Object obj = request.getAttribute("list");
-	List<GuestDto> list = (List<GuestDto>)obj; 
-	for(int i=0;i<list.size();i++){
-		Long bno = list.get(i).getBno();
-		String btext = list.get(i).getBtext();
+	Object obj = request.getAttribute("blp");
+	BoardListProcessor blp = (BoardListProcessor)obj;
+	int count = (int)request.getAttribute("count");
+	for(int i=0;i<blp.post.size();i++){
+		Long bno = blp.post.get(i).getBno();
+		String btext = blp.post.get(i).getBtext();
 %>	
 	<tr>
 		<td><%=bno %></td>

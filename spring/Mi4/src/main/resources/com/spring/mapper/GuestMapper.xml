@@ -8,16 +8,19 @@
 	<select id = "getList" resultType="com.spring.dto.GuestDto">
 		SELECT * from tbl_guest limit #{startIndex}, 5
 	</select>
+	<select id="pagingBlock" resultType="int">
+		select count(*) from tbl_guest
+	</select>
 	<select id = "read" resultType = "com.spring.dto.GuestDto">
 		select * from tbl_guest where bno = #{bno}
 	</select>
 	<select id = "del">
 		delete from tbl_guest where bno = #{bno}
 	</select>
-	<select id = "write" resultType = "com.spring.dto.GuestDto">
+	<select id = "write">
 		insert into tbl_guest(btext) value(#{btext})
 	</select>
-	<select id = "modify" resultType = "com.spring.dto.GuestDto">
+	<select id = "modify">
 		update tbl_guest set btext = #{btext} where bno = #{bno}
 	</select>
 </mapper>
