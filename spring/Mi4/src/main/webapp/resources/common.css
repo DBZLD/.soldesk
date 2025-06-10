@@ -1,12 +1,11 @@
-@charset "UTF-8";
-body{
-	background:gray;
-}
+@charset "EUC-KR";
 
-tr, td{
-	border:solid 1px green;	
+body{
+	background-color: gray;
+	text-align: center;
 }
-img{
-	width:280px;
-	height:200px;
+table{
+	outline-style: solid;
+	outline-color: blue;
+	outline-width: 1px;
 }

@@ -8,7 +8,7 @@
 	<select id = "getList" resultType="com.spring.dto.GuestDto">
 		SELECT * from tbl_guest limit #{startIndex}, 5
 	</select>
-	<select id="pagingBlock" resultType="int">
+	<select id="getCount" resultType="int">
 		select count(*) from tbl_guest
 	</select>
 	<select id = "read" resultType = "com.spring.dto.GuestDto">

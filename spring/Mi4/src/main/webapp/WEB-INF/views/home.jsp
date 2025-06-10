@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="cp" value="${pageContext.request.contextPath}" />
-<%@ page session="false" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${cp}/resources/common.css" >
+<link href="${cp}/resources/common.css" rel="stylesheet" >
 	<title>Home</title>
 </head>
 <body>

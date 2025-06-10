@@ -9,12 +9,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${cp}/resources/common.css">
 <title>방명록 - 글 목록</title>
-<link rel="stylesheet" href="${cp}/resources/common.css" >
 </head>
 <body>
 <h1>방명록</h1>
 <h2>글목록</h2>
+<a href="${cp}/guest/write">새글 쓰기</a>
+<br><br>
 <table>
 	<tr>
 		<td>번호</td>
@@ -24,10 +26,9 @@
 <%
 	Object obj = request.getAttribute("blp");
 	BoardListProcessor blp = (BoardListProcessor)obj;
-	int count = (int)request.getAttribute("count");
-	for(int i=0;i<blp.post.size();i++){
-		Long bno = blp.post.get(i).getBno();
-		String btext = blp.post.get(i).getBtext();
+	for(int i=0;i<blp.getPost().size();i++){
+		Long bno = blp.getPost().get(i).getBno();
+		String btext = blp.getPost().get(i).getBtext();
 %>	
 	<tr>
 		<td><%=bno %></td>
@@ -37,10 +38,8 @@
 	}
 %>
 </table>
-
 <br><br>
-
-<a href="${cp}/guest/write">새글 쓰기</a>
+<%=blp.pagingBlock() %>
 
 </body>
 </html>

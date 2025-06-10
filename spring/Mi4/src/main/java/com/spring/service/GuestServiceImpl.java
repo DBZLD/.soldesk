@@ -22,7 +22,7 @@ public class GuestServiceImpl implements GuestService{
 	@Override
 	public BoardListProcessor getList(int currentPage) {
 		log.info("getList ½ÇÇà");
-		BoardListProcessor blp = new BoardListProcessor();
+		BoardListProcessor blp = new BoardListProcessor(currentPage, mapper);
 		return blp;
 	}
 	@Override

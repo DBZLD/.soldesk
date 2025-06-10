@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class GuestController {
 	
-	//2-2. public GuestController(GuestService service){
+	//2-2. 2-1 = public GuestController(GuestService service){
 		// this.service = service;
 	// }
 	private GuestService service; // 1-1. GuestService는 인터페이스여서 service가 비어있기 때문에
