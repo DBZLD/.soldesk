@@ -14,7 +14,6 @@
 </head>
 <body>
 <h1>방명록</h1>
-<h2>글목록</h2>
 <a href="${cp}/guest/write">새글 쓰기</a>
 <br><br>
 <table>
@@ -33,13 +32,19 @@
 	<tr>
 		<td><%=bno %></td>
 		<td><a href="${cp}/guest/read?bno=<%=bno%>"> <%=btext %> </a></td>
-	<tr>
+	</tr>
 <%		
 	}
 %>
 </table>
-<br><br>
-<%=blp.pagingBlock() %>
-
+<br>
+<div class="paging">
+	<%=blp.pagingBlock() %>
+</div>
+<br>
+<form action="/guest/getList">
+	<input name="word" placeholder="검색">
+	<input type="submit" value="검색">
+</form>
 </body>
 </html>

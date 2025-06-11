@@ -6,9 +6,9 @@
 	<!-- resultType 에 복수형(ArrayList 등)을 적는게 아님. 
 	그냥 dto 단수의 경로를 적어야됨. -->
 	<select id = "getList" resultType="com.spring.dto.GuestDto">
-		SELECT * from tbl_guest limit #{startIndex}, 5
+		SELECT * from tbl_guest where btext like %#{word}% limit #{startIndex}, 5
 	</select>
-	<select id="getCount" resultType="int">
+	<select id = "getCount" resultType="int">
 		select count(*) from tbl_guest
 	</select>
 	<select id = "read" resultType = "com.spring.dto.GuestDto">

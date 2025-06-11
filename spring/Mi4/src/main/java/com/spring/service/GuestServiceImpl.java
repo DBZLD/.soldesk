@@ -1,7 +1,5 @@
 package com.spring.service;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +18,9 @@ public class GuestServiceImpl implements GuestService{
 	private GuestMapper mapper;	
 	
 	@Override
-	public BoardListProcessor getList(int currentPage) {
+	public BoardListProcessor getList(int currentPage, String word) {
 		log.info("getList ½ÇÇà");
-		BoardListProcessor blp = new BoardListProcessor(currentPage, mapper);
+		BoardListProcessor blp = new BoardListProcessor(mapper, currentPage, word);
 		return blp;
 	}
 	@Override

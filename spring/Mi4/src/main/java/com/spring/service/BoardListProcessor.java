@@ -8,6 +8,7 @@ import com.spring.mapper.GuestMapper;
 public class BoardListProcessor {
 	ArrayList<GuestDto> post;
 	GuestMapper mapper;
+	String word = "";
 	String htmlText = "";
 	int currentPage = 0;
 	int totalIndex = 0;
@@ -18,20 +19,21 @@ public class BoardListProcessor {
 	int nowIndex = 0;
 	boolean hasNext = false;
 	boolean hasPrev = false;
-	public BoardListProcessor(int currentPage, GuestMapper mapper) {
+	public BoardListProcessor(GuestMapper mapper, int currentPage, String word) {
 		htmlText = "";
 		this.mapper = mapper;
+		this.word = word;
 		nowIndex = (currentPage-1)*5;
-		this.post = mapper.getList(nowIndex);
 		this.currentPage = currentPage;
+		this.post = mapper.getList(nowIndex);
 		this.totalIndex = mapper.getCount();
 		this.totalPage = (int)Math.ceil((double)totalIndex/5);
 		this.totalBlock = (int)Math.ceil((double)totalPage/5);
 		this.nowBlock = (int)Math.ceil((double)currentPage/5);
 		this.startPage = (nowBlock-1)*5 + 1;
-		setPrevNext();
+		setVar();
 	}
-	public void setPrevNext() {
+	public void setVar() {
 		if(totalBlock == nowBlock) {
 			hasNext = false;
 		}else {
@@ -52,11 +54,19 @@ public class BoardListProcessor {
 		
 		if(totalBlock == nowBlock) {
 			for(int i = 0; i < totalPage%5; i++) {
-				htmlText += String.format("<a href='/guest/getList?currentPage=%d'> %d</a>", startPage + i, startPage + i);				
+				if(currentPage == startPage + i) {
+					htmlText += String.format(" %d", startPage + i);									
+				}else {
+					htmlText += String.format("<a href='/guest/getList?currentPage=%d'> %d</a>", startPage + i, startPage + i);									
+				}
 			}
 		}else {
 			for(int i = 0; i < 5; i++) {
-				htmlText += String.format("<a href='/guest/getList?currentPage=%d'> %d</a>", startPage + i, startPage + i);
+				if(currentPage == startPage + i) {
+					htmlText += String.format(" %d", startPage + i);									
+				}else {
+					htmlText += String.format("<a href='/guest/getList?currentPage=%d'> %d</a>", startPage + i, startPage + i);					
+				}
 			}			
 		}
 		

@@ -11,6 +11,7 @@ create table employee(
     e_annual_income int not null
 );
 select*from employee;
+select*from employee where e_name like '%%';
 drop table employee;
 delete from employee;
 insert into employee(e_name, e_age, e_position, e_gender, e_annual_income, e_join_date) values
