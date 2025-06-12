@@ -10,7 +10,7 @@
 	<title>Home</title>
 </head>
 <body>
-<a href="${cp}/riot/tft">tft</a>
-
+<h1>전적 검색</h1>
+<a href="${cp}/riot/searchTFT">TFT전적 검색</a>
 </body>
 </html>

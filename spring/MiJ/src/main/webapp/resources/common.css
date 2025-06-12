@@ -1,23 +1,28 @@
 @charset "EUC-KR";
 
 body{
-	background-color: gray;
+	background-color: white;
 	display:flex;
-	align-items:center;
 	justify-content:center;
 	flex-direction: column;
 }
-table{
-	text-align: center;
+.mainBoard{
+	background-color:gray;
+	display:flex;
+	flex-direction: row;
+	width:auto;
+	height:auto;
 }
-tr,td{
-	text-align: center;
-	outline-style: solid;
-	outline-color: black;
-	outline-width: 1px;
-	width:100px;
-	height: 30px;
+.rightBoard{
+	display:flex;
+	width:300px;
+	height:400px;
+	justify-content: center;
+	font-weight: 900;
+	font-size: large;
 }
-.paging{
-		
+.leftBoard{
+	background-color:blue;
+	display:flex;
+	flex: 1 0 auto;
 }
