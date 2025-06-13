@@ -3,6 +3,8 @@ package com.spring.service;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -13,42 +15,88 @@ import com.spring.dto.MatchDto;
 import com.spring.dto.Participant;
 import com.spring.dto.PlayerDto;
 import com.spring.dto.PuuidDto;
+import com.spring.dto.queue.QueueDto;
 
 import lombok.extern.log4j.Log4j;
 @Log4j
 public class HisrotyInfosProcessor {
 	
-	public String API_KEY = "RGAPI-32cadf88-44de-4ac1-a3f2-2ba693a6cd3c";	
+	public String API_KEY = "RGAPI-2c3aa2de-e9a1-421f-a248-92022e68a7e4";	
 	public PuuidDto puuid = new PuuidDto();
 	public ArrayList<String> gameIds = new ArrayList<String>();
 	public ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
 	public ArrayList<PlayerDto> playerInfo = new ArrayList<PlayerDto>();
+	public QueueDto queue = new QueueDto();
 	
 	public HisrotyInfosProcessor(String playerId, String playerTag) {
 		setPuuid(playerId, playerTag);
 		setPlayerInfo();
 		setGameIds();
 		setMatchInfos();
+		
+		//setQueue();
 	}
-	public PlayerDto getPlayerRankInfo() {
-		return playerInfo.get(0);
+	public int findRankIndex() {
+		ArrayList<String> queueTypeList = new ArrayList<>();
+		for(int i = 0; i < playerInfo.size(); i++) {
+			queueTypeList.add(playerInfo.get(i).queueType);
+		}
+		int pIndex = queueTypeList.indexOf("RANKED_TFT");
+		return pIndex;
 	}
-	public PlayerDto getPlayerDURankInfo() {
-		return playerInfo.get(1);
+	public int findDURankIndex() {
+		ArrayList<String> queueTypeList = new ArrayList<>();
+		for(int i = 0; i < playerInfo.size(); i++) {
+			queueTypeList.add(playerInfo.get(i).queueType);
+		}
+		int pIndex = queueTypeList.indexOf("RANKED_TFT_DOUBLE_UP");
+		return pIndex;
 	}
-	public String getPlayerRank() {
-		String rank = "";
-		rank += playerInfo.get(0).tier + " ";
-		rank += playerInfo.get(0).rank + " ";
-		rank += playerInfo.get(0).leaguePoints + "LP";
-		return rank;
+	public int findTRankIndex() {
+		ArrayList<String> queueTypeList = new ArrayList<>();
+		for(int i = 0; i < playerInfo.size(); i++) {
+			queueTypeList.add(playerInfo.get(i).queueType);
+		}
+		int pIndex = queueTypeList.indexOf("RANKED_TFT_TURBO");
+		return pIndex;
 	}
-	public String getPlayerDURank() {
-		String rank = "";
-		rank += playerInfo.get(1).tier + " ";
-		rank += playerInfo.get(1).rank + " ";
-		rank += playerInfo.get(1).leaguePoints + "LP";
-		return rank;
+	public String getPlayerRankInfo() {
+		String rankInfo = "";
+		int pIndex = findRankIndex();
+		if(pIndex == -1) {
+			return "랭크 전적 없음";
+		}
+		rankInfo += "랭크 : " + playerInfo.get(pIndex).tier + " ";
+		rankInfo += playerInfo.get(pIndex).rank + " ";
+		rankInfo += playerInfo.get(pIndex).leaguePoints + "LP<br>";
+		rankInfo += playerInfo.get(pIndex).wins + "승 ";
+		rankInfo += playerInfo.get(pIndex).losses + "패";
+		return rankInfo;
+	}
+	public String getPlayerDURankInfo() {
+		String rankInfo = "";
+		int pIndex = findDURankIndex();
+		if(pIndex == -1) {
+			return "더블업 전적 없음";
+		}
+		rankInfo += "더블업 : " + playerInfo.get(pIndex).tier + " ";
+		rankInfo += playerInfo.get(pIndex).rank + " ";
+		rankInfo += playerInfo.get(pIndex).leaguePoints + "LP<br>";
+		rankInfo += playerInfo.get(pIndex).wins + "승 ";
+		rankInfo += playerInfo.get(pIndex).losses + "패";
+		return rankInfo;
+	}
+	public String getPlayerTRankInfo() {
+		String rankInfo = "";
+		int pIndex = findTRankIndex();
+		if(pIndex == -1) {
+			return "초고속 모드 전적 없음";
+		}
+		rankInfo += "초고속 모드 : " + playerInfo.get(pIndex).ratedTier + " ";
+		rankInfo += playerInfo.get(pIndex).ratedRating + "점<br>";
+		rankInfo += playerInfo.get(pIndex).wins + "승 ";
+		rankInfo += playerInfo.get(pIndex).losses + "패";
+		return rankInfo;
 	}
 	public String getPlayerName() {
 		String name = "";
@@ -56,11 +104,30 @@ public class HisrotyInfosProcessor {
 		name += puuid.tagLine;
 		return name;
 	}
-	public PlayerDto getPlayerDoubleUpInfo() {
-		return playerInfo.get(1);
-	}
 	public Participant getMatchParticipant(int mIndex, int pIndex) {
 		return matchInfos.get(mIndex).info.participants.get(pIndex);
+	}
+	public String getMatchDate(int mIndex) {
+		long unixTime = matchInfos.get(mIndex).info.game_datetime;
+		Date date = new Date(unixTime);
+		Calendar gameDate = Calendar.getInstance();
+		gameDate.setTime(date);
+		Calendar nowDate = Calendar.getInstance();
+		String stDate = "";
+		if(gameDate.get(Calendar.YEAR) != nowDate.get(Calendar.YEAR)) {
+			stDate = Integer.toString(nowDate.get(Calendar.YEAR)-gameDate.get(Calendar.YEAR)) + "년 전";
+		}else if(gameDate.get(Calendar.MONTH) != nowDate.get(Calendar.MONTH)) {
+			stDate = Integer.toString(nowDate.get(Calendar.MONTH)-gameDate.get(Calendar.MONTH)) + "달 전";
+		}else if(gameDate.get(Calendar.DAY_OF_MONTH) != nowDate.get(Calendar.DAY_OF_MONTH)) {
+			stDate = Integer.toString(nowDate.get(Calendar.DAY_OF_MONTH)-gameDate.get(Calendar.DAY_OF_MONTH)) + "일 전";
+		}else if(gameDate.get(Calendar.HOUR_OF_DAY) != nowDate.get(Calendar.HOUR_OF_DAY)) {
+			stDate = Integer.toString(nowDate.get(Calendar.HOUR_OF_DAY)-gameDate.get(Calendar.HOUR_OF_DAY)) + "시간 전";
+		}else if(gameDate.get(Calendar.MINUTE) != nowDate.get(Calendar.MINUTE)) {
+			stDate = Integer.toString(nowDate.get(Calendar.MINUTE)-gameDate.get(Calendar.MINUTE)) + "분 전";
+		}else {
+			stDate = "방금 전";
+		}
+		return stDate;
 	}
 	public String getMatchPlayerName(int mIndex, int pIndex) {
 		String name = "";
@@ -69,22 +136,42 @@ public class HisrotyInfosProcessor {
 		return name;
 	}
 	public String getMatchType(int mIndex) {
-		String type = matchInfos.get(mIndex).info.tft_game_type;
+		int type = matchInfos.get(mIndex).info.queueId;
 		String gameType = "";
 		switch(type) {
-		case"1090":
+		case 1090:
 			gameType = "일반";
 			break;
-		case"1100":
+		case 1100:
 			gameType = "랭크";
 			break;
-		case"1160":
+		case 1160:
 			gameType = "더블 업";
 			break;
+		default:
+			gameType = "기타";
+			break;
 		}
-		return gameType;
+		return (String)gameType;
 	}
-	
+	public int findPlayer(int mIndex, String puuid) {
+		int pIndex = matchInfos.get(mIndex).metadata.participants.indexOf(puuid);
+		return pIndex;
+	}
+	public String getMatchPlacement(int mIndex) {
+		String gamePlacement = Integer.toString(matchInfos.get(mIndex).info.participants.get(findPlayer(mIndex, puuid.puuid)).placement)+"등";
+		return gamePlacement;
+	}
+	public String getMatchTime(int mIndex) {
+		int time = (int)matchInfos.get(mIndex).info.participants.get(findPlayer(mIndex, puuid.puuid)).time_eliminated;
+		int nMin = time/60;
+		int nSec = time%60;
+		String gameTime = String.format("%d분 %d초", nMin, nSec);
+		return gameTime;
+	}
+	public void shortQ() {
+		
+	}
 	//생성 시 함수
 	public void setPuuid(String AC_ID, String AC_TAG) { //account id, account tag로 puuid 얻기
 		String API_URL = String.format("https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/%s/%s?api_key=%s", AC_ID, AC_TAG, API_KEY);												
@@ -98,7 +185,6 @@ public class HisrotyInfosProcessor {
 			this.puuid = restTemplate.getForObject(uri, PuuidDto.class);
 			//puuid  f98WWOqUGgb4fJw5YoM_EIi5ylBtG2gBNjnufiPE28COchIKm0kFBTjZSuQvZ8pitMZxLXC3feDw2A
 	}
-	
 	public void setGameIds(){
 		//puuid로 gameIds 얻기 
 		int nCount = 5;
@@ -144,5 +230,18 @@ public class HisrotyInfosProcessor {
 		} catch (URISyntaxException e) {						
 				e.printStackTrace();					
 			}
+	}
+	public void setQueue() {
+		String API_URL = "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/tft-queues.json";
+		URI uri = null;
+		RestTemplate restTemplate = new RestTemplate();
+		try {						
+			uri = new URI(API_URL);
+		} catch (URISyntaxException e) {						
+			e.printStackTrace();					
+		}
+		log.info("-------------------"+restTemplate.getForObject(uri, String.class));
+		//queue = restTemplate.getForObject(uri, QueueDto.class);
+		//log.info("***********************************************"+queue);
 	}
 }

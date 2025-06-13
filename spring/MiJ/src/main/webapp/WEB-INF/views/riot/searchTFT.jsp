@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>TFT</h1>
+	<h1>TFT 전적검색</h1>
 	<form action="${cp}/riot/historyTFT">
 		<input name = "playerID" placeholder="아이디">#
 		<input name = "playerTag" placeholder="태그">

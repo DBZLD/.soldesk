@@ -15,54 +15,53 @@
 <body>
 	<h1>TFT 전적 검색</h1>
 	<br>
-	<a href="${cp }/riot/searchTFT">검색으로 돌아가기</a>
+	<form action="${cp }/riot/historyTFT">
+		<input name = "playerID" placeholder="아이디">#
+		<input name = "playerTag" placeholder="태그">
+		<input type = "submit" placeholder="검색">
+	</form>
+	<a href="${cp }/">메인 화면으로 돌아가기</a>
 	<br>
 	<%
 	HisrotyInfosProcessor mat = (HisrotyInfosProcessor)request.getAttribute("matchInfos");
 	%>
 	<div class = "mainBoard">
-		<div class = "rightBoard">
-			<br><br><br>
-			닉네임 : <%=mat.getPlayerName()%>
-			<br><br><br>
-			랭크 : <%=mat.getPlayerRank()%>
-			<br>
-			승 : <%=mat.getPlayerRankInfo().wins %>
-			패 : <%=mat.getPlayerRankInfo().losses %>
-			<br><br><br>
-			더블업 랭크 : <%=mat.getPlayerDURank()%>
-			<br>
-			승 : <%=mat.getPlayerDURankInfo().wins %>
-			패 : <%=mat.getPlayerDURankInfo().losses %>
-			<%=mat.matchInfos.get(3).info.tft_game_type %>
-			
-		</div>
 		<div class = "leftBoard">
-		<table>	
+			<br><br>
+			<%=mat.getPlayerName()%>
+			<br><br><br>
+			<%=mat.getPlayerRankInfo()%>
+			<br><br><br>
+			<%=mat.getPlayerDURankInfo()%>
+			<br><br><br>
+			<%=mat.getPlayerTRankInfo()%>
+			<br>
+		</div>
+		<div class = "rightBoard">
 			<%
 			for(int i = 0; i < mat.matchInfos.size(); i++){
 			%>
+		<table>	
 			<tr>
-
 				<td>
-					등수 : <%=mat.getMatchType(0) %>
+					<%=mat.getMatchPlacement(i) %>
+					|<%=mat.getMatchType(i)%>|
+					<%=mat.getMatchTime(i)%>|
+					<%=mat.getMatchDate(i)%>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					ㅡㅡㅡㅡㅡ
 				</td>
 				<td>
 					ㅡㅡㅡㅡㅡ
 				</td>
 			</tr>
-			<tr>
-				<td>
-					ㅡㅡㅡㅡㅡㅡ
-				</td>
-				<td>
-					ㅡㅡㅡㅡㅡ
-				</td>
-			</tr>
+		</table>
 			<%
 			}
 			%>
-		</table>
 		</div>
 	</div>
 </body>

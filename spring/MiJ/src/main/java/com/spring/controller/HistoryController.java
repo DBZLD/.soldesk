@@ -18,7 +18,7 @@ public class HistoryController {
 
 	MatchInfosService service;
 	@RequestMapping("/historyTFT")							
-	public void matchHistory(@RequestParam(value="playerID", defaultValue = "dbzld")String playerID, @RequestParam(value="playerTag", defaultValue = "9476")String playerTag, Model model) {
+	public void matchHistory(@RequestParam("playerID")String playerID, @RequestParam("playerTag")String playerTag, Model model) {
 		model.addAttribute("matchInfos", service.getMIP(playerID, playerTag));
 	}
 	@RequestMapping("/searchTFT")
