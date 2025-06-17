@@ -11,6 +11,7 @@
 </head>
 <body>
 <h1>전적 검색</h1>
-<a href="${cp}/riot/searchTFT">TFT전적 검색</a>
+<a href="${cp}/riot/searchTFT">TFT 전적 검색</a>
+<img class="regalia" src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/tft-regalia/TFT_Regalia_Gold.png" alt="regalia">
 </body>
 </html>

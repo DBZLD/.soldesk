@@ -1,28 +1,33 @@
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+// 공통 버튼 컴포넌트
+function CounterButton({ onClick, label }) {
+  return <button onClick={onClick}>{label}</button>;
+}
+
+function Cat() {
+  const [a, setA] = useState(0);
+  const [b, setB] = useState(0);
+  const [c, setC] = useState(0);
+
   return (
-    <div className="App">
-      <SimpleList />
-    </div>
+    <>
+      <h1>간식a {a}</h1>
+      <CounterButton onClick={() => setA(a + 1)} label="+" />
+      <CounterButton onClick={() => setA(a - 1)} label="-" />
+      <h1>간식b {b}</h1>
+      <CounterButton onClick={() => setB(b + 1)} label="+" />
+      <CounterButton onClick={() => setB(b - 1)} label="-" />
+      <h1>간식c {c}</h1>
+      <CounterButton onClick={() => setC(c + 1)} label="+" />
+      <CounterButton onClick={() => setC(c - 1)} label="-" />
+    </>
   );
 }
 
-function SimpleList() {
-  var animals = [
-    <li>고양이</li>
-    ,<li>개</li>
-    ,<li>너굴맨</li>
-  ];
-
-  return (
-    <div>
-      <h2>동물들</h2>
-      <ul>
-        {animals}
-      </ul>
-    </div>
-  );
+function App() {
+  return <Cat />;
 }
 
 export default App;

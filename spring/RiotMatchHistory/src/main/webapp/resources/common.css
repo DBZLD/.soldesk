@@ -17,10 +17,13 @@ body{
 }
 .leftBoard{
 	display:flex;
+	text-align:center;
+	align-items:center;
+	flex-direction: column;
+	width:auto;
+	height:auto;
+	padding: 30px;
 	background-color:white;
-	justify-content: center;
-	width:300px;
-	height:400px;
 	outline: gray solid 1px;
 	font-weight: 600;
 	font-size: large;
@@ -38,4 +41,8 @@ table{
 }
 tr,td{
 	outline: gray solid 1px;
+}
+.regalia{
+	width:150px;
+	height:150px;
 }

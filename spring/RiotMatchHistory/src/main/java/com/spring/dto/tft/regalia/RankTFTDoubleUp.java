@@ -2,7 +2,7 @@ package com.spring.dto.tft.regalia;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RankTFT {
+public class RankTFTDoubleUp {
     @JsonProperty("Bronze")
     public Bronze BRONZE;
 

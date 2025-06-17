@@ -1,7 +1,7 @@
 package com.spring.dto.tft.regalia;
 
 public class RegaliaDto {
-	String type;
-	String version;
-	Data data;
+	public String type;
+	public String version;
+	public Data data;
 }

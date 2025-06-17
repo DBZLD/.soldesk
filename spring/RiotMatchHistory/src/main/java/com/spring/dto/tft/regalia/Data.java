@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Data {
 	@JsonProperty("RANKED_TFT")
-	RankTFT rankTFT;
+	public RankTFT RANKED_TFT;
 	
 	@JsonProperty("RANKED_TFT_DOUBLE_UP")
-	RankDoubleUp rankDoubleUp;
+	public RankTFTDoubleUp RANKED_TFT_DOUBLE_UP;
 	
 	@JsonProperty("RANKED_TFT_TURBO")
-	RankTurbo rankTurbo;
+	public RankTFTTurbo RANKED_TFT_TURBO;
 }

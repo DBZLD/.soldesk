@@ -1,5 +1,5 @@
 package com.spring.dto.tft.regalia;
 
 public class Provisional {
-	Image image;
+	public Image image;
 }

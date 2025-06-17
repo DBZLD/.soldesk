@@ -27,15 +27,10 @@
 	%>
 	<div class = "mainBoard">
 		<div class = "leftBoard">
-			<br><br>
-			<%=mat.getPlayerName()%>
-			<br><br><br>
-			<%=mat.getPlayerRankInfo()%>
-			<br><br><br>
-			<%=mat.getPlayerDURankInfo()%>
-			<br><br><br>
-			<%=mat.getPlayerTRankInfo()%>
-			<br>
+			<%=mat.getPlayerName()%><br><br><br>
+			랭크<br><%=mat.getPlayerRankInfo("RANKED_TFT")%><br><br>
+			더블 업<br><%=mat.getPlayerRankInfo("RANKED_TFT_DOUBLE_UP")%><br><br>
+			초고속 모드<br><%=mat.getPlayerRankInfo("RANKED_TFT_TURBO")%>
 		</div>
 		<div class = "rightBoard">
 			<%

@@ -1,7 +1,11 @@
 package com.spring.service;
 
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,86 +19,49 @@ import com.spring.dto.tft.MatchDto;
 import com.spring.dto.tft.Participant;
 import com.spring.dto.tft.PlayerDto;
 import com.spring.dto.tft.PuuidDto;
+import com.spring.dto.tft.regalia.Image;
 import com.spring.dto.tft.queue.QueueDto;
+import com.spring.dto.tft.regalia.RegaliaDto;
 
 import lombok.extern.log4j.Log4j;
 @Log4j
 public class HisrotyInfosProcessor {
 	
-	public String API_KEY = "RGAPI-b12eed46-aa9e-4b15-9d5c-ccb9dbe0d180";	
+	public String API_KEY = "RGAPI-eee0e0f5-e4a4-4aa2-baf7-d57a872dc8b3";	
 	public PuuidDto puuid = new PuuidDto();
 	public ArrayList<String> gameIds = new ArrayList<String>();
 	public ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
 	public ArrayList<PlayerDto> playerInfo = new ArrayList<PlayerDto>();
 	public QueueDto queue = new QueueDto();
+	public RegaliaDto regalia = new RegaliaDto();
 	
 	public HisrotyInfosProcessor(String playerId, String playerTag) {
 		setPuuid(playerId, playerTag);
 		setPlayerInfo();
 		setGameIds();
 		setMatchInfos();
-		
 		setQueue();
-		setImage("1", "2");
+		setRegalia();
+		
 	}
-	public int findRankIndex() {
+	public int findRankIndex(String rankType) {
 		ArrayList<String> queueTypeList = new ArrayList<>();
 		for(int i = 0; i < playerInfo.size(); i++) {
 			queueTypeList.add(playerInfo.get(i).queueType);
 		}
-		int pIndex = queueTypeList.indexOf("RANKED_TFT");
+		int pIndex = queueTypeList.indexOf(rankType);
 		return pIndex;
 	}
-	public int findDURankIndex() {
-		ArrayList<String> queueTypeList = new ArrayList<>();
-		for(int i = 0; i < playerInfo.size(); i++) {
-			queueTypeList.add(playerInfo.get(i).queueType);
-		}
-		int pIndex = queueTypeList.indexOf("RANKED_TFT_DOUBLE_UP");
-		return pIndex;
-	}
-	public int findTRankIndex() {
-		ArrayList<String> queueTypeList = new ArrayList<>();
-		for(int i = 0; i < playerInfo.size(); i++) {
-			queueTypeList.add(playerInfo.get(i).queueType);
-		}
-		int pIndex = queueTypeList.indexOf("RANKED_TFT_TURBO");
-		return pIndex;
-	}
-	public String getPlayerRankInfo() {
+	public String getPlayerRankInfo(String rankType) {
 		String rankInfo = "";
-		int pIndex = findRankIndex();
+		int pIndex = findRankIndex(rankType);
 		if(pIndex == -1) {
-			return "·©Å© ÀüÀû ¾øÀ½";
+			return "ÀüÀû ¾øÀ½";
 		}
-		rankInfo += "·©Å© : " + playerInfo.get(pIndex).tier + " ";
+		rankInfo += String.format("<img class = \"regalia\" alt=\"regalia\" src=\"%s\">",getRankRegaliaImg(rankType));
+		rankInfo += playerInfo.get(pIndex).tier + " ";
 		rankInfo += playerInfo.get(pIndex).rank + " ";
 		rankInfo += playerInfo.get(pIndex).leaguePoints + "LP<br>";
-		rankInfo += playerInfo.get(pIndex).wins + "½Â ";
-		rankInfo += playerInfo.get(pIndex).losses + "ÆÐ";
-		return rankInfo;
-	}
-	public String getPlayerDURankInfo() {
-		String rankInfo = "";
-		int pIndex = findDURankIndex();
-		if(pIndex == -1) {
-			return "´õºí¾÷ ÀüÀû ¾øÀ½";
-		}
-		rankInfo += "´õºí¾÷ : " + playerInfo.get(pIndex).tier + " ";
-		rankInfo += playerInfo.get(pIndex).rank + " ";
-		rankInfo += playerInfo.get(pIndex).leaguePoints + "LP<br>";
-		rankInfo += playerInfo.get(pIndex).wins + "½Â ";
-		rankInfo += playerInfo.get(pIndex).losses + "ÆÐ";
-		return rankInfo;
-	}
-	public String getPlayerTRankInfo() {
-		String rankInfo = "";
-		int pIndex = findTRankIndex();
-		if(pIndex == -1) {
-			return "ÃÊ°í¼Ó ¸ðµå ÀüÀû ¾øÀ½";
-		}
-		rankInfo += "ÃÊ°í¼Ó ¸ðµå : " + playerInfo.get(pIndex).ratedTier + " ";
-		rankInfo += playerInfo.get(pIndex).ratedRating + "Á¡<br>";
 		rankInfo += playerInfo.get(pIndex).wins + "½Â ";
 		rankInfo += playerInfo.get(pIndex).losses + "ÆÐ";
 		return rankInfo;
@@ -138,27 +105,51 @@ public class HisrotyInfosProcessor {
 	}
 	
 	public String getMatchType(int mIndex) {
-	    int type = matchInfos.get(mIndex).info.queueId;
-	    switch (type) {
-	        case 1090:
-	            return queue.data.Q1090.name;
-	        case 1100:
-	            return queue.data.Q1100.name;
-	        case 1110:
-	            return queue.data.Q1110.name;
-	        case 1130:
-	            return queue.data.Q1130.name;
-	        case 1160:
-	            return queue.data.Q1160.name;
-	        case 1170:
-	            return queue.data.Q1170.name;
-	        case 1180:
-	            return queue.data.Q1180.name;
-	        case 1190:
-	            return queue.data.Q1190.name;
-	        default:
-	            return null;
-	    }
+		String queueId = "Q" + matchInfos.get(mIndex).info.queueId;
+		String name = "";
+		try {
+			Object objData = queue.data;
+			Field fieldQueue = objData.getClass().getDeclaredField(queueId);
+			fieldQueue.setAccessible(true);
+			Object objQueue = fieldQueue.get(objData);
+			
+			Field fieldName = objQueue.getClass().getDeclaredField("name");
+			fieldQueue.setAccessible(true);
+			name = (String)fieldName.get(objQueue);
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return name;
+	}
+	public String getRankRegaliaImg(String rankType) {
+		String url = "";
+		String pTier = "";
+		int pIndex = findRankIndex(rankType);
+		if(pIndex == -1) {
+			pTier = "PROVISIONAL";
+		}else {
+			pTier = playerInfo.get(pIndex).tier;			
+		}
+		try {
+			Object objData = regalia.data;
+			Field fieldRank = objData.getClass().getDeclaredField(rankType);
+			fieldRank.setAccessible(true);
+			Object objRank = fieldRank.get(objData);
+			
+			Field fieldTier = objRank.getClass().getDeclaredField(pTier);
+			fieldTier.setAccessible(true);
+			Object objTier = fieldTier.get(objRank);
+
+			Field fieldImage = objTier.getClass().getDeclaredField("image");
+			fieldImage.setAccessible(true);
+			Object objImage = fieldImage.get(objTier);
+			
+			Image image = (Image)objImage;
+			url = getImageURL(regalia.type, image.full);
+		}catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return url;
 	}
 	public int findPlayer(int mIndex, String puuid) {
 		int pIndex = matchInfos.get(mIndex).metadata.participants.indexOf(puuid);
@@ -175,12 +166,25 @@ public class HisrotyInfosProcessor {
 		String gameTime = String.format("%dºÐ %dÃÊ", nMin, nSec);
 		return gameTime;
 	}
-	public void shortQ() {
-		
+	public String getImageURL(String imageType, String imageId) {
+		String imageURL = String.format("https://ddragon.leagueoflegends.com/cdn/13.24.1/img/%s/%s", imageType, imageId);
+		return imageURL;
 	}
 	//»ý¼º ½Ã ÇÔ¼ö
 	public void setPuuid(String AC_ID, String AC_TAG) { //account id, account tag·Î puuid ¾ò±â
-		String API_URL = String.format("https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/%s/%s?api_key=%s", AC_ID, AC_TAG, API_KEY);												
+		String accountId = AC_ID;
+		String accountTag = AC_TAG;
+		try {
+			if(AC_ID.matches(".*[¤¡-¤¾¤¿-¤Ó°¡-ÆR]+.*")) {
+				accountId = URLEncoder.encode(accountId, StandardCharsets.UTF_8.name());
+			}
+			if(AC_TAG.matches(".*[¤¡-¤¾¤¿-¤Ó°¡-ÆR]+.*")) {
+				accountTag = URLEncoder.encode(accountTag, StandardCharsets.UTF_8.name());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		String API_URL = String.format("https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/%s/%s?api_key=%s", accountId, accountTag, API_KEY);												
 		URI uri = null; 
 		RestTemplate restTemplate = new RestTemplate();
 		try {						
@@ -248,9 +252,15 @@ public class HisrotyInfosProcessor {
 		}
 		queue = restTemplate.getForObject(uri, QueueDto.class);
 	}
-	public String setImage(String imageType, String imageId) {
-		log.info(matchInfos.get(0).info.participants.get(0).traits.get(0).name);
-		//String imageURL = String.format("https://ddragon.leagueoflegends.com/cdn/13.24.1/img/%s/%s.png", imageType, imageId);
-		return "1";
+	public void setRegalia() {
+		String API_URL = "https://ddragon.leagueoflegends.com/cdn/13.24.1/data/ko_KR/tft-regalia.json";
+		URI uri = null;
+		RestTemplate restTemplate = new RestTemplate();
+		try {						
+			uri = new URI(API_URL);
+		} catch (URISyntaxException e) {						
+			e.printStackTrace();					
+		}
+		regalia = restTemplate.getForObject(uri, RegaliaDto.class);
 	}
 }
