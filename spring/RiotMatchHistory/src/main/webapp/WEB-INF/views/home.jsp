@@ -12,6 +12,6 @@
 <body>
 <h1>전적 검색</h1>
 <a href="${cp}/riot/searchTFT">TFT 전적 검색</a>
-<img class="regalia" src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/tft-regalia/TFT_Regalia_Gold.png" alt="regalia">
+<img class="tft-traits" src="https://ddragon.leagueoflegends.com/cdn/15.12.1/img/tft-trait/Trait_Icon_4_Slayer.png">
 </body>
 </html>

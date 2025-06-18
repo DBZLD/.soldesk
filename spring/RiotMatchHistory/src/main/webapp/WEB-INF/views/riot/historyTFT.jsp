@@ -20,7 +20,7 @@
 		<input name = "playerTag" placeholder="태그">
 		<input type = "submit" placeholder="검색">
 	</form>
-	<a href="${cp }/">메인 화면으로 돌아가기</a>
+	<a href="${cp }/searchTFT">TFT 메인 화면으로 돌아가기</a>
 	<br>
 	<%
 	HisrotyInfosProcessor mat = (HisrotyInfosProcessor)request.getAttribute("matchInfos");
@@ -38,19 +38,25 @@
 			%>
 		<table>	
 			<tr>
-				<td>
+				<td colspan="4">
 					<%=mat.getMatchPlacement(i) %>|
 					<%=mat.getMatchType(i) %>|
 					<%=mat.getMatchTime(i)%>|
 					<%=mat.getMatchDate(i)%>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					ㅡㅡㅡㅡㅡ
+			<tr class="tft-table">
+				<td class="tft-table-level">
+					레벨
 				</td>
-				<td>
-					ㅡㅡㅡㅡㅡ
+				<td class="tft-table-trait">
+					특성
+				</td>
+				<td class="tft-table-champion">
+					챔피언
+				</td>
+				<td class="tft-table-player">
+					유저
 				</td>
 			</tr>
 		</table>
