@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
 <script defer="defer" src="/mi/resources/main.797d62a9.js"></script>
 <link rel="stylesheet" href="/mi/resources/main.31d6cfe0.css">
-	<title>Home</title>
+<meta charset="UTF-8">
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
-<a href="/mi/test/getOnePlusTwo">1+2 확인하러가기</a>
+<a href="/api/cat">내 고양이 api 확인[브라우저에 json 찍기]</a>
+
+<hr>
+
+<a href="/weather/getCat">내 고양이 api 확인[정식 api 요청으로 확인]</a>
+
+<hr>
 <div id = "root"></div>
 </body>
 </html>
