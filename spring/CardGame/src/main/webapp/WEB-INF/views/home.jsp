@@ -3,8 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script defer="defer" src="/mi/resources/main.797d62a9.js"></script>
-<link rel="stylesheet" href="/mi/resources/main.31d6cfe0.css">
 <meta charset="UTF-8">
 </head>
 <body>
@@ -17,6 +15,7 @@
 
 <hr>
 <a href="/api/gacha">카드게임 api</a>
-<div id = "root"></div>
+<hr>
+<a href="/card/play">카드 개수</a>
 </body>
 </html>

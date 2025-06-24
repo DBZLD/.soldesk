@@ -1,28 +1,26 @@
 package com.spring.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.dto.CardDto;
+import com.spring.service.CardService;
 import com.spring.service.Dice;
 
+import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/*")
 @RestController
 public class ApiController {
-	class Card{
-		public String job;
-		public String grade;
-		public Card(String job, String grade) {
-			this.job = job;
-			this.grade = grade;
-		}
-	}
+	
+	@Setter(onMethod_ = @Autowired)
+	private CardService service;	
+	
 	
 	public int getLuck() {
 		//확률 공개:
@@ -52,10 +50,13 @@ public class ApiController {
 		return t;
 	}
 	
-	@GetMapping("/gacha")
-	public Card gacha() {
+	@GetMapping("/addCard")
+	public CardDto gacha() {
 		String jobs[] = {"전사","마법사","궁수","도적","사제"};
 		String grade[] = {"SSR","SR","S","R","H","N"};
-		return new Card(jobs[Dice.roll(0,4)],grade[getLuck()]);
+		CardDto card = new CardDto(jobs[Dice.roll(0,4)],grade[getLuck()]);
+		service.addCard(card);
+		
+		return card;
 	}
 }
