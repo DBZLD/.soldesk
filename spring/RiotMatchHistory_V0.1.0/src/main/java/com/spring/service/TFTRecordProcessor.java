@@ -13,6 +13,7 @@ import java.util.Date;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.spring.dto.tft.MatchDto;
@@ -22,28 +23,32 @@ import com.spring.dto.tft.PuuidDto;
 import com.spring.dto.tft.regalia.Image;
 import com.spring.dto.tft.queue.QueueDto;
 import com.spring.dto.tft.regalia.RegaliaDto;
+import com.spring.dto.tft.traits.TraitsDto;
 
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-public class HisrotyInfosProcessor {
+public class TFTRecordProcessor {
 
-	public String API_KEY = "RGAPI-f7d19d53-6a1d-4f45-ac9e-d170feafe555";
+	private String API_KEY = "RGAPI-5abfd5e3-f382-41e9-88a0-e62db92e1e4f";
+	public boolean bSuccess = true;
 	public PuuidDto puuid = new PuuidDto();
 	public ArrayList<String> gameIds = new ArrayList<String>();
 	public ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
 	public ArrayList<PlayerDto> playerInfo = new ArrayList<PlayerDto>();
 	public QueueDto queue = new QueueDto();
 	public RegaliaDto regalia = new RegaliaDto();
-
-	public HisrotyInfosProcessor(String playerId, String playerTag) {
+	public TraitsDto traits = new TraitsDto();
+	
+	public TFTRecordProcessor(String playerId, String playerTag) {
 		setPuuid(playerId, playerTag);
-		setPlayerInfo();
-		setGameIds();
-		setMatchInfos();
-		setQueue();
-		setRegalia();
-
+		if(bSuccess == true) {
+			setPlayerInfo();
+			setGameIds();
+			setMatchInfos();
+			setQueue();
+			setRegalia();			
+		}
 	}
 
 	public int findRankIndex(String rankType) {
@@ -209,10 +214,11 @@ public class HisrotyInfosProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-		} catch (URISyntaxException e) {
+			this.puuid = restTemplate.getForObject(uri, PuuidDto.class);
+		} catch (URISyntaxException|HttpClientErrorException e) {
+			this.bSuccess = false;
 			e.printStackTrace();
 		}
-		this.puuid = restTemplate.getForObject(uri, PuuidDto.class);
 		// puuid
 		// f98WWOqUGgb4fJw5YoM_EIi5ylBtG2gBNjnufiPE28COchIKm0kFBTjZSuQvZ8pitMZxLXC3feDw2A
 	}

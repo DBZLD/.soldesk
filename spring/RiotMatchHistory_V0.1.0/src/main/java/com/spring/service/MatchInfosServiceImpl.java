@@ -9,8 +9,8 @@ import lombok.extern.log4j.Log4j;
 public class MatchInfosServiceImpl implements MatchInfosService{
 	
 	@Override
-	public HisrotyInfosProcessor getMIP(String playerId, String playerTag) {
-		HisrotyInfosProcessor mip = new HisrotyInfosProcessor(playerId, playerTag);
+	public TFTRecordProcessor getMIP(String playerId, String playerTag) {
+		TFTRecordProcessor mip = new TFTRecordProcessor(playerId, playerTag);
 		return mip;
 	}
 }

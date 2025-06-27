@@ -13,7 +13,6 @@ import java.util.Date;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.spring.dto.tft.MatchDto;
@@ -27,10 +26,9 @@ import com.spring.dto.tft.regalia.RegaliaDto;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-public class HisrotyInfosProcessor {
+public class HistoryInfosProcessor {
 
-	public String API_KEY = "RGAPI-bf962ea5-5b2b-4aab-8e1f-c88edc1c1d10";
-	public boolean bError = false;
+	public String API_KEY = "RGAPI-f7d19d53-6a1d-4f45-ac9e-d170feafe555";
 	public PuuidDto puuid = new PuuidDto();
 	public ArrayList<String> gameIds = new ArrayList<String>();
 	public ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
@@ -38,15 +36,14 @@ public class HisrotyInfosProcessor {
 	public QueueDto queue = new QueueDto();
 	public RegaliaDto regalia = new RegaliaDto();
 
-	public HisrotyInfosProcessor(String playerId, String playerTag) {
+	public HistoryInfosProcessor(String playerId, String playerTag) {
 		setPuuid(playerId, playerTag);
-		if(bError != true) {
-			setPlayerInfo();
-			setGameIds();
-			setMatchInfos();
-			setQueue();
-			setRegalia();			
-		}
+		setPlayerInfo();
+		setGameIds();
+		setMatchInfos();
+		setQueue();
+		setRegalia();
+
 	}
 
 	public int findRankIndex(String rankType) {
@@ -212,11 +209,10 @@ public class HisrotyInfosProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			this.puuid = restTemplate.getForObject(uri, PuuidDto.class);
-		} catch (URISyntaxException|HttpClientErrorException e) {
-			this.bError = true;
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
+		this.puuid = restTemplate.getForObject(uri, PuuidDto.class);
 		// puuid
 		// f98WWOqUGgb4fJw5YoM_EIi5ylBtG2gBNjnufiPE28COchIKm0kFBTjZSuQvZ8pitMZxLXC3feDw2A
 	}

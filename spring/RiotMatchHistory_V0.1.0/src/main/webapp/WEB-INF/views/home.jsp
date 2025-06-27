@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>전적 검색</h1>
-<a href="${cp}/riot/historyTFT?playerID=dbzld&playerTag=9476">플레이어api</a>
+<a href="${cp}/riot/getTFTRecord?playerID=dbzld&playerTag=9476">플레이어api</a>
 <!-- <img class="tft-traits" src="https://ddragon.leagueoflegends.com/cdn/15.12.1/img/tft-trait/Trait_Icon_4_Slayer.png"> -->
 </body>
 </html>

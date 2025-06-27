@@ -6,7 +6,7 @@ function TFTHistory() {
 
   return (
     <div>
-      <h1 onClick={() => navigate('/')} style={{cursor:'pointer'}}>메인 화면으로</h1>
+      <h1 onClick={() => navigate('/TFTMain')} style={{cursor:'pointer'}}>TFT 메인 화면으로</h1>
       <h2>TFT 전적</h2>
     </div>
   );

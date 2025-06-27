@@ -1,5 +1,5 @@
 package com.spring.service;
 
 public interface MatchInfosService {
-	public HisrotyInfosProcessor getMIP(String playerId, String playerTag);
+	public HistoryInfosProcessor getMIP(String playerId, String playerTag);
 }

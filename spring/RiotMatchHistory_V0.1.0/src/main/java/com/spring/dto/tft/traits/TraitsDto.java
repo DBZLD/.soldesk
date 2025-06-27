@@ -1,5 +1,5 @@
 package com.spring.dto.tft.traits; 
-public class TratisDto{
+public class TraitsDto{
     public String type;
     public String version;
     public Data data;

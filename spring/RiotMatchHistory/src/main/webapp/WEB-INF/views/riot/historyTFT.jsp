@@ -1,4 +1,4 @@
-<%@page import="com.spring.service.HisrotyInfosProcessor"%>
+<%@page import="com.spring.service.HistoryInfosProcessor"%>
 <%@page import="com.spring.dto.tft.MatchDto"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,7 +23,8 @@
 	<a href="${cp }/searchTFT">TFT 메인 화면으로 돌아가기</a>
 	<br>
 	<%
-	HisrotyInfosProcessor mat = (HisrotyInfosProcessor)request.getAttribute("matchInfos");
+
+	HistoryInfosProcessor mat = (HistoryInfosProcessor)request.getAttribute("matchInfos");
 	%>
 	<div class = "mainBoard">
 		<div class = "leftBoard">
