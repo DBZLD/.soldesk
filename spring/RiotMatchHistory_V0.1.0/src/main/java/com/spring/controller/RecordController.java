@@ -19,16 +19,15 @@ import lombok.extern.log4j.Log4j;
 public class RecordController {
 
 	MatchInfosService service;
+	
 	@RequestMapping("/getTFTRecord")							
 	public TFTRecordProcessor getTFTRecord(@RequestParam(value="playerID", defaultValue = "")
 	String playerID, @RequestParam(value="playerTag", defaultValue = "")String playerTag, Model model) {
 		TFTRecordProcessor hrp = service.getMIP(playerID, playerTag);
 		return hrp;
 	}
-	
-	@RequestMapping("/getTFTApi")
+	@RequestMapping("/TFTApi")
 	public TFTApiProcessor getTFTApi() {
-		TFTApiProcessor tap = new TFTApiProcessor();
-		return tap;
+		return service.getTAP();
 	}
 }
