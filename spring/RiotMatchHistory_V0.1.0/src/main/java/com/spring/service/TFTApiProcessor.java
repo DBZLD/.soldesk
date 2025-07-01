@@ -9,6 +9,7 @@ import com.spring.dto.tft.champion.ChampionDto;
 import com.spring.dto.tft.item.ItemDto;
 import com.spring.dto.tft.queue.QueueDto;
 import com.spring.dto.tft.regalia.RegaliaDto;
+import com.spring.dto.tft.regalia.RegaliaNameDto;
 import com.spring.dto.tft.tactician.TacticianDto;
 import com.spring.dto.tft.traits.TraitsDto;
 
@@ -21,6 +22,7 @@ public class TFTApiProcessor {
 	public static final String REGIONS = "ko_KR";
 	public QueueDto queue = new QueueDto();
 	public RegaliaDto regalia = new RegaliaDto();
+	public RegaliaNameDto regaliaName = new RegaliaNameDto();
 	public TraitsDto traits = new TraitsDto();
 	public ChampionDto champion = new ChampionDto();
 	public ItemDto item = new ItemDto();

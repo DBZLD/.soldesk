@@ -21,7 +21,6 @@ function TFTSearch() {
       setId(inputString);
       setTag('');
     }
-
   };
   return (
     <div>

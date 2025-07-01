@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class TFTRecordProcessor {
 
-	private static String API_KEY = "RGAPI-8835f13c-f99a-4876-a8a6-94001857ced9";
+	private static String API_KEY = "RGAPI-91166597-36e6-426f-8fbc-2b137f4055c8";
 	public boolean bSuccess = true;
 	public PuuidDto puuid = new PuuidDto();
 	public ArrayList<String> gameIds = new ArrayList<String>();
