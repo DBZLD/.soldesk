@@ -5,13 +5,13 @@ import java.net.URISyntaxException;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.spring.dto.tft.champion.ChampionDto;
-import com.spring.dto.tft.item.ItemDto;
-import com.spring.dto.tft.queue.QueueDto;
-import com.spring.dto.tft.regalia.RegaliaDto;
-import com.spring.dto.tft.regalia.RegaliaNameDto;
-import com.spring.dto.tft.tactician.TacticianDto;
-import com.spring.dto.tft.traits.TraitsDto;
+import com.spring.dto.tft.ProfileIconDto;
+import com.spring.dto.tft.TFTChampionDto;
+import com.spring.dto.tft.TFTItemDto;
+import com.spring.dto.tft.TFTQueueDto;
+import com.spring.dto.tft.TFTRegaliaDto;
+import com.spring.dto.tft.TFTTacticianDto;
+import com.spring.dto.tft.TFTTraitDto;
 
 import lombok.extern.log4j.Log4j;
 
@@ -20,13 +20,13 @@ import lombok.extern.log4j.Log4j;
 public class TFTApiProcessor {
 	public static final String VERSIONS = "15.13.1";
 	public static final String REGIONS = "ko_KR";
-	public QueueDto queue = new QueueDto();
-	public RegaliaDto regalia = new RegaliaDto();
-	public RegaliaNameDto regaliaName = new RegaliaNameDto();
-	public TraitsDto traits = new TraitsDto();
-	public ChampionDto champion = new ChampionDto();
-	public ItemDto item = new ItemDto();
-	public TacticianDto tactician = new TacticianDto();
+	public TFTQueueDto queue = new TFTQueueDto();
+	public TFTRegaliaDto regalia = new TFTRegaliaDto();
+	public TFTTraitDto traits = new TFTTraitDto();
+	public TFTChampionDto champion = new TFTChampionDto();
+	public TFTItemDto item = new TFTItemDto();
+	public TFTTacticianDto tactician = new TFTTacticianDto();
+	public ProfileIconDto profileIcon = new ProfileIconDto();
 	
 	public TFTApiProcessor() {
 		setQueue();
@@ -35,6 +35,7 @@ public class TFTApiProcessor {
 		setChampion();
 		setItem();
 		setTactician();
+		setProfileIcon();
 	}
 //	public int findRankIndex(String rankType) {
 //		ArrayList<String> queueTypeList = new ArrayList<>();
@@ -183,7 +184,7 @@ public class TFTApiProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			queue = restTemplate.getForObject(uri, QueueDto.class);
+			queue = restTemplate.getForObject(uri, TFTQueueDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -195,7 +196,7 @@ public class TFTApiProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			regalia = restTemplate.getForObject(uri, RegaliaDto.class);
+			regalia = restTemplate.getForObject(uri, TFTRegaliaDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -207,7 +208,7 @@ public class TFTApiProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			traits = restTemplate.getForObject(uri, TraitsDto.class);
+			traits = restTemplate.getForObject(uri, TFTTraitDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -219,7 +220,7 @@ public class TFTApiProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			champion = restTemplate.getForObject(uri, ChampionDto.class);
+			champion = restTemplate.getForObject(uri, TFTChampionDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -231,7 +232,7 @@ public class TFTApiProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			item = restTemplate.getForObject(uri, ItemDto.class);
+			item = restTemplate.getForObject(uri, TFTItemDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -243,9 +244,24 @@ public class TFTApiProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			tactician = restTemplate.getForObject(uri, TacticianDto.class);
+			tactician = restTemplate.getForObject(uri, TFTTacticianDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
+	}
+	public void setProfileIcon() {
+		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/profileicon.json",VERSIONS,REGIONS);
+		log.info(API_URL);
+		URI uri = null;
+		RestTemplate restTemplate = new RestTemplate();
+		try {
+			uri = new URI(API_URL);
+			profileIcon = restTemplate.getForObject(uri, ProfileIconDto.class);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+	public void setRegaliaName() {
+		
 	}
 }
