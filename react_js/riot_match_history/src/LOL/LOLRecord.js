@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function LOLHistory() {
+function LOLRecord() {
   const navigate = useNavigate();
 
   return (
@@ -12,4 +12,4 @@ function LOLHistory() {
   );
 }
 
-export default LOLHistory;
+export default LOLRecord;

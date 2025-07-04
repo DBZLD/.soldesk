@@ -71,6 +71,7 @@ function TFTRecord() {
         <>
           <h1 onClick={() => navigate('/TFTMain')} style={{ cursor: 'pointer' }}>TFT 메인 화면으로</h1>
           <h2>TFT 전적</h2>
+          <h2>{data.puuid.gameName}#{data.puuid.tagLine}</h2>
           <TFTMatchAccordion/>
         </>
       )}

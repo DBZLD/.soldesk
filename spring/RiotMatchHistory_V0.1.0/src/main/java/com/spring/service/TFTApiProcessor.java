@@ -2,6 +2,8 @@ package com.spring.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
+import static java.util.Map.entry;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -9,6 +11,7 @@ import com.spring.dto.tft.ProfileIconDto;
 import com.spring.dto.tft.TFTChampionDto;
 import com.spring.dto.tft.TFTItemDto;
 import com.spring.dto.tft.TFTQueueDto;
+import com.spring.dto.tft.TFTRegalia;
 import com.spring.dto.tft.TFTRegaliaDto;
 import com.spring.dto.tft.TFTTacticianDto;
 import com.spring.dto.tft.TFTTraitDto;
@@ -27,6 +30,27 @@ public class TFTApiProcessor {
 	public TFTItemDto item = new TFTItemDto();
 	public TFTTacticianDto tactician = new TFTTacticianDto();
 	public ProfileIconDto profileIcon = new ProfileIconDto();
+	
+	private Map<String, String> regaliaName = Map.ofEntries(
+		entry("Iron", "아이언"),
+		entry("Bronze", "브론즈"),
+		entry("Silver", "실버"),
+		entry("Gold", "골드"),
+		entry("Platinum", "플레티넘"),
+		entry("Emerald", "에메랄드"),
+		entry("Diamond", "다이아몬드"),
+		entry("Master", "마스터"),
+		entry("Grandmaster", "그랜드마스터"),
+		entry("Challenger", "챌린저"),
+		entry("Provisional", "랭크 없음")
+	);
+	private Map<String, String> regaliaNameTurbo = Map.of(
+		"Blue", "블루",
+		"Gray", "그레이",
+		"Green", "그린",
+		"Hyper", "하이퍼",
+		"Purple", "퍼플"
+	);
 	
 	public TFTApiProcessor() {
 		setQueue();
@@ -200,6 +224,9 @@ public class TFTApiProcessor {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
+		setRegaliaName(regalia.data.RANKED_TFT, regaliaName);
+		setRegaliaName(regalia.data.RANKED_TFT_DOUBLE_UP, regaliaName);
+		setRegaliaName(regalia.data.RANKED_TFT_TURBO, regaliaNameTurbo);
 	}
 	public void setTraits() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-trait.json",VERSIONS,REGIONS);
@@ -261,7 +288,11 @@ public class TFTApiProcessor {
 			e.printStackTrace();
 		}
 	}
-	public void setRegaliaName() {
-		
+	public void setRegaliaName(Map<String, TFTRegalia> map, Map<String, String> name) {
+		for(Map.Entry<String, TFTRegalia> entry : map.entrySet()) {
+			String tier = entry.getKey();
+			TFTRegalia regalia = entry.getValue();
+			regalia.name = name.getOrDefault(tier, tier);
+		}
 	}
 }

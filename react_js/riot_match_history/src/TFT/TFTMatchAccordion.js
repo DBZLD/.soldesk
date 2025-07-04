@@ -23,7 +23,8 @@ function AccordionExpandFullRow() {
         <TableBody>
           <TableRow>
             {/* 1열 */}
-            <TableCell colSpan={4}>등수 | 게임 형식 | 게임 시간 | 게임 일자</TableCell>
+            <TableCell>등수</TableCell>
+            <TableCell colSpan={3}>게임 형식 | 게임 시간 | 게임 일자</TableCell>
             {/* 2열 병합 + 토글 버튼 */}
             <TableCell rowSpan={2}  sx={{
                verticalAlign: "bottom", 

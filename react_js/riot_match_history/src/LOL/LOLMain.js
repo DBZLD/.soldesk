@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function LOLSearch() {
+function LOLMain() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/LOLHistory');
+    navigate('/LOLRecord');
   }
   return (
     <div>
@@ -22,4 +22,4 @@ function LOLSearch() {
   );
 }
 
-export default LOLSearch;
+export default LOLMain;
