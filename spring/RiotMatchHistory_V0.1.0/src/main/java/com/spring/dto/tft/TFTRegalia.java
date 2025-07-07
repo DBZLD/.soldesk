@@ -1,7 +1,7 @@
 package com.spring.dto.tft;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.spring.service.Image;
+import com.spring.util.Image;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TFTRegalia {

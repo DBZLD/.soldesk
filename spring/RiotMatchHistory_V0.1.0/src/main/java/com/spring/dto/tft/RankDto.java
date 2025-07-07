@@ -1,7 +1,7 @@
 
 package com.spring.dto.tft;
 
-public class PlayerDto {
+public class RankDto {
 
 	public String puuid;
 	public String leagueId;

@@ -1,4 +1,4 @@
-package com.spring.service;
+package com.spring.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

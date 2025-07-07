@@ -1,7 +1,6 @@
-package com.spring.dto.tft;
+package com.spring.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.spring.service.Image;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProfileIcon {

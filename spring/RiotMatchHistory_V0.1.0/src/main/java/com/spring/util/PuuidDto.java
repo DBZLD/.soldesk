@@ -1,4 +1,4 @@
-package com.spring.dto.tft;
+package com.spring.util;
 
 public class PuuidDto {
 	public String puuid;

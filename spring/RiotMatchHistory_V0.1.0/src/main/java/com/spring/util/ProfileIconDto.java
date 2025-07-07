@@ -1,4 +1,4 @@
-package com.spring.dto.tft;
+package com.spring.util;
 
 import java.util.HashMap;
 import java.util.Map;

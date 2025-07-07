@@ -13,22 +13,24 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.spring.dto.tft.MatchDto;
-import com.spring.dto.tft.PlayerDto;
-import com.spring.dto.tft.PuuidDto;
-import com.spring.dto.tft.SummonerDto;
+import com.spring.dto.tft.RankDto;
+import com.spring.tft.TFTPlayerRankInfos;
+import com.spring.util.PuuidDto;
+import com.spring.util.Common;
+import com.spring.util.ProfileDto;
 
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class TFTRecordProcessor {
 
-	private static String API_KEY = "RGAPI-2678c3b2-e1cd-4455-b94a-6273a5644f98";
 	public boolean bSuccess = true;
-	public PuuidDto puuid = new PuuidDto();
-	public ArrayList<String> gameIds = new ArrayList<String>();
-	public ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
-	public ArrayList<PlayerDto> playerRankInfo = new ArrayList<PlayerDto>();
-	public SummonerDto summonerInfo = new SummonerDto();
+	private PuuidDto puuid = new PuuidDto();
+	private ArrayList<String> matchIds = new ArrayList<String>();
+	private ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
+	public ArrayList<RankDto> rankInfos = new ArrayList<RankDto>();
+	private ProfileDto profileInfo = new ProfileDto();
+	public TFTPlayerRankInfos ppi = new TFTPlayerRankInfos();
 	
 	public TFTRecordProcessor(String playerId, String playerTag) {
 		setPuuid(playerId, playerTag);
@@ -37,6 +39,8 @@ public class TFTRecordProcessor {
 			setGameIds();
 			setMatchInfos();
 			setSummoner();
+			
+			getPlayerProfileInfo();
 		}
 	}
 	public void setPuuid(String AC_ID, String AC_TAG) { // account id, account tag로 puuid 얻기
@@ -54,7 +58,7 @@ public class TFTRecordProcessor {
 		}
 		String API_URL = String.format(
 				"https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/%s/%s?api_key=%s", accountId,
-				accountTag, API_KEY);
+				accountTag, Common.API_KEY);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -73,14 +77,14 @@ public class TFTRecordProcessor {
 		int nCount = 5;
 		String API_URL = String.format(
 				"https://asia.api.riotgames.com/tft/match/v1/matches/by-puuid/%s/ids?start=0&count=%d&api_key=%s",
-				puuid.puuid, nCount, API_KEY);
+				puuid.puuid, nCount, Common.API_KEY);
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			URI uri = new URI(API_URL);
 			ResponseEntity<ArrayList<String>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
 					new ParameterizedTypeReference<ArrayList<String>>() {
 					});
-			this.gameIds = response.getBody();
+			this.matchIds = response.getBody();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -90,9 +94,9 @@ public class TFTRecordProcessor {
 		// gameId로 matchInfo얻기
 		RestTemplate restTemplate = new RestTemplate();
 		ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
-		for (int i = 0; i < gameIds.size(); i++) {
+		for (int i = 0; i < matchIds.size(); i++) {
 			String API_URL = String.format("https://asia.api.riotgames.com/tft/match/v1/matches/%s?api_key=%s",
-					gameIds.get(i), API_KEY);
+					matchIds.get(i), Common.API_KEY);
 			try {
 				URI uri = new URI(API_URL);
 				MatchDto matchInfo = restTemplate.getForObject(uri, MatchDto.class);
@@ -106,14 +110,14 @@ public class TFTRecordProcessor {
 
 	public void setPlayerRankInfo() {
 		String API_URL = String.format(
-		"https://kr.api.riotgames.com/tft/league/v1/by-puuid/%s?api_key=%s", puuid.puuid, API_KEY);
+		"https://kr.api.riotgames.com/tft/league/v1/by-puuid/%s?api_key=%s", puuid.puuid, Common.API_KEY);
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			URI uri = new URI(API_URL);
-			ResponseEntity<ArrayList<PlayerDto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
-					new ParameterizedTypeReference<ArrayList<PlayerDto>>() {
+			ResponseEntity<ArrayList<RankDto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
+					new ParameterizedTypeReference<ArrayList<RankDto>>() {
 					});
-			playerRankInfo = response.getBody();
+			rankInfos = response.getBody();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -121,14 +125,159 @@ public class TFTRecordProcessor {
 	public void setSummoner() {
 		String API_URL = String.format(
 		"https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/%s?api_key=%s"
-		, puuid.puuid, API_KEY);
+		, puuid.puuid, Common.API_KEY);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			this.summonerInfo = restTemplate.getForObject(uri, SummonerDto.class);
+			this.profileInfo = restTemplate.getForObject(uri, ProfileDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 	}
+	public TFTPlayerRankInfos getPlayerProfileInfo() {
+		RankDto rankInfo = new RankDto();
+		RankDto doubleUpInfo = new RankDto();
+		RankDto turboInfo = new RankDto();
+		RankDto provisional = new RankDto();
+		provisional.tier = "PROVISIONAL";
+		
+		int idx = findRankIndex("RANKED_TFT");
+		rankInfo = idx != -1 ? rankInfos.get(idx) : provisional;
+		
+		idx = findRankIndex("RANKED_TFT_DOUBLE_UP");
+		doubleUpInfo = idx != -1 ? rankInfos.get(idx) : provisional;
+		
+		idx = findRankIndex("RANKED_TFT_TURBO");
+		turboInfo = idx != -1 ? rankInfos.get(idx) : provisional;
+		
+		ppi = new TFTPlayerRankInfos(rankInfo, doubleUpInfo, turboInfo);
+		
+		
+		return ppi;
+	}
+	public int findRankIndex(String rankType) {
+		ArrayList<String> queueTypeList = new ArrayList<>();
+		for (int i = 0; i < rankInfos.size(); i++) {
+			queueTypeList.add(rankInfos.get(i).queueType);
+		}
+		int pIndex = queueTypeList.indexOf(rankType);
+		return pIndex;
+	}
+	
+	public String getImgURL(String imgType, String value) {
+		String imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s.png",
+		Common.VERSIONS, imgType, value);
+		
+		return imgURL;
+	}
+//	public String getPlayerName() {
+//	String name = "";
+//	name += puuid.gameName + "#";
+//	name += puuid.tagLine;
+//	return name;
+//}
+//
+//public Participant getMatchParticipant(int mIndex, int pIndex) {
+//	return matchInfos.get(mIndex).info.participants.get(pIndex);
+//}
+//
+//public String getMatchDate(int mIndex) {
+//	long unixTime = matchInfos.get(mIndex).info.game_datetime;
+//	Date date = new Date(unixTime);
+//	Calendar gameDate = Calendar.getInstance();
+//	gameDate.setTime(date);
+//	Calendar nowDate = Calendar.getInstance();
+//	String stDate = "";
+//	if (gameDate.get(Calendar.YEAR) != nowDate.get(Calendar.YEAR)) {
+//		stDate = Integer.toString(nowDate.get(Calendar.YEAR) - gameDate.get(Calendar.YEAR)) + "년 전";
+//	} else if (gameDate.get(Calendar.MONTH) != nowDate.get(Calendar.MONTH)) {
+//		stDate = Integer.toString(nowDate.get(Calendar.MONTH) - gameDate.get(Calendar.MONTH)) + "달 전";
+//	} else if (gameDate.get(Calendar.DAY_OF_MONTH) != nowDate.get(Calendar.DAY_OF_MONTH)) {
+//		stDate = Integer.toString(nowDate.get(Calendar.DAY_OF_MONTH) - gameDate.get(Calendar.DAY_OF_MONTH)) + "일 전";
+//	} else if (gameDate.get(Calendar.HOUR_OF_DAY) != nowDate.get(Calendar.HOUR_OF_DAY)) {
+//		stDate = Integer.toString(nowDate.get(Calendar.HOUR_OF_DAY) - gameDate.get(Calendar.HOUR_OF_DAY)) + "시간 전";
+//	} else if (gameDate.get(Calendar.MINUTE) != nowDate.get(Calendar.MINUTE)) {
+//		stDate = Integer.toString(nowDate.get(Calendar.MINUTE) - gameDate.get(Calendar.MINUTE)) + "분 전";
+//	} else {
+//		stDate = "방금 전";
+//	}
+//	return stDate;
+//}
+//
+//public String getMatchPlayerName(int mIndex, int pIndex) {
+//	String name = "";
+//	name += matchInfos.get(mIndex).info.participants.get(pIndex).riotIdGameName + "#";
+//	name += matchInfos.get(mIndex).info.participants.get(pIndex).riotIdTagline;
+//	return name;
+//}
+//
+//public String getMatchType(int mIndex) {
+//	String queueId = "Q" + matchInfos.get(mIndex).info.queueId;
+//	String name = "";
+//	try {
+//		Object objData = queue.data;
+//		Field fieldQueue = objData.getClass().getDeclaredField(queueId);
+//		fieldQueue.setAccessible(true);
+//		Object objQueue = fieldQueue.get(objData);
+//
+//		Field fieldName = objQueue.getClass().getDeclaredField("name");
+//		fieldQueue.setAccessible(true);
+//		name = (String) fieldName.get(objQueue);
+//	} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//		e.printStackTrace();
+//	}
+//	return name;
+//}
+//
+//public String getRankRegaliaImg(String rankType, int pIndex) {
+//	if (pIndex == -1) {
+//		return String.format("<img class = \"%s\" alt=\"%s\" src=\"%s\">",
+//		"tft-regalia", "tft-regalia", getImageURL("tft-regalia", "TFT_Regalia_Provisional.png"));
+//	}
+//	String url = "";
+//	String pTier = "";
+//	pTier = playerInfo.get(pIndex).tier;
+//	
+//	try {
+//		Object objData = regalia.data;
+//		Field fieldRank = objData.getClass().getDeclaredField(rankType);
+//		fieldRank.setAccessible(true);
+//		Object objRank = fieldRank.get(objData);
+//
+//		Field fieldTier = objRank.getClass().getDeclaredField(pTier);
+//		fieldTier.setAccessible(true);
+//		Object objTier = fieldTier.get(objRank);
+//
+//		Field fieldImage = objTier.getClass().getDeclaredField("image");
+//		fieldImage.setAccessible(true);
+//		Object objImage = fieldImage.get(objTier);
+//
+//		Image image = (Image) objImage;
+//		url = String.format("<img class = \"%s\" alt=\"%s\" src=\"%s\">",
+//			  regalia.type, regalia.type, getImageURL(regalia.type, image.full));
+//	} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+//		e.printStackTrace();
+//	}
+//	return url;
+//}
+//
+//public int findPlayer(int mIndex, String puuid) {
+//	int pIndex = matchInfos.get(mIndex).metadata.participants.indexOf(puuid);
+//	return pIndex;
+//}
+//
+//public String getMatchPlacement(int mIndex) {
+//	String gamePlacement = Integer.toString(
+//			matchInfos.get(mIndex).info.participants.get(findPlayer(mIndex, puuid.puuid)).placement) + "등";
+//	return gamePlacement;
+//}
+//
+//public String getMatchTime(int mIndex) {
+//	int time = (int) matchInfos.get(mIndex).info.participants.get(findPlayer(mIndex, puuid.puuid)).time_eliminated;
+//	int nMin = time / 60;
+//	int nSec = time % 60;
+//	String gameTime = String.format("%d분 %d초", nMin, nSec);
+//	return gameTime;
+//}
 }

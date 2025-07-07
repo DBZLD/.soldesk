@@ -1,6 +1,6 @@
-package com.spring.dto.tft;
+package com.spring.util;
 
-public class SummonerDto {
+public class ProfileDto {
 	public String id;
 	public String puuid;
 	public String profileIconId;
