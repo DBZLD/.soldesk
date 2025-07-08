@@ -2,13 +2,11 @@ package com.spring.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Map;
 import static java.util.Map.entry;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.spring.dto.tft.RankDto;
 import com.spring.dto.tft.TFTChampionDto;
 import com.spring.dto.tft.TFTItemDto;
 import com.spring.dto.tft.TFTQueueDto;
@@ -16,9 +14,8 @@ import com.spring.dto.tft.TFTRegalia;
 import com.spring.dto.tft.TFTRegaliaDto;
 import com.spring.dto.tft.TFTTacticianDto;
 import com.spring.dto.tft.TFTTraitDto;
-import com.spring.tft.TFTPlayerRankInfo;
-import com.spring.tft.TFTPlayerRankInfos;
 import com.spring.util.Common;
+import com.spring.util.Image;
 import com.spring.util.ProfileIconDto;
 
 import lombok.extern.log4j.Log4j;
@@ -64,22 +61,14 @@ public class TFTApiProcessor {
 		setTactician();
 		setProfileIcon();
 	}
-	public void transQueue() {
+	
+	public String getRegaliaImg(String full, String group) {
+		String imgURL;
+		imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
+				Common.VERSIONS, group, full);
 		
+		return imgURL;
 	}
-	public void transRegailia() {
-		
-	}
-	public void transTraits() {
-	
-	}
-	public void transChampion() {
-	
-	}
-	public void transItem() {
-	
-	}
-	
 	public void setQueue() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-queues.json",
 				Common.VERSIONS,Common.REGIONS);
