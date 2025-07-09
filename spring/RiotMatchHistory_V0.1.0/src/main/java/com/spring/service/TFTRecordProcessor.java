@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.spring.dto.tft.MatchDto;
 import com.spring.dto.tft.RankDto;
+import com.spring.tft.TFTMatchInfo;
 import com.spring.tft.TFTPlayerProfileInfo;
 import com.spring.tft.TFTPlayerRankInfos;
 import com.spring.util.PuuidDto;
@@ -24,28 +25,30 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class TFTRecordProcessor {
-
+	private TFTApiProcessor tap = new TFTApiProcessor();
 	public boolean bSuccess = true;
 	private PuuidDto puuidDto = new PuuidDto();
-	private ArrayList<String> matchIds = new ArrayList<String>();
-	private ArrayList<MatchDto> matchDto = new ArrayList<MatchDto>();
-	private ArrayList<RankDto> rankDto = new ArrayList<RankDto>();
+	private ArrayList<String> matchIds = new ArrayList<>();
+	public ArrayList<MatchDto> matchDto = new ArrayList<>();
+	private ArrayList<RankDto> rankDto = new ArrayList<>();
 	private ProfileDto profileDto = new ProfileDto();
 	public TFTPlayerRankInfos playerRankInfo = new TFTPlayerRankInfos();
-	public TFTPlayerProfileInfo playerProfileInfo = new  TFTPlayerProfileInfo();
+	public TFTPlayerProfileInfo playerProfileInfo = new TFTPlayerProfileInfo();
+	public ArrayList<TFTMatchInfo> matchInfo = new ArrayList<>();
 	
 	public TFTRecordProcessor(String playerId, String playerTag) {
-		setPuuid(playerId, playerTag);
+		setPuuidDto(playerId, playerTag);
 		if(bSuccess == true) {
-			setPlayerRankInfo();
 			setGameIds();
-			setMatchInfos();
-			setSummoner();
+			setPlayerRankDto();
+			setMatchDto();
+			setProfileDto();
 			
+			setPlayerRankInfo();
 			setPlayerProfileInfo();
 		}
 	}
-	public void setPuuid(String AC_ID, String AC_TAG) { // account id, account tag로 puuid 얻기
+	public void setPuuidDto(String AC_ID, String AC_TAG) { // account id, account tag로 puuid 얻기
 		String accountId = AC_ID;
 		String accountTag = AC_TAG;
 		try {
@@ -92,7 +95,7 @@ public class TFTRecordProcessor {
 		}
 	}
 
-	public void setMatchInfos() {
+	public void setMatchDto() {
 		// gameId로 matchInfo얻기
 		RestTemplate restTemplate = new RestTemplate();
 		ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
@@ -110,7 +113,7 @@ public class TFTRecordProcessor {
 		this.matchDto = matchInfos;
 	}
 
-	public void setPlayerRankInfo() {
+	public void setPlayerRankDto() {
 		String API_URL = String.format(
 		"https://kr.api.riotgames.com/tft/league/v1/by-puuid/%s?api_key=%s", puuidDto.puuid, Common.API_KEY);
 		RestTemplate restTemplate = new RestTemplate();
@@ -124,7 +127,7 @@ public class TFTRecordProcessor {
 			e.printStackTrace();
 		}
 	}
-	public void setSummoner() {
+	public void setProfileDto() {
 		String API_URL = String.format(
 		"https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/%s?api_key=%s"
 		, puuidDto.puuid, Common.API_KEY);
@@ -137,7 +140,7 @@ public class TFTRecordProcessor {
 			e.printStackTrace();
 		}
 	}
-	public void setPlayerProfileInfo() {
+	public void setPlayerRankInfo() {
 		RankDto rankInfo = new RankDto();
 		RankDto doubleUpInfo = new RankDto();
 		RankDto turboInfo = new RankDto();
@@ -158,9 +161,7 @@ public class TFTRecordProcessor {
 		provisional.queueType = Common.TFT_TURBO;
 		turboInfo = idx != -1 ? rankDto.get(idx) : provisional;
 		
-		log.info(turboInfo.ratedRating);
-		log.info(turboInfo.rank);
-		playerRankInfo = new TFTPlayerRankInfos(rankInfo, doubleUpInfo, turboInfo);
+		playerRankInfo = new TFTPlayerRankInfos(rankInfo, doubleUpInfo, turboInfo, tap);
 	}
 	public int findRankIndex(String rankType) {
 		ArrayList<String> queueTypeList = new ArrayList<>();
@@ -170,9 +171,22 @@ public class TFTRecordProcessor {
 		int pIndex = queueTypeList.indexOf(rankType);
 		return pIndex;
 	}
-	
+	public void setPlayerProfileInfo() {
+		playerProfileInfo.puuid = puuidDto.puuid;
+		playerProfileInfo.name = puuidDto.gameName;
+		playerProfileInfo.tag = puuidDto.tagLine;
+		playerProfileInfo.level = profileDto.summonerLevel;
+		playerProfileInfo.iconFull = tap.profileIcon.data.get(profileDto.profileIconId).image.full;
+		playerProfileInfo.iconGroup = tap.profileIcon.data.get(profileDto.profileIconId).image.group;
+		playerProfileInfo.iconURL = getImgURL(playerProfileInfo.iconGroup, playerProfileInfo.iconFull);
+	}
+	public void setMatchInfo() {
+		for(int i = 0; i <= matchIds.size(); i++) {
+			matchInfo.add(new TFTMatchInfo(matchDto.get(i)));
+		}
+	}
 	public String getImgURL(String imgType, String value) {
-		String imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s.png",
+		String imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
 		Common.VERSIONS, imgType, value);
 		
 		return imgURL;

@@ -15,7 +15,6 @@ import com.spring.dto.tft.TFTRegaliaDto;
 import com.spring.dto.tft.TFTTacticianDto;
 import com.spring.dto.tft.TFTTraitDto;
 import com.spring.util.Common;
-import com.spring.util.Image;
 import com.spring.util.ProfileIconDto;
 
 import lombok.extern.log4j.Log4j;
