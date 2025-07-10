@@ -1,7 +1,8 @@
 package com.spring.dto.tft;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TFTRegaliaDto {
-	public String type;
-	public String version;
-	public TFTRegaliaData data;
+	public Map<String, TFTRegalia> tier = new HashMap<>();
 }

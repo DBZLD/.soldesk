@@ -29,25 +29,28 @@ public class TFTRecordProcessor {
 	public boolean bSuccess = true;
 	private PuuidDto puuidDto = new PuuidDto();
 	private ArrayList<String> matchIds = new ArrayList<>();
-	public ArrayList<MatchDto> matchDto = new ArrayList<>();
+	private ArrayList<MatchDto> matchDto = new ArrayList<>();
 	private ArrayList<RankDto> rankDto = new ArrayList<>();
 	private ProfileDto profileDto = new ProfileDto();
+	
 	public TFTPlayerRankInfos playerRankInfo = new TFTPlayerRankInfos();
 	public TFTPlayerProfileInfo playerProfileInfo = new TFTPlayerProfileInfo();
 	public ArrayList<TFTMatchInfo> matchInfo = new ArrayList<>();
-	
+
 	public TFTRecordProcessor(String playerId, String playerTag) {
 		setPuuidDto(playerId, playerTag);
-		if(bSuccess == true) {
+		if (bSuccess == true) {
 			setGameIds();
 			setPlayerRankDto();
 			setMatchDto();
 			setProfileDto();
-			
+
 			setPlayerRankInfo();
 			setPlayerProfileInfo();
+			setMatchInfo();
 		}
 	}
+
 	public void setPuuidDto(String AC_ID, String AC_TAG) { // account id, account tag로 puuid 얻기
 		String accountId = AC_ID;
 		String accountTag = AC_TAG;
@@ -69,7 +72,7 @@ public class TFTRecordProcessor {
 		try {
 			uri = new URI(API_URL);
 			this.puuidDto = restTemplate.getForObject(uri, PuuidDto.class);
-		} catch (URISyntaxException|HttpClientErrorException e) {
+		} catch (URISyntaxException | HttpClientErrorException e) {
 			this.bSuccess = false;
 			e.printStackTrace();
 		}
@@ -114,8 +117,9 @@ public class TFTRecordProcessor {
 	}
 
 	public void setPlayerRankDto() {
-		String API_URL = String.format(
-		"https://kr.api.riotgames.com/tft/league/v1/by-puuid/%s?api_key=%s", puuidDto.puuid, Common.API_KEY);
+		//puuid로 플레이어 랭크 정보 얻기
+		String API_URL = String.format("https://kr.api.riotgames.com/tft/league/v1/by-puuid/%s?api_key=%s",
+				puuidDto.puuid, Common.API_KEY);
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			URI uri = new URI(API_URL);
@@ -127,10 +131,11 @@ public class TFTRecordProcessor {
 			e.printStackTrace();
 		}
 	}
+
 	public void setProfileDto() {
-		String API_URL = String.format(
-		"https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/%s?api_key=%s"
-		, puuidDto.puuid, Common.API_KEY);
+		//puuid로 플레이어 프로필 정보 얻기
+		String API_URL = String.format("https://kr.api.riotgames.com/tft/summoner/v1/summoners/by-puuid/%s?api_key=%s",
+				puuidDto.puuid, Common.API_KEY);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -140,30 +145,32 @@ public class TFTRecordProcessor {
 			e.printStackTrace();
 		}
 	}
-	public void setPlayerRankInfo() {
-		RankDto rankInfo = new RankDto();
-		RankDto doubleUpInfo = new RankDto();
-		RankDto turboInfo = new RankDto();
+
+	public void setPlayerRankInfo() { // 플레이어 랭크 정보 재정리
+		playerRankInfo = new TFTPlayerRankInfos(
+			getRankOrProvisional("RANKED_TFT", Common.TFT_RANK),
+			getRankOrProvisional("RANKED_TFT_DOUBLE_UP", Common.TFT_DOUBLE_UP),
+			getRankOrProvisional("RANKED_TFT_TURBO", Common.TFT_TURBO),
+			tap
+		);
+	}
+	private RankDto getRankOrProvisional(String queueType, String queueConst) {
+		int idx = findRankIndex(queueType);
+		if (idx != -1) {
+			return rankDto.get(idx);
+		}
 		RankDto provisional = new RankDto();
+		provisional.queueType = queueConst;
+		if(queueType.equals(Common.TFT_TURBO)){
+			provisional.ratedTier = Common.UNRATED;
+		}else {
+			provisional.tier = Common.UNRATED;			
+		}
 		
-		int idx = findRankIndex("RANKED_TFT");
-		provisional.tier = Common.UNRATED;
-		provisional.queueType = Common.TFT_RANK;
-		rankInfo = idx != -1 ? rankDto.get(idx) : provisional;
-		
-		idx = findRankIndex("RANKED_TFT_DOUBLE_UP");
-		provisional.tier = Common.UNRATED;
-		provisional.queueType = Common.TFT_DOUBLE_UP;
-		doubleUpInfo = idx != -1 ? rankDto.get(idx) : provisional;
-		
-		idx = findRankIndex("RANKED_TFT_TURBO");
-		provisional.ratedTier = Common.UNRATED;
-		provisional.queueType = Common.TFT_TURBO;
-		turboInfo = idx != -1 ? rankDto.get(idx) : provisional;
-		
-		playerRankInfo = new TFTPlayerRankInfos(rankInfo, doubleUpInfo, turboInfo, tap);
+		return provisional;
 	}
 	public int findRankIndex(String rankType) {
+		//랭크 타입 받아서 타입 일치하는 rankDto인덱스 받아오기(없으면 -1반환)
 		ArrayList<String> queueTypeList = new ArrayList<>();
 		for (int i = 0; i < rankDto.size(); i++) {
 			queueTypeList.add(rankDto.get(i).queueType);
@@ -171,37 +178,19 @@ public class TFTRecordProcessor {
 		int pIndex = queueTypeList.indexOf(rankType);
 		return pIndex;
 	}
+
 	public void setPlayerProfileInfo() {
-		playerProfileInfo.puuid = puuidDto.puuid;
-		playerProfileInfo.name = puuidDto.gameName;
-		playerProfileInfo.tag = puuidDto.tagLine;
-		playerProfileInfo.level = profileDto.summonerLevel;
-		playerProfileInfo.iconFull = tap.profileIcon.data.get(profileDto.profileIconId).image.full;
-		playerProfileInfo.iconGroup = tap.profileIcon.data.get(profileDto.profileIconId).image.group;
-		playerProfileInfo.iconURL = getImgURL(playerProfileInfo.iconGroup, playerProfileInfo.iconFull);
+		//플레이어 프로필 정보 재정리
+		playerProfileInfo = new TFTPlayerProfileInfo(profileDto, puuidDto, tap);
 	}
+
 	public void setMatchInfo() {
-		for(int i = 0; i <= matchIds.size(); i++) {
-			matchInfo.add(new TFTMatchInfo(matchDto.get(i)));
+		// 매치 정보 재정리
+		for (int i = 0; i < matchIds.size(); i++) {
+			matchInfo.add(new TFTMatchInfo(matchDto.get(i), tap));
 		}
 	}
-	public String getImgURL(String imgType, String value) {
-		String imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
-		Common.VERSIONS, imgType, value);
-		
-		return imgURL;
-	}
-//	public String getPlayerName() {
-//	String name = "";
-//	name += puuid.gameName + "#";
-//	name += puuid.tagLine;
-//	return name;
-//}
-//
-//public Participant getMatchParticipant(int mIndex, int pIndex) {
-//	return matchInfos.get(mIndex).info.participants.get(pIndex);
-//}
-//
+
 //public String getMatchDate(int mIndex) {
 //	long unixTime = matchInfos.get(mIndex).info.game_datetime;
 //	Date date = new Date(unixTime);

@@ -2,15 +2,22 @@ package com.spring.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
 import static java.util.Map.entry;
 
 import org.springframework.web.client.RestTemplate;
 
 import com.spring.dto.tft.TFTChampionDto;
+import com.spring.dto.tft.TFTItem;
 import com.spring.dto.tft.TFTItemDto;
+import com.spring.dto.tft.TFTQueue;
 import com.spring.dto.tft.TFTQueueDto;
 import com.spring.dto.tft.TFTRegalia;
+import com.spring.dto.tft.TFTRegaliaApiDto;
 import com.spring.dto.tft.TFTRegaliaDto;
 import com.spring.dto.tft.TFTTacticianDto;
 import com.spring.dto.tft.TFTTraitDto;
@@ -31,25 +38,23 @@ public class TFTApiProcessor {
 	public ProfileIconDto profileIcon = new ProfileIconDto();
 	
 	private Map<String, String> regaliaName = Map.ofEntries(
-		entry("Iron", "아이언"),
-		entry("Bronze", "브론즈"),
-		entry("Silver", "실버"),
-		entry("Gold", "골드"),
-		entry("Platinum", "플레티넘"),
-		entry("Emerald", "에메랄드"),
-		entry("Diamond", "다이아몬드"),
-		entry("Master", "마스터"),
-		entry("Grandmaster", "그랜드마스터"),
-		entry("Challenger", "챌린저"),
-		entry("Provisional", "랭크 없음")
-	);
-	private Map<String, String> regaliaNameTurbo = Map.of(
-		"Blue", "블루",
-		"Gray", "그레이",
-		"Green", "그린",
-		"Hyper", "하이퍼",
-		"Purple", "퍼플"
-	);
+			entry("Iron", "아이언"),
+			entry("Bronze", "브론즈"),
+			entry("Silver", "실버"),
+			entry("Gold", "골드"),
+			entry("Platinum", "플레티넘"),
+			entry("Emerald", "에메랄드"),
+			entry("Diamond", "다이아몬드"),
+			entry("Master", "마스터"),
+			entry("Grandmaster", "그랜드마스터"),
+			entry("Challenger", "챌린저"),
+			entry("Provisional", "랭크 없음"),
+			entry("Blue", "블루"),
+			entry("Gray", "그레이"),
+			entry("Green", "그린"),
+			entry("Orange", "하이퍼"),
+			entry("Purple", "퍼플")
+		);
 	
 	public TFTApiProcessor() {
 		setQueue();
@@ -80,21 +85,25 @@ public class TFTApiProcessor {
 			e.printStackTrace();
 		}
 	}
-
 	public void setRegalia() {
+		TFTRegaliaApiDto regaliaShort = new TFTRegaliaApiDto();
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-regalia.json",
 				Common.VERSIONS,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			regalia = restTemplate.getForObject(uri, TFTRegaliaDto.class);
+			regaliaShort = restTemplate.getForObject(uri, TFTRegaliaApiDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		setRegaliaName(regalia.data.RANKED_TFT, regaliaName);
-		setRegaliaName(regalia.data.RANKED_TFT_DOUBLE_UP, regaliaName);
-		setRegaliaName(regalia.data.RANKED_TFT_TURBO, regaliaNameTurbo);
+		TFTRegalia hyper = regaliaShort.data.RANKED_TFT_TURBO.get("Hyper"); //플레이어 랭크 정보 가져올때는 Orange고 이미지,번역 Api에서는 Hyper임
+		regaliaShort.data.RANKED_TFT_TURBO.remove("Hyper");
+		regaliaShort.data.RANKED_TFT_TURBO.put("Orange", hyper);
+		
+		regalia.tier.putAll(regaliaShort.data.RANKED_TFT);
+		regalia.tier.putAll(regaliaShort.data.RANKED_TFT_TURBO);
+		setRegaliaName(regalia.tier, regaliaName);
 	}
 	public void setTrait() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-trait.json",
@@ -131,6 +140,9 @@ public class TFTApiProcessor {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
+		//라이엇 최신api에 앙심이 없음(14.23.1에는 있음)
+		TFTItem spite = new TFTItem("TFT_Item_Spite", "앙심", "TFT_Item_Spite.png", "tft-item"); 
+		item.data.put("TFT_Item_Spite", spite);
 	}
 	public void setTactician() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-tactician.json",
@@ -162,5 +174,74 @@ public class TFTApiProcessor {
 			TFTRegalia regalia = entry.getValue();
 			regalia.name = name.getOrDefault(tier, tier);
 		}
+	}
+	public String getImgURL(String imgType, String value) {
+		String imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
+		Common.VERSIONS, imgType, value);
+		if(value.equals("TFT_Item_Spite.png")) {
+			return String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
+					"14.23.1", imgType, value);
+		}
+		return imgURL;
+	}
+	public String transGameDatetime(Long gameDatetime) {
+	    Instant instant = Instant.ofEpochMilli(gameDatetime);
+	    ZonedDateTime gameTime = instant.atZone(ZoneId.systemDefault());
+	    ZonedDateTime now = ZonedDateTime.now();
+
+	    long years = ChronoUnit.YEARS.between(gameTime, now);
+	    if (years > 0) return years + "년 전";
+
+	    long months = ChronoUnit.MONTHS.between(gameTime, now);
+	    if (months > 0) return months + "달 전";
+
+	    long days = ChronoUnit.DAYS.between(gameTime, now);
+	    if (days > 0) return days + "일 전";
+
+	    long hours = ChronoUnit.HOURS.between(gameTime, now);
+	    if (hours > 0) return hours + "시간 전";
+
+	    long minutes = ChronoUnit.MINUTES.between(gameTime, now);
+	    if (minutes > 0) return minutes + "분 전";
+
+	    return "방금 전";
+	}
+	public String transGameLength(Double gameLength) {
+	int time = (int) Math.floor(gameLength);
+	int nMin = time / 60;
+	int nSec = time % 60;
+	String gameTime = String.format("%d분 %d초", nMin, nSec);
+	return gameTime;
+}
+	public String transQueueType(int queueType) {
+		String trans = queue.data.get(Integer.toString(queueType)).name;
+		return trans;
+	}
+	public String transQueueType(String queueType) {
+		String trans = "";
+	    for (Map.Entry<String, TFTQueue> entry : queue.data.entrySet()) {
+	        if (entry.getValue().queueType.equals(queueType)) {
+	            trans = entry.getValue().name;
+	        }
+	    }
+		return trans;
+	}
+	public String transLomaRank(String rank) {
+		switch(rank) {
+		case"I":
+			return "1";
+		case"II":
+			return "2";
+		case"III":
+			return "3";
+		case"IV":
+			return "4";
+		}
+		return rank;
+	}
+	public String transLastRound(int lastRound) {
+		String trans = "";
+		
+		return trans;
 	}
 }

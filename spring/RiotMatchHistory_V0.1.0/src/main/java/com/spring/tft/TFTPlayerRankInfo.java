@@ -1,6 +1,5 @@
 package com.spring.tft;
 
-
 import com.spring.dto.tft.RankDto;
 import com.spring.dto.tft.TFTQueue;
 import com.spring.service.TFTApiProcessor;
@@ -21,32 +20,26 @@ public class TFTPlayerRankInfo {
 	public String imgURL;
 
 	public TFTPlayerRankInfo(RankDto rankDto, TFTApiProcessor tap) {
-		boolean isTurbo = Common.TFT_TURBO.equals(rankDto.queueType);
-		boolean isUnrated = isTurbo ? Common.UNRATED.equals(rankDto.ratedTier)
-		                             : Common.UNRATED.equals(rankDto.tier);
-		
 		type = rankDto.queueType;
+		boolean isTurbo = Common.TFT_TURBO.equals(type);
 		tier = isTurbo ? rankDto.ratedTier : rankDto.tier;
+		boolean isUnrated = Common.UNRATED.equals(tier);
 		tier = tier.substring(0, 1).toUpperCase() + tier.substring(1).toLowerCase();
-		
-		full = isTurbo && !isUnrated ? tap.regalia.data.RANKED_TFT_TURBO.get(tier).image.full :
-			tap.regalia.data.RANKED_TFT.get(tier).image.full;
-		group = isTurbo && !isUnrated ? tap.regalia.data.RANKED_TFT_TURBO.get(tier).image.group :
-			tap.regalia.data.RANKED_TFT.get(tier).image.group;
+
+		full = tap.regalia.tier.get(tier).image.full;
+		group = tap.regalia.tier.get(tier).image.group;
 		imgURL = tap.getRegaliaImg(full, group);
 		if (!isUnrated) {
-		    rank = isTurbo ? Integer.toString(rankDto.ratedRating) : rankDto.rank;
-		    point = isTurbo ? 0 : rankDto.leaguePoints;
-		    win = rankDto.wins;
-		    lose = rankDto.losses;
+			rank = isTurbo ? Integer.toString(rankDto.ratedRating) : rankDto.rank;
+			point = isTurbo ? 0 : rankDto.leaguePoints;
+			win = rankDto.wins;
+			lose = rankDto.losses;
 		}
-		//번역
-		tier = isTurbo && !isUnrated ? tap.regalia.data.RANKED_TFT_TURBO.get(tier).name : 
-			tap.regalia.data.RANKED_TFT.get(tier).name;
-        for (TFTQueue info : tap.queue.data.values()) {
-            if (type.equals(info.queueType)) {
-                type = info.name;
-            }
-        }
+		// 번역
+		type = tap.transQueueType(type);
+		tier = tap.regalia.tier.get(tier).name;
+		if (rank != null) {
+			rank = tap.transLomaRank(rank);
+		}
 	}
 }

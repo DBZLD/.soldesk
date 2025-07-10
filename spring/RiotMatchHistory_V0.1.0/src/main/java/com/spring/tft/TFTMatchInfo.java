@@ -3,19 +3,24 @@ package com.spring.tft;
 import java.util.ArrayList;
 
 import com.spring.dto.tft.MatchDto;
+import com.spring.dto.tft.Participant;
+import com.spring.service.TFTApiProcessor;
 
 public class TFTMatchInfo {
-	public String match_id;
-	public Long game_datetime;
-	public Double game_length;
-	public ArrayList<String> puuidList;
-	public ArrayList<TFTMatchPlayerInfo> playerInfos;
-	
-	public TFTMatchInfo(MatchDto matchDto) {
-		match_id = matchDto.metadata.match_id;
-		puuidList = matchDto.metadata.participants;
-		game_datetime = matchDto.info.game_datetime;
-		game_length = matchDto.info.game_length;
-		playerInfos = new ArrayList<TFTMatchPlayerInfo>(matchDto.info.participants);
+	public String matchId;
+	public String gameDatetime;
+	public String gameLength;
+	public String queueType;
+	public Integer playerIndex;
+	public ArrayList<TFTMatchPlayerInfo> playerInfos = new ArrayList<>();
+
+	public TFTMatchInfo(MatchDto matchDto, TFTApiProcessor tap) {
+		matchId = matchDto.metadata.match_id;
+		gameDatetime = tap.transGameDatetime(matchDto.info.game_datetime);
+		gameLength = tap.transGameLength(matchDto.info.game_length);
+		queueType = tap.transQueueType(matchDto.info.queue_id);
+		for (Participant part : matchDto.info.participants) {
+			playerInfos.add(new TFTMatchPlayerInfo(part, tap));
+		}
 	}
 }
