@@ -1,7 +1,7 @@
 package com.spring.util;
 
 public class Common {
-	public static final String API_KEY = "RGAPI-3017d711-a332-4b96-9b2d-fd73e75e7a15";
+	public static final String API_KEY = "RGAPI-310bf6e8-86da-45f0-8ad5-19959964ae7d";
 	public static final String VERSIONS = "15.13.1";
 	public static final String REGIONS = "ko_KR";
 	

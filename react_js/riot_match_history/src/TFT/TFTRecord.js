@@ -67,13 +67,16 @@ function TFTRecord() {
             <input type="submit" value="검색"></input>
           </form>
         </>
-      ) : (
+      ) : data ? (
         <>
           <h1 onClick={() => navigate('/TFTMain')} style={{ cursor: 'pointer' }}>TFT 메인 화면으로</h1>
           <h2>TFT 전적</h2>
-          <h2>{data.puuid.gameName}#{data.puuid.tagLine}</h2>
+          <h2>{data.playerProfileInfo.name}#{data.playerProfileInfo.tag}</h2>
           <TFTMatchAccordion/>
         </>
+      ) : (
+        <h2>데이터 불러오는 중...</h2>
+
       )}
     </div>
   );

@@ -15,14 +15,15 @@ public class TFTItemInfo {
 	public String imgURL;
 
 	public TFTItemInfo(String itemName, TFTApiProcessor tap) {
-		name = itemName;
 		TFTItem item = new TFTItem();
-		for (Map.Entry<String, TFTItem> entry : tap.item.data.entrySet()) {
-			if (entry.getKey().contains(name)) {
+		for (Map.Entry<String, TFTItem> entry : tap.item.data.entrySet()) { 
+			//엑소코어,이벤트 아이템 등은 map의 key값 앞에 tft???/가 붙어있어 itemName이 포함된 목록으로 찾음
+			if (entry.getKey().equals(itemName) || entry.getKey().endsWith("/"+itemName)) {
 				item = entry.getValue();
 				break;
 			}
 		}
+		name = item.name;
 		full = item.image.full;
 		group = item.image.group;
 		imgURL = tap.getImgURL(group, full);

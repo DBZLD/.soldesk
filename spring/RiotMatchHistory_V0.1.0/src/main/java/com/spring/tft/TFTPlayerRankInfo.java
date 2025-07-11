@@ -1,7 +1,6 @@
 package com.spring.tft;
 
 import com.spring.dto.tft.RankDto;
-import com.spring.dto.tft.TFTQueue;
 import com.spring.service.TFTApiProcessor;
 import com.spring.util.Common;
 
@@ -39,7 +38,7 @@ public class TFTPlayerRankInfo {
 		type = tap.transQueueType(type);
 		tier = tap.regalia.tier.get(tier).name;
 		if (rank != null) {
-			rank = tap.transLomaRank(rank);
+			rank = tap.transRankNum(rank);
 		}
 	}
 }

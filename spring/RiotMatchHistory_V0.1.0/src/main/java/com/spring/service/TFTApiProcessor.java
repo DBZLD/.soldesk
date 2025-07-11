@@ -32,7 +32,7 @@ public class TFTApiProcessor {
 	public TFTQueueDto queue = new TFTQueueDto();
 	public TFTRegaliaDto regalia = new TFTRegaliaDto();
 	public TFTTraitDto trait = new TFTTraitDto();
-	public TFTChampionDto champion = new TFTChampionDto();
+	public TFTChampionDto unit = new TFTChampionDto();
 	public TFTItemDto item = new TFTItemDto();
 	public TFTTacticianDto tactician = new TFTTacticianDto();
 	public ProfileIconDto profileIcon = new ProfileIconDto();
@@ -124,7 +124,7 @@ public class TFTApiProcessor {
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			champion = restTemplate.getForObject(uri, TFTChampionDto.class);
+			unit = restTemplate.getForObject(uri, TFTChampionDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -175,13 +175,13 @@ public class TFTApiProcessor {
 			regalia.name = name.getOrDefault(tier, tier);
 		}
 	}
-	public String getImgURL(String imgType, String value) {
-		String imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
-		Common.VERSIONS, imgType, value);
-		if(value.equals("TFT_Item_Spite.png")) {
+	public String getImgURL(String group, String full) {
+		if(full.equals("TFT_Item_Spite.png")) {
 			return String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
-					"14.23.1", imgType, value);
+					"14.23.1", group, full);
 		}
+		String imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
+		Common.VERSIONS, group, full);
 		return imgURL;
 	}
 	public String transGameDatetime(Long gameDatetime) {
@@ -206,15 +206,15 @@ public class TFTApiProcessor {
 
 	    return "방금 전";
 	}
-	public String transGameLength(Double gameLength) {
-	int time = (int) Math.floor(gameLength);
-	int nMin = time / 60;
-	int nSec = time % 60;
-	String gameTime = String.format("%d분 %d초", nMin, nSec);
-	return gameTime;
+	public String transTimeElemented(Double gameLength) {
+	int nMin = (int)Math.floor(gameLength/60);
+	int nSec = (int)Math.ceil(gameLength%60);
+	
+	return nMin + ":" + nSec;
 }
 	public String transQueueType(int queueType) {
 		String trans = queue.data.get(Integer.toString(queueType)).name;
+		
 		return trans;
 	}
 	public String transQueueType(String queueType) {
@@ -224,9 +224,10 @@ public class TFTApiProcessor {
 	            trans = entry.getValue().name;
 	        }
 	    }
+	    
 		return trans;
 	}
-	public String transLomaRank(String rank) {
+	public String transRankNum(String rank) {
 		switch(rank) {
 		case"I":
 			return "1";
@@ -237,10 +238,11 @@ public class TFTApiProcessor {
 		case"IV":
 			return "4";
 		}
+		
 		return rank;
 	}
 	public String transLastRound(int lastRound) {
-		String trans = "";
+		String trans = ((lastRound - 5)/7+2) + "-" + ((lastRound-5)%7+1);
 		
 		return trans;
 	}

@@ -29,7 +29,7 @@ public class TFTRecordProcessor {
 	public boolean bSuccess = true;
 	private PuuidDto puuidDto = new PuuidDto();
 	private ArrayList<String> matchIds = new ArrayList<>();
-	private ArrayList<MatchDto> matchDto = new ArrayList<>();
+	public ArrayList<MatchDto> matchDto = new ArrayList<>();
 	private ArrayList<RankDto> rankDto = new ArrayList<>();
 	private ProfileDto profileDto = new ProfileDto();
 	
@@ -187,7 +187,7 @@ public class TFTRecordProcessor {
 	public void setMatchInfo() {
 		// 매치 정보 재정리
 		for (int i = 0; i < matchIds.size(); i++) {
-			matchInfo.add(new TFTMatchInfo(matchDto.get(i), tap));
+			matchInfo.add(new TFTMatchInfo(matchDto.get(i), playerProfileInfo.puuid, tap));
 		}
 	}
 
