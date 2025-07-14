@@ -2,6 +2,8 @@ package com.spring.service;
 
 import org.springframework.stereotype.Service;
 
+import com.spring.util.Common;
+
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -15,7 +17,7 @@ public class MatchInfosServiceImpl implements MatchInfosService{
 	}
 	@Override
 	public TFTApiProcessor getTAP() {
-		TFTApiProcessor tap = new TFTApiProcessor();
+		TFTApiProcessor tap = new TFTApiProcessor(Common.LATEST_VERSIONS);
 		return tap;
 	}
 }

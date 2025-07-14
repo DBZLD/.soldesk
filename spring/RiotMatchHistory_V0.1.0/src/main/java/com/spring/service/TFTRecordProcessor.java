@@ -25,11 +25,11 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class TFTRecordProcessor {
-	private TFTApiProcessor tap = new TFTApiProcessor();
+	private TFTApiProcessor tap = new TFTApiProcessor(Common.LATEST_VERSIONS);
 	public boolean bSuccess = true;
 	private PuuidDto puuidDto = new PuuidDto();
 	private ArrayList<String> matchIds = new ArrayList<>();
-	public ArrayList<MatchDto> matchDto = new ArrayList<>();
+	private ArrayList<MatchDto> matchDto = new ArrayList<>();
 	private ArrayList<RankDto> rankDto = new ArrayList<>();
 	private ProfileDto profileDto = new ProfileDto();
 	
@@ -54,6 +54,7 @@ public class TFTRecordProcessor {
 	public void setPuuidDto(String AC_ID, String AC_TAG) { // account id, account tag·Î puuid ¾ò±â
 		String accountId = AC_ID;
 		String accountTag = AC_TAG;
+		// id ¶Ç´Â tag°¡ ÇÑ±ÛÀÏ¶§ URL ÀÎÄÚµù ÇØ¾ßÇÔ
 		try {
 			if (AC_ID.matches(".*[¤¡-¤¾¤¿-¤Ó°¡-ÆR]+.*")) {
 				accountId = URLEncoder.encode(accountId, StandardCharsets.UTF_8.name());
@@ -82,10 +83,9 @@ public class TFTRecordProcessor {
 
 	public void setGameIds() {
 		// puuid·Î gameIds ¾ò±â
-		int nCount = 5;
 		String API_URL = String.format(
 				"https://asia.api.riotgames.com/tft/match/v1/matches/by-puuid/%s/ids?start=0&count=%d&api_key=%s",
-				puuidDto.puuid, nCount, Common.API_KEY);
+				puuidDto.puuid, Common.MATCH_COUNT, Common.API_KEY);
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			URI uri = new URI(API_URL);
@@ -148,19 +148,18 @@ public class TFTRecordProcessor {
 
 	public void setPlayerRankInfo() { // ÇÃ·¹ÀÌ¾î ·©Å© Á¤º¸ ÀçÁ¤¸®
 		playerRankInfo = new TFTPlayerRankInfos(
-			getRankOrProvisional("RANKED_TFT", Common.TFT_RANK),
-			getRankOrProvisional("RANKED_TFT_DOUBLE_UP", Common.TFT_DOUBLE_UP),
-			getRankOrProvisional("RANKED_TFT_TURBO", Common.TFT_TURBO),
-			tap
+			getRank(Common.TFT_RANK), getRank(Common.TFT_DOUBLE_UP), getRank(Common.TFT_TURBO), tap
 		);
 	}
-	private RankDto getRankOrProvisional(String queueType, String queueConst) {
-		int idx = findRankIndex(queueType);
-		if (idx != -1) {
-			return rankDto.get(idx);
+	private RankDto getRank(String queueType) {
+		int index = findRankIndex(queueType);
+		
+		if (index != -1) {
+			return rankDto.get(index);
 		}
 		RankDto provisional = new RankDto();
-		provisional.queueType = queueConst;
+		provisional.queueType = queueType;
+		
 		if(queueType.equals(Common.TFT_TURBO)){
 			provisional.ratedTier = Common.UNRATED;
 		}else {
@@ -187,7 +186,7 @@ public class TFTRecordProcessor {
 	public void setMatchInfo() {
 		// ¸ÅÄ¡ Á¤º¸ ÀçÁ¤¸®
 		for (int i = 0; i < matchIds.size(); i++) {
-			matchInfo.add(new TFTMatchInfo(matchDto.get(i), playerProfileInfo.puuid, tap));
+			matchInfo.add(new TFTMatchInfo(matchDto.get(i), playerProfileInfo.puuid));
 		}
 	}
 

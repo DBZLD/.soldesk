@@ -1,9 +1,11 @@
 package com.spring.util;
 
 public class Common {
-	public static final String API_KEY = "RGAPI-310bf6e8-86da-45f0-8ad5-19959964ae7d";
-	public static final String VERSIONS = "15.13.1";
+	public static final String API_KEY = "RGAPI-4ede62db-0e97-4fe0-b45a-7419e6c26602";
+	public static final String LATEST_VERSIONS = "15.13.1";
 	public static final String REGIONS = "ko_KR";
+	
+	public static final Integer MATCH_COUNT = 5;
 	
 	public static final String CHAMPIONS_URL = "tft-champion";
 	public static final String ITEMS_URL = "tft-item";

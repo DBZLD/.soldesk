@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import TFTMatchAccordion from './TFTMatchAccordion';
+import '.././common.css';
 
 function TFTRecord() {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ function TFTRecord() {
   };
   //~isInvalid가 true일때
   return (
-    <div>
+    <div className='main'>
       {isInvalid ? (
         <>
           <h1 onClick={() => navigate('/TFTMain')} style={{ cursor: 'pointer' }}>TFT 메인 화면으로</h1>
@@ -70,9 +71,38 @@ function TFTRecord() {
       ) : data ? (
         <>
           <h1 onClick={() => navigate('/TFTMain')} style={{ cursor: 'pointer' }}>TFT 메인 화면으로</h1>
-          <h2>TFT 전적</h2>
-          <h2>{data.playerProfileInfo.name}#{data.playerProfileInfo.tag}</h2>
+          <div className='profileArea'>
+          <img id='icon' src={data.playerProfileInfo.iconURL} alt='playerProfileIcon'></img>
+          <h4 id='level'>{data.playerProfileInfo.level}</h4>
+          <h1 id='name'>{data.playerProfileInfo.name}#{data.playerProfileInfo.tag}</h1>
+          <button id='refresh'>전적 갱신</button>
+          </div>
+          <div className='rankArea'>
+            <div className='rankBox'>
+              <h1 id='regaliaType'>랭크</h1>
+              <img id='regaliaImg' src={data.playerRankInfo.rank.imgURL} alt='playerRegaliaImg'></img>
+              <h2 id='regaliaTier'>{data.playerRankInfo.rank.tier} {data.playerRankInfo.rank.rank}</h2>
+              <h2 id='regaliaPoint'>{data.playerRankInfo.rank.point}LP</h2>
+              <h2 id='regaliaRank'></h2>
+            </div>
+            <div className='rankBox'>
+              <h1 id='regaliaType'>더블 업</h1>
+              <img id='regaliaImg' src={data.playerRankInfo.doubleUp.imgURL} alt='playerRegaliaImg'></img>
+              <h2 id='regaliaTier'>{data.playerRankInfo.doubleUp.tier} {data.playerRankInfo.doubleUp.rank}</h2>
+              <h2 id='regaliaPoint'>{data.playerRankInfo.doubleUp.point}LP</h2>
+              <h2 id='regaliaRank'></h2>
+            </div>
+            <div className='rankBox'>
+              <h1 id='regaliaType'>초고속 모드</h1>
+              <img id='regaliaImg' src={data.playerRankInfo.turbo.imgURL} alt='playerRegaliaImg'></img>
+              <h2 id='regaliaTier'>{data.playerRankInfo.turbo.tier} {data.playerRankInfo.turbo.rank}</h2>
+              <h2 id='regaliaPoint'>{data.playerRankInfo.turbo.point}점</h2>
+              <h2 id='regaliaRank'></h2>
+            </div>
+          </div>
+          <div className='recordArea'>
           <TFTMatchAccordion/>
+          </div>
         </>
       ) : (
         <h2>데이터 불러오는 중...</h2>

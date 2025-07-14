@@ -12,7 +12,6 @@ import static java.util.Map.entry;
 import org.springframework.web.client.RestTemplate;
 
 import com.spring.dto.tft.TFTChampionDto;
-import com.spring.dto.tft.TFTItem;
 import com.spring.dto.tft.TFTItemDto;
 import com.spring.dto.tft.TFTQueue;
 import com.spring.dto.tft.TFTQueueDto;
@@ -29,6 +28,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 
 public class TFTApiProcessor {
+	public String version;
 	public TFTQueueDto queue = new TFTQueueDto();
 	public TFTRegaliaDto regalia = new TFTRegaliaDto();
 	public TFTTraitDto trait = new TFTTraitDto();
@@ -36,7 +36,7 @@ public class TFTApiProcessor {
 	public TFTItemDto item = new TFTItemDto();
 	public TFTTacticianDto tactician = new TFTTacticianDto();
 	public ProfileIconDto profileIcon = new ProfileIconDto();
-	
+
 	private Map<String, String> regaliaName = Map.ofEntries(
 			entry("Iron", "아이언"),
 			entry("Bronze", "브론즈"),
@@ -56,7 +56,8 @@ public class TFTApiProcessor {
 			entry("Purple", "퍼플")
 		);
 	
-	public TFTApiProcessor() {
+	public TFTApiProcessor(String version) {
+		this.version = version;
 		setQueue();
 		setRegalia();
 		setTrait();
@@ -69,13 +70,13 @@ public class TFTApiProcessor {
 	public String getRegaliaImg(String full, String group) {
 		String imgURL;
 		imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
-				Common.VERSIONS, group, full);
+				version, group, full);
 		
 		return imgURL;
 	}
 	public void setQueue() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-queues.json",
-				Common.VERSIONS,Common.REGIONS);
+				version,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -88,7 +89,7 @@ public class TFTApiProcessor {
 	public void setRegalia() {
 		TFTRegaliaApiDto regaliaShort = new TFTRegaliaApiDto();
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-regalia.json",
-				Common.VERSIONS,Common.REGIONS);
+				version,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -107,7 +108,7 @@ public class TFTApiProcessor {
 	}
 	public void setTrait() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-trait.json",
-				Common.VERSIONS,Common.REGIONS);
+				version,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -119,7 +120,7 @@ public class TFTApiProcessor {
 	}
 	public void setChampion() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-champion.json",
-				Common.VERSIONS,Common.REGIONS);
+				version,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -131,7 +132,7 @@ public class TFTApiProcessor {
 	}
 	public void setItem() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-item.json",
-				Common.VERSIONS,Common.REGIONS);
+				version,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -140,13 +141,10 @@ public class TFTApiProcessor {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		//라이엇 최신api에 앙심이 없음(14.23.1에는 있음)
-		TFTItem spite = new TFTItem("TFT_Item_Spite", "앙심", "TFT_Item_Spite.png", "tft-item"); 
-		item.data.put("TFT_Item_Spite", spite);
 	}
 	public void setTactician() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-tactician.json",
-				Common.VERSIONS,Common.REGIONS);
+				version,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -158,7 +156,7 @@ public class TFTApiProcessor {
 	}
 	public void setProfileIcon() {
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/profileicon.json",
-				Common.VERSIONS,Common.REGIONS);
+				version,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
@@ -176,12 +174,8 @@ public class TFTApiProcessor {
 		}
 	}
 	public String getImgURL(String group, String full) {
-		if(full.equals("TFT_Item_Spite.png")) {
-			return String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
-					"14.23.1", group, full);
-		}
 		String imgURL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/img/%s/%s",
-		Common.VERSIONS, group, full);
+				version, group, full);
 		return imgURL;
 	}
 	public String transGameDatetime(Long gameDatetime) {
