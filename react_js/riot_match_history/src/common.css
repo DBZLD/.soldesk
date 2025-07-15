@@ -1,33 +1,41 @@
-.main{
+body{
     width:auto;
     height:auto;
-    margin-left: 140px;
-    margin-right: 140px;
+    background-color: rgb(243, 255, 255);
 }
+.center{
+    margin-left: 10%;
+    margin-right: 10%;
+    justify-items: center;
 
+}
 .profileArea{
     height: 200px;
-    margin-bottom: 80px;
+    margin-bottom: 70px;
     position: relative;
+}
+.profileBox{
+    width: 100px;
+    height: 120px;
+    position: relative;
+    right:450px;
+    top: 130px;
 }
 #icon{
     width: 100px;
     height: 100px;
     position: absolute;
-    top: 120px;
-    left: 30px;
-
     border-style: solid;
     border-width: 2px;
     border-color: navy;
     border-radius: 25%;
 }
 #level{
-    position: absolute;
-    top: 180px;
-    left:65px;
     width: auto;
-    display: inline;
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    transform: translateX(-50%);
     text-align: center;
     background-color: rgb(223, 223, 223);
     border: 2px solid navy;
@@ -35,15 +43,15 @@
 }
 #name{
     position:absolute;
-    top:90px;
-    left:170px;
+    right: 220px;
+    bottom: 35px;
 }
 #refresh{
     width:90px;
     height:50px;
     position: absolute;
-    top: 170px;
-    left: 170px;
+    right: 330px;
+    bottom: -30px;
 
     background-color: rgb(7, 172, 172);
     border: 1px solid navy;
@@ -53,51 +61,170 @@
     font-weight: 700;
 }
 .rankArea{
-    height: 400px;
+    width:80%;
+    height: 300px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
-
-    background-color: aquamarine;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    background-color: white;
+    border: 3px solid rgb(231, 231, 231);
 }
 .rankBox{
     width: 30%;
     height: auto;
     position: relative;
-
-    background-color: rgb(188, 230, 230);
 }
-#regaliaType{
+.regaliaType{
     width: 160px;
     position: absolute;
     left: 50%;
-    margin-left: -80px;
+    top: 5%;
+    transform: translateX(-50%);
     text-align: center;
 }
-#regaliaImg{
+.regaliaImg{
     width:200px;
     height: 200px;
     position: absolute;
-    top: 40px;
-    left: 25%;
-    margin-left: -100px;
+    top: 15%;
+    left: 30%;
+    transform: translateX(-50%);
 }
-#regaliaTier{
+.regaliaTier{
     width: 150px;
     position: absolute;
-    left: 65%;
-    top: 20%;
-    margin-left: -75px;
+    left: 70%;
+    top: 35%;
+    transform: translateX(-50%);
     text-align: center;
 }
-#regaliaPoint{
+.regaliaPoint{
     width: 100px;
     position: absolute;
-    left: 65%;
-    top:30%;
-    margin-left: -50px;
+    left: 70%;
+    top:45%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+.regaliaWin{
+    width: 100px;
+    position: absolute;
+    left: 40%;
+    top:70%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+.regaliaLose{
+    width: 100px;
+    position: absolute;
+    left: 60%;
+    top:70%;
+    transform: translateX(-50%);
     text-align: center;
 }
 .recordArea{
     height: auto;
+    margin-top: 70px;
+}
+.playerCell{
+    width: 12%;
+    position: relative;
+}
+.playerTactician{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: 3px solid navy;
+    border-radius: 50%;
+}
+.playerLevel{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    text-align: center;
+    text-justify: center;
+    color: navy;
+    border: 3px solid;
+    border-radius: 50%;
+}
+.traitCell{
+    width: 180px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.trait{
+    width: 25px;
+    height: 25px;
+    margin: 5px;
+}
+.traitTier1{
+    background-color: rgba(255, 187, 0, 0.555);
+    border-radius: 50%;
+}
+.traitTier2{
+    background-color: rgb(196, 196, 196);
+    border-radius: 50%;
+}
+.traitTier3{
+    background-color: rgb(243, 127, 73);
+    border-radius: 50%;
+}
+.traitTier4{
+    background-color: rgb(203, 204, 114);
+    border-radius: 50%;
+}
+.traitTier5{
+    background-color: rgb(194, 241, 255);
+    border-radius: 50%;
+}
+.unitCell{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 60%;
+    gap:8px;
+}
+.unit{
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.unitImg{
+    width: 37px;
+    height: 37px;
+    object-fit: none;
+    object-position: -150px -30px;
+    border: 3px solid;
+    border-radius: 10%;
+}
+.item{
+    display: inline;
+    justify-items: center;
+}
+.itemImg{
+    width: 12px;
+    height: 12px;
+}
+.unitRarity0{
+    color: rgb(206, 206, 206);
+}
+.unitRarity1{
+    color: rgb(103, 255, 103);
+}
+.unitRarity2{
+    color: rgb(80, 150, 255);
+}
+.unitRarity4{
+    color: rgb(203, 73, 255);
+}
+.unitRarity6{
+    color: rgb(255, 225, 93);
 }

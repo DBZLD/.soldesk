@@ -13,18 +13,22 @@ import {
   Typography,
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import '.././common.css';
 
-function AccordionExpandFullRow() {
+function AccordionExpandFullRow({data}) {
   const [open, setOpen] = useState(false);
 
+  function printStar(count, unitRarity){
+    return <h4 className={`unitRarity${unitRarity}`}>{"★".repeat(count)}</h4>;
+  }
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{marginBottom:'40px'}}>
       <Table>
         <TableBody>
-          <TableRow>
+          <TableRow sx={{height:'50px'}}>
             {/* 1열 */}
-            <TableCell>등수</TableCell>
-            <TableCell colSpan={3}>게임 형식 | 게임 시간 | 게임 일자</TableCell>
+            <TableCell>{data.playerInfos[data.myIndex].placement}등</TableCell>
+            <TableCell colSpan={3}>{data.queueType} | {data.playerInfos[data.myIndex].timeElemented} | {data.gameDatetime}</TableCell>
             {/* 2열 병합 + 토글 버튼 */}
             <TableCell rowSpan={2}  sx={{
                verticalAlign: "bottom", 
@@ -40,10 +44,37 @@ function AccordionExpandFullRow() {
               </IconButton>
             </TableCell>
           </TableRow>
-          <TableRow>
-            <TableCell style={{width:'7%'}}>전설이</TableCell>
-            <TableCell style={{width:'15%'}}>특성</TableCell>
-            <TableCell style={{width:'60%'}}>챔피언</TableCell>
+          <TableRow sx={{height:'100px'}}>
+            <TableCell>
+              <div className="playerCell">
+              <img className="playerTactician" src={data.playerInfos[data.myIndex].tacticianImgURL} alt="tactician"></img>
+              <h4 className="playerLevel">{data.playerInfos[data.myIndex].level}</h4>
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="traitCell">
+              {data.playerInfos[data.myIndex].traitList.slice(0, data.playerInfos[data.myIndex].traitList.length).map((trait, index) => (
+                <img key={index} className={`trait traitTier${trait.style}`}src={trait.imgURL} alt="traitImg"></img>
+              ))}
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="unitCell">
+              {data.playerInfos[data.myIndex].unitList.slice(0, data.playerInfos[data.myIndex].unitList.length).map((unit, index) => (
+                <div className="unit">
+                  {printStar(unit.tier, unit.rarity)}
+                  <img key={index} className={`unitImg unitRarity${unit.rarity}`}src={unit.imgURL} alt="unitImg"></img> 
+                   <div>
+                  {unit.itemList.slice(0, unit.itemList.length).map((item, index) => (
+                    <div className="item">
+                      <img key={index} className="itemImg" src={item.imgURL} alt="itemImg"></img>
+                    </div>
+                  ))}
+                  </div>
+                </div>
+              ))}
+              </div>
+            </TableCell>
             <TableCell style={{width:'18%'}}>매칭</TableCell>
           </TableRow>
 
