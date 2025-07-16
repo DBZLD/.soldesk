@@ -20,13 +20,12 @@ function TFTRecord() {
       try {
         const response = await axios.get('http://localhost:8080/riot/getTFTRecord', {
           params: {
-            playerID: pId,
-            playerTag: pTag,
+            playerID: pId.replace(/\s/g, ""),
+            playerTag: pTag.replace(/\s/g, ""),
           },
         });
-        setData(response.data);
         console.log(response.data);
-
+        setData(response.data);
         if (response.data?.bSuccess) {
           setIsInvalid(false);
         } else {
@@ -34,6 +33,8 @@ function TFTRecord() {
         }
       } catch (error) {
         console.error('Error:', error);
+        setIsInvalid(true);
+        setData(null);
       }
     };
     fetchData();
@@ -66,8 +67,7 @@ function TFTRecord() {
       {data.tier !== "랭크 없음" && (
         <>
           <h2 className="regaliaPoint">{data.point}{isTurbo ? "점" : "LP"}</h2>
-          <h2 className="regaliaWin">{data.win}승</h2>
-          <h2 className="regaliaLose">{data.lose}패</h2>
+          <h2 className="regaliaWL">{data.win}승 {data.lose}패</h2>
         </>
       )}
     </div>
@@ -75,7 +75,7 @@ function TFTRecord() {
 }
   //~isInvalid가 true일때
   return (
-    <body>
+    <div className='body'>
       {isInvalid ? (
         <div className='center'>
           <h1 onClick={() => navigate('/TFTMain')} style={{ cursor: 'pointer' }}>TFT 메인 화면으로</h1>
@@ -110,7 +110,7 @@ function TFTRecord() {
       ) : (
         <h2>데이터 불러오는 중...</h2>
       )}
-    </body>
+    </div>
   );
 }
 
