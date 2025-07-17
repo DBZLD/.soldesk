@@ -1,5 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, TextField } from '@mui/material';
+import MiniAppBar from './MiniAppBar';
+import './common.css';
 
 function RiotAppBar() {
   return (
@@ -19,6 +21,7 @@ function RiotAppBar() {
         <Button color="inherit">로그인</Button>
         <Button color="inherit">회원가입</Button>
       </Toolbar>
+      <MiniAppBar/>
     </AppBar>
   );
 }

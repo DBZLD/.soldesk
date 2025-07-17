@@ -4,6 +4,7 @@ import axios from 'axios';
 import TFTMatchAccordion from './TFTMatchAccordion';
 import '.././reset.css';
 import '.././common.css';
+import RiotAppBar from '../RiotAppBar';
 
 function TFTRecord() {
   const navigate = useNavigate();
@@ -76,9 +77,9 @@ function TFTRecord() {
   //~isInvalid가 true일때
   return (
     <div className='body'>
+      <RiotAppBar/>
       {isInvalid ? (
         <div className='center'>
-          <h1 onClick={() => navigate('/TFTMain')} style={{ cursor: 'pointer' }}>TFT 메인 화면으로</h1>
           <h2>잘못된 아이디 또는 태그입니다.</h2>
           <form onSubmit={handleSubmit}>
             <input type="text" placeholder='아이디#태그' onChange={handleInputChange} defaultValue={`${pId}${pTag ? `#${pTag}` : ''}`}></input>
@@ -87,7 +88,6 @@ function TFTRecord() {
         </div>
       ) : data ? (
         <div className='center'>
-          <h1 onClick={() => navigate('/TFTMain')} style={{ cursor: 'pointer' }}>TFT 메인 화면으로</h1>
           <div className='profileArea'>
             <div className='profileBox'>
           <img id='icon' src={data.playerProfileInfo.iconURL} alt='playerProfileIcon'></img>

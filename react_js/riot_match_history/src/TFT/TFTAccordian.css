@@ -1,0 +1,199 @@
+.playerTactician {
+    width: 50px;
+    height: 50px;
+    border: 3px solid navy;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.playerLevel {
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 65%;
+    top: 60%;
+    text-align: center;
+    text-justify: center;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgb(70, 70, 70);
+    border: 2px solid navy;
+    border-radius: 50%;
+}
+.playerCell {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: navy;
+}
+.playerWidth{
+    width: 7%;
+}
+.traitWidth{
+    width: 16%;
+}
+.unitWidth{
+    width: 53%;
+}
+.matchmateWidth{
+    width: 20%;
+}
+.traitCell {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.traitImg {
+    width: 25px;
+    height: 25px;
+    margin: 3px;
+    border-radius: 50%;
+}
+.traitTier1 {
+    background-color: rgba(255, 187, 0, 0.555);
+}
+.traitTier2 {
+    background-color: rgb(196, 196, 196);
+}
+.traitTier3 {
+    background-color: rgb(243, 127, 73);
+}
+.traitTier4 {
+    background-color: rgb(203, 204, 114);
+}
+.traitTier5 {
+    background-color: rgb(194, 241, 255);
+}
+
+.unitCell {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.unitBox {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.unitImg {
+    width: 37px;
+    height: 37px;
+    object-fit: none;
+    object-position: -150px -30px;
+    border: 3px solid;
+    border-radius: 10%;
+}
+
+.itemBox {
+    width: 36px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemImg {
+    width: 12px;
+    height: 12px;
+}
+
+.unitRarity0 {
+    color: rgb(206, 206, 206);
+}
+
+.unitRarity1 {
+    color: rgb(103, 255, 103);
+}
+
+.unitRarity2 {
+    color: rgb(80, 150, 255);
+}
+
+.unitRarity4 {
+    color: rgb(203, 73, 255);
+}
+
+.unitRarity6 {
+    color: rgb(255, 225, 93);
+}
+
+.matchmateCell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: rgb(170, 170, 170);
+}
+.matchmate{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+.matchmateIcon{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 2px;
+}
+.matchmateName{
+    width: auto;
+    cursor: pointer;
+    font-size:x-small;
+}
+
+.exTraitCell {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.exTraitImg {
+    width: 17px;
+    height: 17px;
+    margin: 2px;
+    border-radius: 50%;
+}
+.exUnitCell {
+    display: flex;
+    flex-direction: row;
+}
+
+.exUnitBox {
+    width: auto;
+    display: flex;
+    margin: 2px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exUnitImg {
+    width: 30px;
+    height: 30px;
+    object-fit: none;
+    object-position: -150px -30px;
+    border: 2px solid;
+    border-radius: 10%;
+}
+
+.exItemBox {
+    width: 36px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.exItemImg {
+    width: 12px;
+    height: 12px;
+}

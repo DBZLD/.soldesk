@@ -14,27 +14,30 @@ import {
   Typography,
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
-import '.././common.css';
+import './TFTAccordian.css';
 
 function AccordionExpandFullRow({data}) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  function printStar(count, unitRarity){
+  function printUnitTier(count, unitRarity){
     return <h4 className={`unitRarity${unitRarity}`}>{"★".repeat(count)}</h4>;
   }
+    function printExUnitTier(count, unitRarity){
+    return <h5 className={`unitRarity${unitRarity}`}>{"★".repeat(count)}</h5>;
+  }
   return (
-    <TableContainer component={Paper} sx={{marginBottom:'40px'}}>
+    <TableContainer component={Paper} sx={{marginBottom:'20px', backgroundColor:'rgb(70, 70, 70)'}}>
       <Table>
         <TableBody>
           <TableRow sx={{height:'50px'}}>
             {/* 1열 */}
-            <TableCell>{data.playerInfos[data.myIndex].placement}등</TableCell>
-            <TableCell colSpan={3}>{data.queueType} | {data.playerInfos[data.myIndex].timeElemented} | {data.gameDatetime}</TableCell>
-            {/* 2열 병합 + 토글 버튼 */}
+            <TableCell sx={{color: 'rgb(170, 170, 170)', fontWeight:'900'}}>{data.playerInfos[data.myIndex].placement}등</TableCell>
+            <TableCell sx={{color: 'rgb(170, 170, 170)'}} colSpan={3}>{data.queueType} | {data.playerInfos[data.myIndex].timeElemented} | {data.gameDatetime}</TableCell>
+            {/* 2열 */}
             <TableCell rowSpan={2}  sx={{
                verticalAlign: "bottom", 
-               backgroundColor: "grey",
+               backgroundColor: "gray",
                width:"15px"
               }}>
               <IconButton
@@ -57,18 +60,18 @@ function AccordionExpandFullRow({data}) {
             <TableCell className="traitWidth">
               <div className="traitCell">
               {data.playerInfos[data.myIndex].traitList.slice(0, data.playerInfos[data.myIndex].traitList.length).map((trait, index) => (
-                <img key={index} className={`trait traitTier${trait.style}`}src={trait.imgURL} alt="traitImg"></img>
+                <img key={index} className={`traitImg traitTier${trait.style}`}src={trait.imgURL} alt="traitImg"></img>
               ))}
               </div>
             </TableCell>
             <TableCell className="unitWidth">
               <div className="unitCell">
               {data.playerInfos[data.myIndex].unitList.slice(0, data.playerInfos[data.myIndex].unitList.length).map((unit, index) => (
-                <div className="unit">
-                  {printStar(unit.tier, unit.rarity)}
+                <div className="unitBox">
+                  {printUnitTier(unit.tier, unit.rarity)}
                   <img key={index} className={`unitImg unitRarity${unit.rarity}`}src={unit.imgURL} alt="unitImg"></img> 
                    <div>
-                     <div className="item">
+                     <div className="itemBox">
                   {unit.itemList.slice(0, unit.itemList.length).map((item, index) => (
                       <img key={index} className="itemImg" src={item.imgURL} alt="itemImg"></img>
                     ))}
@@ -96,88 +99,56 @@ function AccordionExpandFullRow({data}) {
 
           {open && (
             <TableRow>
-              <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0 }}>
+              <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0, color:"rgb(170, 170, 170)"}}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   <Box margin={2}>
-                    <Typography variant="h6" gutterBottom>
+                    <Typography variant="h7" gutterBottom>
                         확장 테이블
                     </Typography>
                     <Table size="small" aria-label="expanded table">
                       <TableHead>
-                        <TableRow sx={{"& th, &td": {textAlign:"center"},}}>
-                          <TableCell style={{width:'5%'}}>등수</TableCell>
-                          <TableCell style={{width:'10%'}}>플레이어</TableCell>
-                          <TableCell style={{width:'7%'}}>라운드</TableCell>
-                          <TableCell style={{width:'15%'}}>특성</TableCell>
-                          <TableCell style={{width:'56%'}}>챔피언</TableCell>
-                          <TableCell style={{width:'7%'}}>업적</TableCell>
+                        <TableRow sx={{"& th, &td": {color:"rgb(170, 170, 170)"},}}>
+                          <TableCell sx={{width:'6%'}}>등수</TableCell>
+                          <TableCell sx={{width:'14%'}}>플레이어</TableCell>
+                          <TableCell sx={{width:'7%'}}>라운드</TableCell>
+                          <TableCell sx={{width:'15%', textAlign:"center"}}>특성</TableCell>
+                          <TableCell sx={{width:'40%', textAlign:"center"}}>챔피언</TableCell>
+                          <TableCell sx={{width:'6%'}}>업적</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        <TableRow>
-                          <TableCell>1</TableCell>
-                          <TableCell>1</TableCell>
-                          <TableCell>1</TableCell>
-                          <TableCell>1</TableCell>
-                          <TableCell>1</TableCell>
-                          <TableCell>1</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>2</TableCell>
-                          <TableCell>2</TableCell>
-                          <TableCell>2</TableCell>
-                          <TableCell>2</TableCell>
-                          <TableCell>2</TableCell>
-                          <TableCell>2</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>3</TableCell>
-                          <TableCell>3</TableCell>
-                          <TableCell>3</TableCell>
-                          <TableCell>3</TableCell>
-                          <TableCell>3</TableCell>
-                          <TableCell>3</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>4</TableCell>
-                          <TableCell>4</TableCell>
-                          <TableCell>4</TableCell>
-                          <TableCell>4</TableCell>
-                          <TableCell>4</TableCell>
-                          <TableCell>4</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>5</TableCell>
-                          <TableCell>5</TableCell>
-                          <TableCell>5</TableCell>
-                          <TableCell>5</TableCell>
-                          <TableCell>5</TableCell>
-                          <TableCell>5</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>6</TableCell>
-                          <TableCell>6</TableCell>
-                          <TableCell>6</TableCell>
-                          <TableCell>6</TableCell>
-                          <TableCell>6</TableCell>
-                          <TableCell>6</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>7</TableCell>
-                          <TableCell>7</TableCell>
-                          <TableCell>7</TableCell>
-                          <TableCell>7</TableCell>
-                          <TableCell>7</TableCell>
-                          <TableCell>7</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>8</TableCell>
-                          <TableCell>8</TableCell>
-                          <TableCell>8</TableCell>
-                          <TableCell>8</TableCell>
-                          <TableCell>8</TableCell>
-                          <TableCell>8</TableCell>
-                        </TableRow>
+                          {data.playerInfos.slice(0, data.playerInfos.length).map((player, index) => (
+                            <TableRow>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.placement}</TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.playerId}</TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.lastRound}<br />{player.timeElemented}</TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>
+                                <div className="exTraitCell">
+                                {player.traitList.slice(0, player.traitList.length).map((trait, index) => (
+                                  <img key={index} className={`exTraitImg traitTier${trait.style}`}src={trait.imgURL} alt="exTraitImg"></img>
+                                ))}
+                                </div>
+                              </TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>
+                                <div className="exUnitCell">
+                                  {player.unitList.slice(0, player.unitList.length).map((unit, index) => (
+                                    <div className="exUnitBox">
+                                      {printExUnitTier(unit.tier, unit.rarity)}
+                                      <img key={index} className={`exUnitImg unitRarity${unit.rarity}`}src={unit.imgURL} alt="exUnitImg"></img> 
+                                      <div>
+                                        <div className="exItemBox">
+                                      {unit.itemList.slice(0, unit.itemList.length).map((item, index) => (
+                                          <img key={index} className="exItemImg" src={item.imgURL} alt="exItemImg"></img>
+                                        ))}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.totalDamage}</TableCell>
+                            </TableRow>
+                          ))}
                       </TableBody>
                     </Table>
                   </Box>
