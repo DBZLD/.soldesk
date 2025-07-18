@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RiotAppBar from '.././RiotAppBar';
+import '../reset.css';
+import './TFTcommon.css';
 
 function TFTSearch() {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function TFTSearch() {
     }
   };
   return (
-    <div>
+    <div className='body'>
       <RiotAppBar/>
       <h1 onClick={() => navigate('/')} style={{cursor:'pointer'}}>메인 화면으로</h1>
       <h2>TFT 전적 검색</h2>

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import TFTMatchAccordion from './TFTMatchAccordion';
-import '.././reset.css';
-import '.././common.css';
+import '../reset.css';
+import './TFTcommon.css';
 import RiotAppBar from '../RiotAppBar';
 
 function TFTRecord() {

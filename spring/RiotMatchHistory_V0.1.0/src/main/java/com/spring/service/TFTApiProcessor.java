@@ -178,7 +178,7 @@ public class TFTApiProcessor {
 				version, group, full);
 		return imgURL;
 	}
-	public String transGameDatetime(Long gameDatetime) {
+	public String transGamePasstime(Long gameDatetime) {
 	    Instant instant = Instant.ofEpochMilli(gameDatetime);
 	    ZonedDateTime gameTime = instant.atZone(ZoneId.systemDefault());
 	    ZonedDateTime now = ZonedDateTime.now();
@@ -199,6 +199,12 @@ public class TFTApiProcessor {
 	    if (minutes > 0) return minutes + "분 전";
 
 	    return "방금 전";
+	}
+	public String transGameDatetime(Long gameDatetime) {
+	    Instant instant = Instant.ofEpochMilli(gameDatetime);
+	    ZonedDateTime gameTime = instant.atZone(ZoneId.systemDefault());
+	    String a = String.format("%s", gameTime);
+	    return a;
 	}
 	public String transTimeElemented(Double gameLength) {
 	int nMin = (int)Math.floor(gameLength/60);

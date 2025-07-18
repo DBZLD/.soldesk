@@ -108,9 +108,9 @@ function AccordionExpandFullRow({data}) {
                     <Table size="small" aria-label="expanded table">
                       <TableHead>
                         <TableRow sx={{"& th, &td": {color:"rgb(170, 170, 170)"},}}>
-                          <TableCell sx={{width:'6%'}}>등수</TableCell>
+                          <TableCell sx={{width:'6%', textAlign:"center"}}>등수</TableCell>
                           <TableCell sx={{width:'14%'}}>플레이어</TableCell>
-                          <TableCell sx={{width:'7%'}}>라운드</TableCell>
+                          <TableCell sx={{width:'7%', textAlign:"center"}}>라운드</TableCell>
                           <TableCell sx={{width:'15%', textAlign:"center"}}>특성</TableCell>
                           <TableCell sx={{width:'40%', textAlign:"center"}}>챔피언</TableCell>
                           <TableCell sx={{width:'6%'}}>업적</TableCell>
@@ -119,9 +119,9 @@ function AccordionExpandFullRow({data}) {
                       <TableBody>
                           {data.playerInfos.slice(0, data.playerInfos.length).map((player, index) => (
                             <TableRow>
-                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.placement}</TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)", textAlign:"center"}}>{player.placement}</TableCell>
                               <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.playerId}</TableCell>
-                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.lastRound}<br />{player.timeElemented}</TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)", textAlign:"center"}}>{player.lastRound}<br />{player.timeElemented}</TableCell>
                               <TableCell sx={{color:"rgb(170, 170, 170)"}}>
                                 <div className="exTraitCell">
                                 {player.traitList.slice(0, player.traitList.length).map((trait, index) => (
@@ -146,7 +146,7 @@ function AccordionExpandFullRow({data}) {
                                   ))}
                                 </div>
                               </TableCell>
-                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.totalDamage}</TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.totalDamage}<br/>{player.goldLeft}</TableCell>
                             </TableRow>
                           ))}
                       </TableBody>

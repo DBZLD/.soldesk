@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, Button, TextField } from '@mui/material';
 import MiniAppBar from './MiniAppBar';
-import './common.css';
+import './reset.css';
 
 function RiotAppBar() {
   return (
