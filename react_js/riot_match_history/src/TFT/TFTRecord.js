@@ -64,10 +64,10 @@ function TFTRecord() {
     <div className="rankBox">
       <h1 className="regaliaType">{title}</h1>
       <img className="regaliaImg" src={data.imgURL} alt="playerRegaliaImg" />
-      <h2 className="regaliaTier">{data.tier} {data.rank}</h2>
+      <h2 className="regaliaTier">{isTurbo||data.isInvalid ? `{data.tier}` : `{data.tier}{data.rank}`}</h2>
       {data.tier !== "랭크 없음" && (
         <>
-          <h2 className="regaliaPoint">{data.point}{isTurbo ? "점" : "LP"}</h2>
+          <h2 className="regaliaPoint">{isTurbo ? `{data.rank}점` : `{data.point}LP`}</h2>
           <h2 className="regaliaWL">{data.win}승 {data.lose}패</h2>
         </>
       )}

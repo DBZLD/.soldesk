@@ -89,6 +89,7 @@
     top: 5%;
     transform: translateX(-50%);
     text-align: center;
+    font-size: auto;
 }
 
 .regaliaImg {
@@ -101,30 +102,27 @@
 }
 
 .regaliaTier {
-    width: 200px;
+    width: 30%;
     position: absolute;
-    left: 70%;
+    left: 65%;
     top: 35%;
-    transform: translateX(-50%);
-    text-align: center;
 }
 
 .regaliaPoint {
-    width: auto;
+    width: 20%;
     position: absolute;
-    left: 70%;
+    left: 65%;
     top: 45%;
-    transform: translateX(-50%);
-    text-align: center;
 }
 
 .regaliaWL {
-    width: auto;
+    width: 30%;
     position: absolute;
     left: 50%;
     top: 75%;
     transform: translateX(-50%);
     text-align: center;
+    font-size: auto;
 }
 
 .recordArea {

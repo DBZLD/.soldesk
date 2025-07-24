@@ -13,7 +13,7 @@ public class TFTMatchInfo {
 	public String gameVersion;
 	public String matchId;
 	public String gameDatetime;
-	public String gamePasstime;
+	public String gamePassedtime;
 	public String queueType;
 	public Integer myIndex;
 	public ArrayList<TFTMatchPlayerInfo> playerInfos = new ArrayList<>();
@@ -28,7 +28,7 @@ public class TFTMatchInfo {
 		
 		matchId = matchDto.metadata.match_id;
 		gameDatetime = tap.transGameDatetime(matchDto.info.game_datetime);
-		gamePasstime = tap.transGamePasstime(matchDto.info.game_datetime);
+		gamePassedtime = tap.transGamePassedtime(matchDto.info.game_datetime);
 		queueType = tap.transQueueType(matchDto.info.queue_id);
 		//gameVersion 설정
 		//playerInfos 설정

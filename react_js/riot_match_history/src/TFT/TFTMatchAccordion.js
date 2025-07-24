@@ -12,6 +12,7 @@ import {
   IconButton,
   Box,
   Typography,
+  Tooltip
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import './TFTAccordian.css';
@@ -32,20 +33,18 @@ function AccordionExpandFullRow({data}) {
         <TableBody>
           <TableRow sx={{height:'50px'}}>
             {/* 1열 */}
-            <TableCell sx={{color: 'rgb(170, 170, 170)', fontWeight:'900'}}>{data.playerInfos[data.myIndex].placement}등</TableCell>
-            <TableCell sx={{color: 'rgb(170, 170, 170)'}} colSpan={3}>{data.queueType} | {data.playerInfos[data.myIndex].timeElemented} | {data.gameDatetime}</TableCell>
+            <TableCell className={`playerPlacement${data.playerInfos[data.myIndex].placement}`} sx={{textAlign: "center", fontWeight:'800'}}>#{data.playerInfos[data.myIndex].placement}</TableCell>
+            <TableCell sx={{color: 'rgb(170, 170, 170)'}} colSpan={3}>{data.queueType} | {data.playerInfos[data.myIndex].timeElemented} | {data.gamePassedtime}</TableCell>
             {/* 2열 */}
-            <TableCell rowSpan={2}  sx={{
-               verticalAlign: "bottom", 
-               backgroundColor: "gray",
-               width:"15px"
-              }}>
+            <TableCell rowSpan={2} className={`playerPlacement${data.playerInfos[data.myIndex].placement}`}
+              sx={{
+              verticalAlign: "bottom", 
+              width:"15px" }}>
               <IconButton
                 aria-label="expand"
                 size="small"
                 onClick={() => setOpen(!open)}
-                sx={{color:"white !important"}}
-              >
+                sx={{color:"white !important"}}>
                 {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
               </IconButton>
             </TableCell>
@@ -53,14 +52,18 @@ function AccordionExpandFullRow({data}) {
           <TableRow sx={{height:'90px'}}>
             <TableCell className="cellWidth">
               <div className="playerCell">
-              <img className="playerTactician" src={data.playerInfos[data.myIndex].tacticianImgURL} alt="tactician"></img>
+                <Tooltip title={data.playerInfos[data.myIndex].tacticianName}>
+                  <img className="playerTactician" src={data.playerInfos[data.myIndex].tacticianImgURL} alt="tactician"></img>
+                </Tooltip>
               <h4 className="playerLevel">{data.playerInfos[data.myIndex].level}</h4>
               </div>
             </TableCell>
             <TableCell className="traitWidth">
               <div className="traitCell">
               {data.playerInfos[data.myIndex].traitList.slice(0, data.playerInfos[data.myIndex].traitList.length).map((trait, index) => (
-                <img key={index} className={`traitImg traitTier${trait.style}`}src={trait.imgURL} alt="traitImg"></img>
+                <Tooltip title={trait.name}>
+                  <img key={index} className={`traitImg traitTier${trait.style}`}src={trait.imgURL} alt="traitImg"></img>
+                </Tooltip>
               ))}
               </div>
             </TableCell>
@@ -69,11 +72,17 @@ function AccordionExpandFullRow({data}) {
               {data.playerInfos[data.myIndex].unitList.slice(0, data.playerInfos[data.myIndex].unitList.length).map((unit, index) => (
                 <div className="unitBox">
                   {printUnitTier(unit.tier, unit.rarity)}
-                  <img key={index} className={`unitImg unitRarity${unit.rarity}`}src={unit.imgURL} alt="unitImg"></img> 
+                  <Tooltip title={unit.name}>
+                    <div className={`unitImg unitRarity${unit.rarity}`}>
+                      <img key={index} className="unitSprite" src={unit.imgURL} alt="unitImg"></img> 
+                    </div>
+                  </Tooltip>
                    <div>
                      <div className="itemBox">
                   {unit.itemList.slice(0, unit.itemList.length).map((item, index) => (
+                    <Tooltip title={item.name}>
                       <img key={index} className="itemImg" src={item.imgURL} alt="itemImg"></img>
+                    </Tooltip>
                     ))}
                     </div>
                   </div>
@@ -103,7 +112,7 @@ function AccordionExpandFullRow({data}) {
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   <Box margin={2}>
                     <Typography variant="h7" gutterBottom>
-                        확장 테이블
+                        일자 | {data.gameDatetime} 버전 | {data.gameVersion}
                     </Typography>
                     <Table size="small" aria-label="expanded table">
                       <TableHead>
@@ -125,7 +134,9 @@ function AccordionExpandFullRow({data}) {
                               <TableCell sx={{color:"rgb(170, 170, 170)"}}>
                                 <div className="exTraitCell">
                                 {player.traitList.slice(0, player.traitList.length).map((trait, index) => (
-                                  <img key={index} className={`exTraitImg traitTier${trait.style}`}src={trait.imgURL} alt="exTraitImg"></img>
+                                  <Tooltip title={trait.name}>
+                                    <img key={index} className={`exTraitImg traitTier${trait.style}`}src={trait.imgURL} alt="exTraitImg"></img>
+                                  </Tooltip>
                                 ))}
                                 </div>
                               </TableCell>
@@ -134,11 +145,17 @@ function AccordionExpandFullRow({data}) {
                                   {player.unitList.slice(0, player.unitList.length).map((unit, index) => (
                                     <div className="exUnitBox">
                                       {printExUnitTier(unit.tier, unit.rarity)}
-                                      <img key={index} className={`exUnitImg unitRarity${unit.rarity}`}src={unit.imgURL} alt="exUnitImg"></img> 
+                                      <Tooltip title={unit.name}>
+                                        <div className={`exUnitImg unitRarity${unit.rarity}`}>
+                                      <img key={index} className="exUnitSprite" src={unit.imgURL} alt="exUnitImg"></img> 
+                                        </div>
+                                      </Tooltip>
                                       <div>
                                         <div className="exItemBox">
                                       {unit.itemList.slice(0, unit.itemList.length).map((item, index) => (
+                                        <Tooltip title={item.name}>
                                           <img key={index} className="exItemImg" src={item.imgURL} alt="exItemImg"></img>
+                                        </Tooltip>
                                         ))}
                                         </div>
                                       </div>
