@@ -5,9 +5,10 @@ import { Box, TextField, IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 
 import '../reset.css';
+import '../index.css';
 import './TFTcommon.css';
 
-function TFTSearch() {
+function TFTMain() {
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const [tag, setTag] = useState('');
@@ -92,4 +93,4 @@ function TFTSearch() {
   );
 }
 
-export default TFTSearch;
+export default TFTMain;

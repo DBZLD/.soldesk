@@ -12,7 +12,7 @@ html, body {
   margin: 0;
   padding: 0;
 }
-
+/* 전체 메인 페이지 */
 .mainPage {
     width: 100%;
     min-height: 100vh;
@@ -33,4 +33,23 @@ html, body {
     font-size:40px;
     text-align: center;
     color: rgb(170, 170, 170);    
+}
+/* 이외 메인 페이지 */
+.body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(41, 41, 41);
+    color: rgb(170, 170, 170);
+}
+.main{
+    width: 100%;
+    min-height: 50vh;
+    justify-items: center;
+    align-content: center;
+}
+
+.title{
+    font-size:70px;
+    font-weight: 700;
+    margin: 40px;
 }

@@ -24,6 +24,15 @@
 <input name="version" placeholder="버전(ex.15.16.1)">
 <input type="submit" value = "api보기">
 </form>
+<form action="/db/addAccount">
+<input name="id" placeholder="아이디">
+<input name="tag" placeholder="태그">
+<input type="submit" value = "DB 추가">
+</form>
+<form action="/db/getAccount">
+<input name="id" placeholder="아이디">
+<input type="submit" value = "DB 받아오기">
+</form>
 <pre>패치 버전 목록
 "15.16.1", "15.15.1", "15.14.1", "15.13.1", "15.12.1", "15.11.1",
 "15.10.1", "15.9.1", "15.8.1", "15.7.1", "15.6.1", "15.5.1", 

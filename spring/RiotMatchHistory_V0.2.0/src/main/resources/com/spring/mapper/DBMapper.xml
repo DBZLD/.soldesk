@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.DBMapper">
+	<select id="getAccount" resultType="com.spring.util.AccountDto">
+		select * from search_DB where id like concat(#{id}, '%') and tag like concat(#{tag}, '%') order by id
+	</select>
+	<select id="addAccount">
+		insert into search_DB(id, tag) value(#{id}, #{tag})
+	</select>
+</mapper>
