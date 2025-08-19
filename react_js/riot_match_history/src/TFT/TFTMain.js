@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RiotAppBar from '.././RiotAppBar';
+import { Box, TextField, IconButton, InputAdornment } from '@mui/material';
+import SearchIcon from "@mui/icons-material/Search";
+
 import '../reset.css';
 import './TFTcommon.css';
 
@@ -28,15 +31,63 @@ function TFTSearch() {
   return (
     <div className='body'>
       <RiotAppBar/>
-      <h1 onClick={() => navigate('/')} style={{cursor:'pointer'}}>메인 화면으로</h1>
-      <h2>TFT 전적 검색</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder='아이디#태그' onChange={handleInputChange}></input>
-        <input type="submit" value="검색"></input>
-      </form>
-
-    <h2>이름: {id}</h2>
-    <h2>태그: {tag}</h2>
+      <div className='main'>
+        <div className='title'>TFT 전적 검색</div>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{ display: "flex", alignItems: "center", mb: 3 }}
+          >
+          <TextField
+            label="아이디#태그"
+            variant="outlined"
+            onChange={handleInputChange}
+            InputLabelProps={{
+              sx: {
+                color: "rgba(170, 170, 170, 0.4)",
+                "&.MuiInputLabel-root:not(.Mui-focused):not(.MuiInputLabel-shrink)": {
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  marginLeft:"15px",
+                },
+              },
+            }}
+            sx={{
+              width: 700,
+              "& .MuiOutlinedInput-root": {
+                display: "flex",
+                alignItems: "center",
+                color: "white",
+                "& fieldset": {
+                  borderColor: "rgba(54, 45, 104, 1)",
+                  borderWidth: 3,
+                },
+                "&:hover fieldset": {
+                  borderColor: "rgba(54, 45, 104, 1)",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "rgba(24, 14, 78, 1)",
+                },
+              },
+            }}
+            inputProps={{
+              sx: {
+                height: 40,
+                color: "rgb(170, 170, 170)",
+              },
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton type="submit">
+                    <SearchIcon sx={{ color: "rgba(54, 45, 104, 1)" }} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          </Box>
+      </div>
     </div>
   );
 }

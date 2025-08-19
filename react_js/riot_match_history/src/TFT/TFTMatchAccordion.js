@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import './TFTAccordian.css';
+import '../reset.css';
 
 function AccordionExpandFullRow({data}) {
   const [open, setOpen] = useState(false);
@@ -32,10 +33,8 @@ function AccordionExpandFullRow({data}) {
       <Table>
         <TableBody>
           <TableRow sx={{height:'50px'}}>
-            {/* 1열 */}
             <TableCell className={`playerPlacement${data.playerInfos[data.myIndex].placement}`} sx={{textAlign: "center", fontWeight:'800'}}>#{data.playerInfos[data.myIndex].placement}</TableCell>
             <TableCell sx={{color: 'rgb(170, 170, 170)'}} colSpan={3}>{data.queueType} | {data.playerInfos[data.myIndex].timeElemented} | {data.gamePassedtime}</TableCell>
-            {/* 2열 */}
             <TableCell rowSpan={2} className={`playerPlacement${data.playerInfos[data.myIndex].placement}`}
               sx={{
               verticalAlign: "bottom", 
@@ -98,27 +97,26 @@ function AccordionExpandFullRow({data}) {
                       <div
                         className="matchmateName"
                         onClick={() => navigate(`/TFTRecord?id=${player.playerId}&tag=${player.playerTag}`)}>
-                        {player.playerId.length <= 8 ? player.playerId : player.playerId.slice(0, 8) + "..."}
-                      </div>
+                        {player.playerId}</div>
                   </div>
                 ))}
               </div>
             </TableCell>
           </TableRow>
 
-          {open && (
+          {open && ( //확장 테이블
             <TableRow>
               <TableCell colSpan={5} style={{ paddingBottom: 0, paddingTop: 0, color:"rgb(170, 170, 170)"}}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   <Box margin={2}>
-                    <Typography variant="h7" gutterBottom>
-                        일자 | {data.gameDatetime} 버전 | {data.gameVersion}
+                    <Typography variant="subtitle2" gutterBottom textAlign="right">
+                        일자 | {data.gameDatetime} / 버전 | {data.gameVersion}
                     </Typography>
                     <Table size="small" aria-label="expanded table">
                       <TableHead>
-                        <TableRow sx={{"& th, &td": {color:"rgb(170, 170, 170)"},}}>
+                        <TableRow sx={{"& th, &td": {color:"rgb(170, 170, 170)"}}}>
                           <TableCell sx={{width:'6%', textAlign:"center"}}>등수</TableCell>
-                          <TableCell sx={{width:'14%'}}>플레이어</TableCell>
+                          <TableCell sx={{width:'14%', textAlign:"center"}}>플레이어</TableCell>
                           <TableCell sx={{width:'7%', textAlign:"center"}}>라운드</TableCell>
                           <TableCell sx={{width:'15%', textAlign:"center"}}>특성</TableCell>
                           <TableCell sx={{width:'40%', textAlign:"center"}}>챔피언</TableCell>
@@ -129,7 +127,15 @@ function AccordionExpandFullRow({data}) {
                           {data.playerInfos.slice(0, data.playerInfos.length).map((player, index) => (
                             <TableRow>
                               <TableCell sx={{color:"rgb(170, 170, 170)", textAlign:"center"}}>{player.placement}</TableCell>
-                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.playerId}</TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>
+                                <div className="exPlayerCell">
+                                  <Tooltip title={player.tacticianName}>
+                                    <img className="exPlayerTactician" src={player.tacticianImgURL} alt="tactician"></img>
+                                  </Tooltip>
+                                  <div className="exPlayerLevel">{player.level}</div>
+                                  <div className="exPlayerId" onClick={() => navigate(`/TFTRecord?id=${player.playerId}&tag=${player.playerTag}`)}>
+                                    {player.playerId}</div>
+                                </div></TableCell>
                               <TableCell sx={{color:"rgb(170, 170, 170)", textAlign:"center"}}>{player.lastRound}<br />{player.timeElemented}</TableCell>
                               <TableCell sx={{color:"rgb(170, 170, 170)"}}>
                                 <div className="exTraitCell">
@@ -163,7 +169,10 @@ function AccordionExpandFullRow({data}) {
                                   ))}
                                 </div>
                               </TableCell>
-                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>{player.totalDamage}<br/>{player.goldLeft}</TableCell>
+                              <TableCell sx={{color:"rgb(170, 170, 170)"}}>
+                                <Tooltip title="입힌 피해량">{player.totalDamage}</Tooltip><br/>
+                                <Tooltip title="남은 골드">{player.goldLeft}</Tooltip>
+                                </TableCell>
                             </TableRow>
                           ))}
                       </TableBody>

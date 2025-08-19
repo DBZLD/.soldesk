@@ -63,22 +63,29 @@ function TFTRecord() {
   return (
     <div className="rankBox">
       <h1 className="regaliaType">{title}</h1>
-      <img className="regaliaImg" src={data.imgURL} alt="playerRegaliaImg" />
-      <h2 className="regaliaTier">{isTurbo||data.isInvalid ? `{data.tier}` : `{data.tier}{data.rank}`}</h2>
+      <img className={isTurbo ? "turboRegaliaImg" : "regaliaImg"} src={data.imgURL} alt="playerRegaliaImg" />
+      <h2 className="regaliaTier">{(isTurbo || isNoPointTier(data.tier)) ? `${data.tier}` : `${data.tier} ${data.rank}`}</h2>
       {data.tier !== "랭크 없음" && (
         <>
-          <h2 className="regaliaPoint">{isTurbo ? `{data.rank}점` : `{data.point}LP`}</h2>
+          <h2 className="regaliaPoint">{isTurbo ? `${data.rank}점` : `${data.point}LP`}</h2>
           <h2 className="regaliaWL">{data.win}승 {data.lose}패</h2>
         </>
       )}
     </div>
   );
 }
+function isNoPointTier(tier){
+  if(tier === "마스터" || tier === "그랜드마스터" || tier === "챌린저" || tier === "랭크 없음"){
+    return true;
+  }
+  return false;
+}
   //~isInvalid가 true일때
   return (
     <div className='body'>
-      <RiotAppBar/>
       {isInvalid ? (
+        <>
+        <RiotAppBar/>
         <div className='center'>
           <h2>잘못된 아이디 또는 태그입니다.</h2>
           <form onSubmit={handleSubmit}>
@@ -86,7 +93,10 @@ function TFTRecord() {
             <input type="submit" value="검색"></input>
           </form>
         </div>
+        </>
       ) : data ? (
+        <>
+          <RiotAppBar/>
         <div className='center'>
           <div className='profileArea'>
             <div className='profileBox'>
@@ -97,7 +107,7 @@ function TFTRecord() {
           <button id='refresh'>전적 갱신</button>
           </div>
           <div className='rankArea'>
-            <RegaliaBox title="랭크" data={data.playerRankInfo.rank} />
+            <RegaliaBox title="랭크" data={data.playerRankInfo.rank}/>
             <RegaliaBox title="더블 업" data={data.playerRankInfo.doubleUp} />
             <RegaliaBox title="초고속 모드" data={data.playerRankInfo.turbo} isTurbo />  
           </div>
@@ -106,7 +116,11 @@ function TFTRecord() {
             <TFTMatchAccordion key={index} data={match} />
             ))}
           </div>
+          <div className='seeMoreArea'>
+            <button className='seeMoreButton'>더보기</button>
+          </div>
         </div>
+        </>
       ) : (
         <h2>데이터 불러오는 중...</h2>
       )}

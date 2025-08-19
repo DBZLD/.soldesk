@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.spring.util.Image;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TFTUnit {
+public class TFTTactician {
 	public String id;
+	public String tier;
 	public String name;
-	public int tier;
 	public Image image;
 }

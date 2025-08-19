@@ -1,0 +1,76 @@
+@charset "EUC-KR";
+
+body{
+	background-color: #f1f1f1;
+	display:flex;
+	justify-content:center;
+	flex-direction: column;
+}
+.mainBoard{
+	display:flex;
+	flex-direction: row;
+	width:auto;
+	height:auto;
+	margin-left: 60px;
+	margin-right: 60px;
+	
+}
+.leftBoard{
+	display:flex;
+	text-align:center;
+	align-items:center;
+	flex-direction: column;
+	width:auto;
+	height:auto;
+	padding: 30px;
+	background-color:white;
+	outline: gray solid 1px;
+	font-weight: 600;
+	font-size: large;
+}
+.rightBoard{
+	background-color:white;
+	display:flex;
+	flex-direction: column;
+	flex: 1 0 auto;
+	outline: gray solid 1px;
+}
+table{
+	margin:10px;
+	border-collapse: collapse;
+}
+tr,td{
+	outline: gray solid 1px;
+}
+.tft-regalia{
+	width:150px;
+	height:150px;
+}
+.tft-table{
+	height:100px;
+}
+.tft-table-level{
+	width:100px;
+}
+.tft-table-trait{
+	width:250px;	
+}
+.tft-table-champion{
+	width:550px;	
+}
+.tft-table-player{
+	width:150px;	
+}
+/* 브론즈 https://cdn.dak.gg/tft/images2/tft/traits/background/bronze.svg?3 
+실버  https://cdn.dak.gg/tft/images2/tft/traits/background/silver.svg?3
+골드  https://cdn.dak.gg/tft/images2/tft/traits/background/gold.svg?3
+프리즘  https://cdn.dak.gg/tft/images2/tft/traits/background/chromatic.svg?3
+고유  https://cdn.dak.gg/tft/images2/tft/traits/background/unique.svg?3 */
+.tft-traits{
+	background-image:url("https://cdn.dak.gg/tft/images2/tft/traits/background/bronze.svg?3");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+	width:25px;
+	height:25px;
+}

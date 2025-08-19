@@ -5,15 +5,25 @@ import TFTMain from './TFT/TFTMain';
 import TFTRecord from './TFT/TFTRecord';
 import LOLMain from './LOL/LOLMain';
 import LOLRecord from './LOL/LOLRecord';
+import VALMain from './VAL/VALMain';
+import VALRecord from './VAL/VALRecord';
+import COMMain from './COM/COMMain';
+import SignInPage from './SignInPage';
+import SignUpPage from './SignUpPage';
 
 function Locate() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/TFTRecord" element={<TFTRecord />} />
       <Route path="/TFTMain" element={<TFTMain/>} />
+      <Route path="/TFTRecord" element={<TFTRecord />} />
       <Route path="/LOLMain" element={<LOLMain/>} />
       <Route path="/LOLRecord" element={<LOLRecord/>} />
+      <Route path="/VALMain" element={<VALMain/>} />
+      <Route path="/VALRecord" element={<VALRecord/>} />
+      <Route path="/COMMain" element={<COMMain/>}/>
+      <Route path="/SignInPage" element={<SignInPage/>}/>
+      <Route path="/SignUpPage" element={<SignUpPage/>}/>
     </Routes>
   );
 }
