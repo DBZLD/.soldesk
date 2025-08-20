@@ -15,15 +15,15 @@ function Locate() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/TFTMain" element={<TFTMain/>} />
+      <Route path="/TFTMain" element={<TFTMain />} />
       <Route path="/TFTRecord" element={<TFTRecord />} />
-      <Route path="/LOLMain" element={<LOLMain/>} />
-      <Route path="/LOLRecord" element={<LOLRecord/>} />
-      <Route path="/VALMain" element={<VALMain/>} />
-      <Route path="/VALRecord" element={<VALRecord/>} />
-      <Route path="/COMMain" element={<COMMain/>}/>
-      <Route path="/SignInPage" element={<SignInPage/>}/>
-      <Route path="/SignUpPage" element={<SignUpPage/>}/>
+      <Route path="/LOLMain" element={<LOLMain />} />
+      <Route path="/LOLRecord" element={<LOLRecord />} />
+      <Route path="/VALMain" element={<VALMain />} />
+      <Route path="/VALRecord" element={<VALRecord />} />
+      <Route path="/COMMain" element={<COMMain />} />
+      <Route path="/SignInPage" element={<SignInPage />} />
+      <Route path="/SignUpPage" element={<SignUpPage />} />
     </Routes>
   );
 }

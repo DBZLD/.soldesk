@@ -4,9 +4,15 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.DBMapper">
 	<select id="getAccount" resultType="com.spring.util.AccountDto">
-		select * from search_DB where id like concat(#{id}, '%') and tag like concat(#{tag}, '%') order by id
+		select * from search_DB where id like concat(#{id}, '%') and tag like concat(#{tag}, '%') order by id limit 5
+	</select>
+	<select id="getAccountID" resultType="com.spring.util.AccountDto">
+		select * from search_DB where id like concat(#{id}, '%') order by id limit 5
+	</select>
+	<select id="findAccount" resultType="com.spring.util.AccountDto">
+	    select * from search_DB where id = #{id} and tag = #{tag}
 	</select>
 	<select id="addAccount">
-		insert into search_DB(id, tag) value(#{id}, #{tag})
+		insert into search_DB(id, tag, icon, regalia) value(#{id}, #{tag}, #{icon}, #{regalia})
 	</select>
 </mapper>

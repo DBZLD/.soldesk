@@ -4,7 +4,9 @@ use riot_match_history;
 
 create table search_DB(
 	id char(20) not null,
-    tag char(20) not null
+    tag char(20) not null,
+    icon char(255) not null,
+	regalia char(20) not null
 );
 select *from search_DB;
 delete from search_DB;

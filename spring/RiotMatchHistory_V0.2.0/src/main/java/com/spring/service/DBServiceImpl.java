@@ -20,11 +20,25 @@ public class DBServiceImpl implements DBService{
 	private DBMapper mapper;	
 	
 	@Override
-	public void addAccount(String id, String tag) {
-		mapper.addAccount(id, tag);
-	}
-	@Override
 	public ArrayList<AccountDto> getAccount(String id, String tag) {
-		return mapper.getAccount(id, tag);
+		// 빈 값을 입력
+	    if ((id == null || id.isEmpty()) && (tag == null || tag.isEmpty())) {
+	        return new ArrayList<>();
+	    }
+	    // id만 입력
+	    if (tag == null || tag.isEmpty()) {
+	        return mapper.getAccountID(id);
+	    }
+	    //id, tag 입력
+	    return mapper.getAccount(id, tag);
+	}
+	
+	@Override
+	public void addAccount(String id, String tag, String icon, String regalia) {
+		if(mapper.findAccount(id, tag).size() <= 0) {
+			mapper.addAccount(id, tag, icon, regalia);			
+		}else {
+			log.info("already db");
+		}
 	}
 }

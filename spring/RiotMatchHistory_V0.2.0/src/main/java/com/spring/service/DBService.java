@@ -6,5 +6,5 @@ import com.spring.util.AccountDto;
 
 public interface DBService {
 	public ArrayList<AccountDto> getAccount(String id, String tag);
-	public void addAccount(String id, String tag);
+	public void addAccount(String id, String tag, String icon, String regalia);
 }
