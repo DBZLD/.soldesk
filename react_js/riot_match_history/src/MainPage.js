@@ -1,9 +1,7 @@
-import { ImageList, ImageListItem } from '@mui/material';
-import './reset.css';
-import './index.css';
+import React from 'react';
+import { Box, Typography, ImageList, ImageListItem, Link } from '@mui/material';
 
 function MainPage() {
-
   const itemData = [
     {
       img: 'https://cdn.apnews.kr/news/photo/202005/20200527_1_bodyimg_856029.PNG',
@@ -26,24 +24,60 @@ function MainPage() {
       nav: '/COMMain',
     },
   ];
+
   return (
-    <div className='mainPage'>
-      <div className='mainTitle'>라이엇 전적 검색</div>
-      <ImageList cols={4} rowHeight={250}>
+    <Box
+      sx={{
+        width: '100%',
+        minHeight: '100vh',
+        backgroundColor: 'rgb(41, 41, 41)',
+        color: 'rgb(170, 170, 170)',
+        textAlign: 'center',
+      }}
+    >
+      {/* 타이틀 */}
+      <Typography
+        variant="h2"
+        sx={{ fontSize: 70, fontWeight: 800, pt: 5, pb: 5 }}
+      >
+        라이엇 전적 검색
+      </Typography>
+
+      {/* 메뉴 리스트 */}
+      <ImageList cols={4} rowHeight={250} sx={{ justifyItems: 'center' }}>
         {itemData.map((item) => (
           <ImageListItem key={item.img}>
-            <a className='mainSubtitle' href={item.nav}>
-              <img className='mainImg'
-                src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+            <Link
+              href={item.nav}
+              underline="none"
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                fontSize: 40,
+                color: 'inherit',
+              }}
+            >
+              <Box
+                component="img"
+                src={`${item.img}?w=300&h=170&fit=crop&auto=format`}
                 alt={item.title}
                 loading="lazy"
+                sx={{
+                  width: 300,
+                  height: 170,
+                  borderRadius: 2,
+                  mb: 1,
+                }}
               />
-              <div>{item.title}</div>
-            </a>
+              <Typography variant="h4" sx={{ fontSize: 40, fontWeight: 700 }}>
+                {item.title}
+              </Typography>
+            </Link>
           </ImageListItem>
         ))}
       </ImageList>
-    </div>
+    </Box>
   );
 }
 

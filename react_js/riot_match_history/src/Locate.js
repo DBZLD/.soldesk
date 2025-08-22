@@ -10,6 +10,7 @@ import VALRecord from './VAL/VALRecord';
 import COMMain from './COM/COMMain';
 import SignInPage from './SignInPage';
 import SignUpPage from './SignUpPage';
+import MyPage from './MyPage';
 
 function Locate() {
   return (
@@ -24,6 +25,7 @@ function Locate() {
       <Route path="/COMMain" element={<COMMain />} />
       <Route path="/SignInPage" element={<SignInPage />} />
       <Route path="/SignUpPage" element={<SignUpPage />} />
+      <Route path="/MyPage" element={<MyPage />} />
     </Routes>
   );
 }

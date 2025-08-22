@@ -1,12 +1,16 @@
-// LoginPage.jsx
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Box, TextField, Button, Typography, Container, Alert } from '@mui/material';
-import './reset.css';
-import './index.css';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from './UserContext';
+import RiotAppBar from './RiotAppBar';
+import axios from 'axios';
 
-const LoginPage = () => {
+const SignInPage = () => {
+  const navigate = useNavigate();
+  const { setUserId, setIsLoggedIn, setRiotAccount } = useContext(UserContext);
+
   const [formData, setFormData] = useState({
-    email: '',
+    id: '',
     password: ''
   });
 
@@ -19,74 +23,113 @@ const LoginPage = () => {
     setSuccess('');
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!formData.email || !formData.password) {
-      setError('이메일과 비밀번호를 입력해주세요.');
-      return;
+  if (!formData.id || !formData.password) {
+    setError('아이디 또는 비밀번호를 입력해주세요.');
+    return;
+  }
+
+  try {
+    const response = await axios.get('http://localhost:8080/db/findAccountDB', {
+      params: {
+        id: formData.id,
+        pw: formData.password
+      }
+    });
+
+    if (response.data) {
+      console.log('로그인 성공:', formData);
+      setIsLoggedIn(true);
+      setUserId(response.data.id);
+      setRiotAccount(response.data.riotAccount || '');
+
+      setSuccess('로그인 성공!');
+      setError('');
+      navigate(`/`);
+    } else {
+      setError('아이디 또는 비밀번호가 일치하지 않습니다.');
+      setIsLoggedIn(false);
+      setSuccess('');
     }
 
-    // 여기서 API 호출 가능 (예: axios.post('/login', formData))
-    console.log('로그인 데이터:', formData);
-    // 임시 성공 처리
-    setSuccess('로그인 성공!');
+  } catch (err) {
+    console.error('로그인 오류:', err);
+    setError('서버 오류가 발생했습니다.');
+    setSuccess('');
+  }
+};
+
+  const textFieldSx = {
+    '& .MuiInputBase-input': { color: 'rgb(200,200,200)' },
+    '& .MuiOutlinedInput-root': {
+      "& fieldset": { borderColor: "rgba(54, 45, 104, 1)", borderWidth: 3 },
+      "&:hover fieldset": { borderColor: "rgba(54, 45, 104, 1)" },
+      "&.Mui-focused fieldset": { borderColor: "rgba(24, 14, 78, 1)" }, 
+    },
   };
 
   return (
-    <div className='mainPage'>
-    <Container maxWidth="sm">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: 4,
-          boxShadow: 3,
-          borderRadius: 2,
-        }}
-      >
-        <Typography variant="h4" component="h1" gutterBottom>
-          로그인
-        </Typography>
-
-        {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
-        {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
-
-        <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
-          <TextField
-            label="이메일"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-          <TextField
-            label="비밀번호"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          />
-
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{ mt: 3 }}
-          >
+    <Box sx={{ minHeight: '100vh', backgroundColor: 'rgb(41, 41, 41)' }}>
+      <RiotAppBar />
+      <Container maxWidth="sm" sx={{ mt: 5 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: 'rgba(70, 70, 70, 1)',
+            color: 'rgb(170, 170, 170)',
+            padding: 4,
+            boxShadow: 3,
+            borderRadius: 2,
+          }}
+        >
+          <Typography variant="h4" component="h1" gutterBottom>
             로그인
-          </Button>
+          </Typography>
+
+          {error && <Alert severity="error" sx={{ mb: 2, width: '100%' }}>{error}</Alert>}
+          {success && <Alert severity="success" sx={{ mb: 2, width: '100%' }}>{success}</Alert>}
+
+          <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
+            <TextField
+              label="아이디"
+              name="id"
+              autoComplete="off"
+              value={formData.id}
+              onChange={handleChange}
+              fullWidth
+              margin="normal"
+              InputLabelProps={{ sx: { color: 'rgba(170,170,170,0.7)' } }}
+              sx={textFieldSx}
+            />
+            <TextField
+              label="비밀번호"
+              name="password"
+              type="password"
+              autoComplete="off"
+              value={formData.password}
+              onChange={handleChange}
+              fullWidth
+              margin="normal"
+              InputLabelProps={{ sx: { color: 'rgba(170,170,170,0.7)' } }}
+              sx={textFieldSx}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{ mt: 3, py: 1.5 }}
+            >
+              로그인
+            </Button>
+          </Box>
         </Box>
-      </Box>
-    </Container>
-    </div>
+      </Container>
+    </Box>
   );
 };
 
-export default LoginPage;
+export default SignInPage;

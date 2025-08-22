@@ -4,12 +4,15 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import Locate from './Locate';
 import './index.css';
+import { UserProvider } from './UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider theme={theme}>
     <BrowserRouter>
-      <Locate />
+      <UserProvider>
+        <Locate />
+      </UserProvider>
     </BrowserRouter>
   </ThemeProvider>
 );

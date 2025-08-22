@@ -1,7 +1,8 @@
+// TFTMain.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RiotAppBar from '.././RiotAppBar';
-import { Box, IconButton, InputAdornment, Autocomplete, TextField } from '@mui/material';
+import { Box, IconButton, InputAdornment, Autocomplete, TextField, Typography } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import axios from 'axios';
 import '../reset.css';
@@ -35,15 +36,9 @@ function TFTMain() {
       setTag(tagValue);
 
       try {
-        console.log(idValue);
-        console.log(tagValue);
-        const response = await axios.get('http://localhost:8080/db/getAccount', {
-          params: {
-            id: idValue,
-            tag: tagValue,
-          }
+        const response = await axios.get('http://localhost:8080/db/getSearchDB', {
+          params: { id: idValue, tag: tagValue }
         });
-        console.log("DB 저장 성공:", response.data);
         setOptions(response.data);
       } catch (error) {
         console.error("DB 저장 실패:", error);
@@ -52,15 +47,15 @@ function TFTMain() {
   };
 
   return (
-    <div className='body'>
+    <Box className="body">
       <RiotAppBar />
-      <div className='main'>
-        <div className='title'>TFT 전적 검색</div>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{ display: "flex", alignItems: "center", mb: 3 }}
-        >
+      <Box className="main" sx={{ textAlign: "center", mt: 5 }}>
+        <Typography variant="h2" sx={{ fontWeight: 700, mb: 3 }}>
+          TFT 전적 검색
+        </Typography>
+
+        {/* 검색창 */}
+        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", justifyContent: "center", mb: 5 }}>
           <Autocomplete
             freeSolo
             options={options}
@@ -73,8 +68,6 @@ function TFTMain() {
             }}
             onChange={(event, newValue) => {
               if (!newValue) return;
-
-              // 옵션 클릭 시 id, tag 분리
               let idValue = "";
               let tagValue = "";
 
@@ -89,98 +82,63 @@ function TFTMain() {
                 idValue = newValue.id;
                 tagValue = newValue.tag;
               }
-
-              // 페이지 이동
               navigate(`/TFTRecord?id=${idValue}&tag=${tagValue}`);
             }}
             onInputChange={handleInputChange}
             renderOption={(props, option) => (
-              <Box
-                component="li"
-                {...props}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 1,
-                }}
-              >
+              <Box component="li" {...props} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 {option.icon && (
                   <img
                     src={option.icon}
                     alt="icon"
-                    style={{ width: 32, height: 32, borderRadius: "50%" }}
+                    className="profileIcon"
                   />
                 )}
                 <Box>
-                  <div style={{ fontWeight: "bold" }}>
+                  <Typography sx={{ fontWeight: "bold", color:'rgb(70, 70, 70)' }}>
                     {option.id}#{option.tag}
-                  </div>
+                  </Typography>
                   {option.regalia && (
-                    <div style={{ fontSize: "0.8rem", color: "gray" }}>
+                    <Typography variant="body2" color="gray">
                       {option.regalia}
-                    </div>
+                    </Typography>
                   )}
                 </Box>
               </Box>
+            )}
+            PaperComponent={(props) => (
+              <Box {...props} sx={{ backgroundColor: 'rgba(126, 126, 182, 0.8)' }} />
             )}
             renderInput={(params) => (
               <TextField
                 {...params}
                 label="아이디#태그"
                 variant="outlined"
-                InputLabelProps={{
-                  sx: {
-                    color: "rgba(170, 170, 170, 0.4)",
-                    "&.MuiInputLabel-root:not(.Mui-focused):not(.MuiInputLabel-shrink)": {
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      marginLeft: "15px",
-                    },
-                  },
-                }}
+                fullWidth
                 sx={{
                   width: 700,
                   "& .MuiOutlinedInput-root": {
-                    display: "flex",
-                    alignItems: "center",
-                    color: "white",
-                    "& fieldset": {
-                      borderColor: "rgba(54, 45, 104, 1)",
-                      borderWidth: 3,
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "rgba(54, 45, 104, 1)",
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "rgba(24, 14, 78, 1)",
-                    },
-                  },
-                }}
-                inputProps={{
-                  ...params.inputProps,
-                  sx: {
-                    height: 40,
-                    color: "rgb(170, 170, 170)",
-                  },
+                    "& fieldset": { borderColor: "rgba(54, 45, 104, 1)", borderWidth: 3 },
+                    "&:hover fieldset": { borderColor: "rgba(54, 45, 104, 1)" },
+                    "&.Mui-focused fieldset": { borderColor: "rgba(24, 14, 78, 1)" }, 
+                  }
                 }}
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (
-                    <>
-                      <InputAdornment position="end">
-                        <IconButton type="submit">
-                          <SearchIcon sx={{ color: "rgba(54, 45, 104, 1)" }} />
-                        </IconButton>
-                      </InputAdornment>
-                    </>
+                    <InputAdornment position="end">
+                      <IconButton type="submit">
+                        <SearchIcon sx={{ color:"rgba(54, 45, 104, 1)" }}/>
+                      </IconButton>
+                    </InputAdornment>
                   ),
                 }}
               />
             )}
           />
         </Box>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

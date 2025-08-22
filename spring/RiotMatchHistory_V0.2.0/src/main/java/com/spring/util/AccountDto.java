@@ -2,7 +2,7 @@ package com.spring.util;
 
 public class AccountDto {
 	public String id;
-	public String tag;
-	public String icon;
-	public String regalia;
+	public String pw;
+	public String email;
+	public String riotAccount;
 }

@@ -3,16 +3,26 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.DBMapper">
-	<select id="getAccount" resultType="com.spring.util.AccountDto">
+	<select id="getSearchDB" resultType="com.spring.util.SearchDto">
 		select * from search_DB where id like concat(#{id}, '%') and tag like concat(#{tag}, '%') order by id limit 5
 	</select>
-	<select id="getAccountID" resultType="com.spring.util.AccountDto">
+	<select id="getSearchDBbyID" resultType="com.spring.util.SearchDto">
 		select * from search_DB where id like concat(#{id}, '%') order by id limit 5
 	</select>
-	<select id="findAccount" resultType="com.spring.util.AccountDto">
+	<select id="findSearchDB" resultType="com.spring.util.SearchDto">
 	    select * from search_DB where id = #{id} and tag = #{tag}
 	</select>
-	<select id="addAccount">
+	<select id="addSearchDB">
 		insert into search_DB(id, tag, icon, regalia) value(#{id}, #{tag}, #{icon}, #{regalia})
+	</select>
+	
+	<select id="findAccountDBbyID" resultType="com.spring.util.AccountDto">
+	    select * from account_DB where id = #{id}
+	</select>
+	<select id="findAccountDB" resultType="com.spring.util.AccountDto">
+	    select * from account_DB where id = #{id} and pw = #{pw}
+	</select>
+	<select id="addAccountDB">
+		insert into account_DB(id, pw, email, riotAccount) value(#{id}, #{pw}, #{email}, #{riotAccount})
 	</select>
 </mapper>

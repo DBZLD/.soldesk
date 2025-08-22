@@ -1,15 +1,17 @@
-import React from 'react';
+import { useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, TextField, Box } from '@mui/material';
-import MiniAppBar from './MiniAppBar';
+import { AppBar, Toolbar, Typography, TextField, Box } from '@mui/material';
+import { UserContext } from './UserContext';
 import './reset.css';
 
-function RiotAppBar(page) {
+function RiotAppBar() {
   const navigate = useNavigate();
-  const location = useLocation(); // 현재 경로 확인용
+  const { setUserId, setIsLoggedIn, setRiotAccount, isLoggedIn, userId } = useContext(UserContext);
+  const location = useLocation(); 
 
   const isActive = (path) => location.pathname === path;
-
+  console.log(isLoggedIn);
+  console.log(userId);
   return (
     <AppBar position="static" sx={{ backgroundColor: 'rgba(24, 14, 78, 1)' }}>
       <Toolbar sx={{ display: 'flex', alignItems: 'center', gap: 5 }}>
@@ -78,11 +80,68 @@ function RiotAppBar(page) {
           sx={{ backgroundColor: 'white', borderRadius: 1, mr: 2, width: '250px' }}
         />
 
-        <Button color="inherit" onClick={() => navigate(`/SignInPage`)}>로그인</Button>
-        <Button color="inherit" onClick={() => navigate(`/SignUpPage`)}>회원가입</Button>
+        {!isLoggedIn ? (
+          <>
+            <Typography
+              variant="h6"
+              onClick={() => navigate(`/SignInPage`)}
+              sx={{
+                cursor: 'pointer',
+                backgroundColor: isActive('/SignInPage') ? 'rgba(87, 78, 126, 1)' : 'transparent',
+                padding: '12px',
+              }}
+            >
+              로그인
+            </Typography>
+
+            <Typography
+              variant="h6"
+              onClick={() => navigate(`/SignUpPage`)}
+              sx={{
+                cursor: 'pointer',
+                backgroundColor: isActive('/SignUpPage') ? 'rgba(87, 78, 126, 1)' : 'transparent',
+                padding: '12px',
+              }}
+            >
+              회원가입
+            </Typography>
+          </>
+        ) :
+        <>
+            <Typography
+              variant="h6"
+              onClick={() => {
+                setIsLoggedIn(false);
+                setUserId('');
+                setRiotAccount('');
+                localStorage.clear();
+                console.log("로그아웃")
+              }}
+              sx={{
+                cursor: 'pointer',
+                backgroundColor: 'transparent',
+                padding: '12px',
+              }}
+            >
+              로그아웃
+            </Typography>
+
+            <Typography
+              variant="h6"
+              onClick={() => navigate(`/MyPage`)}
+              sx={{
+                cursor: 'pointer',
+                backgroundColor: isActive('/MyPage') ? 'rgba(87, 78, 126, 1)' : 'transparent',
+                padding: '12px',
+              }}
+            >
+              {userId}
+            </Typography>
+          </>
+        }
+
       </Toolbar>
 
-      <MiniAppBar pg={page} />
     </AppBar>
   );
 }

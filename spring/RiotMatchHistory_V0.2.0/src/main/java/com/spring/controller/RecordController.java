@@ -18,14 +18,18 @@ import lombok.extern.log4j.Log4j;
 @RestController
 public class RecordController {
 
+	//
 	MatchInfosService service;
 	
+	// 라이엇 id와 tag를 받아오고 플레이어의 TFT정보들이 들어있는 TFTRecordProcessor 반환
 	@RequestMapping("/getTFTRecord")							
 	public TFTRecordProcessor getTFTRecord(@RequestParam(value="playerID", defaultValue = "")
 	String playerID, @RequestParam(value="playerTag", defaultValue = "")String playerTag, Model model) {
-		TFTRecordProcessor hrp = service.getMIP(playerID, playerTag);
-		return hrp;
+		TFTRecordProcessor trp = service.getTRP(playerID, playerTag);
+		return trp;
 	}
+	
+	// 버전을 받아오고 버전에 맞는 TFT 라이엇 api가 들어있는 TFTApiProcessor 반환
 	@RequestMapping("/TFTApi")
 	public TFTApiProcessor getTFTApi(@RequestParam(value="version", defaultValue = "15.16.1")String version) {
 		return service.getTAP(version);

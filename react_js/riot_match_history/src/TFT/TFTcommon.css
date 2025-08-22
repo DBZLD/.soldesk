@@ -1,150 +1,41 @@
-.center {
-    margin-left: 10%;
-    margin-right: 10%;
-    justify-items: center;
-}
-
-.errorTitle {
-    font-size: 40px;
-    font-weight: 700;
-    margin: 40px;
+.profileIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 
 .profileArea {
-    width: 100%;
-    height: 200px;
-    position: relative;
-    margin-top: 30px;
-    color: rgb(170, 170, 170);
+  width: 100%;
+  height: 200px;
+  position: relative;
+  margin-top: 30px;
+  color: rgb(170, 170, 170);
 }
 
 .profileBox {
-    width: 100px;
-    height: 120px;
-    left: 10%;
-    top: 20%;
-    position: relative;
+  width: 100px;
+  height: 120px;
+  left: 10%;
+  top: 20%;
+  position: relative;
 }
 
 #icon {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    border: 2px solid navy;
-    border-radius: 25%;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  border: 2px solid navy;
+  border-radius: 25%;
 }
 
 #level {
-    width: auto;
-    position: absolute;
-    left: 50%;
-    top: 75%;
-    transform: translateX(-50%);
-    text-align: center;
-    background-color: black;
-    border: 2px solid navy;
-    padding: 3px;
-    border-radius: 20%;
-}
-
-#name {
-    position: absolute;
-    left: 20%;
-    top: 25%;
-}
-
-#refresh {
-    width: 90px;
-    height: 50px;
-    position: absolute;
-    left: 20%;
-    top: 45%;
-    background-color: navy;
-    border-radius: 5%;
-    color: white;
-    font-size: medium;
-    font-weight: 700;
-}
-
-.rankArea {
-    width: 90%;
-    height: 300px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 70px;
-}
-
-.rankBox {
-    width: 30%;
-    background-color: rgb(46, 46, 46);
-    color: rgb(170, 170, 170);
-    position: relative;
-}
-
-.regaliaType {
-    width: 160px;
-    position: absolute;
-    left: 50%;
-    top: 5%;
-    transform: translateX(-50%);
-    text-align: center;
-    font-size: auto;
-}
-
-.regaliaImg {
-    width: 180px;
-    height: 180px;
-    position: absolute;
-    top: 15%;
-    left: 25%;
-    transform: translateX(-50%);
-}
-
-.turboRegaliaImg {
-    width: 130px;
-    height: 130px;
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    transform: translateX(-50%);
-}
-
-.regaliaTier {
-    width: auto;
-    position: absolute;
-    left: 55%;
-    top: 35%;
-}
-
-.regaliaPoint {
-    width: auto;
-    position: absolute;
-    left: 55%;
-    top: 45%;
-}
-
-.regaliaWL {
-    width: auto;
-    position: absolute;
-    left: 50%;
-    top: 75%;
-    transform: translateX(-50%);
-    text-align: center;
-    font-size: auto;
-}
-
-.recordArea {
-    width: 90%;
-    margin-top: 70px;
-}
-
-.seeMoreArea {
-    height: 100px;
-}
-
-.seeMoreButton {
-    width: 70vw;
-    height: 70px;
-    color: white;
-    background-color: gray;
+  position: absolute;
+  left: 50%;
+  top: 75%;
+  transform: translateX(-50%);
+  background-color: black;
+  border: 2px solid navy;
+  padding: 3px;
+  border-radius: 20%;
+  font-size: 0.8rem;
 }
