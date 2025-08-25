@@ -5,6 +5,6 @@ import com.spring.util.Image;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TFTRegalia {
-	public Image image;
-	public String name;
+	public Image image;	//티어 이미지
+	public String name;	//티어 이름
 }

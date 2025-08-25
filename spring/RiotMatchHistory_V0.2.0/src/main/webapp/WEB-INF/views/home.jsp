@@ -13,7 +13,7 @@
 <h1>라이엇 전적 api창</h1>
 <hr>
 <h2>전적 api 보기</h2>
-<form action="/riot/getTFTRecord">
+<form action="${cp}/riot/getTFTRecord">
 <input name="playerID" placeholder="아이디">
 <input name="playerTag" placeholder="태그">
 <input type="submit" value = "api보기">

@@ -25,8 +25,8 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class TFTRecordProcessor {
-	public boolean bSuccess = true;												//올바른 요청 여부
-	public String latestVersion = setLatestVersion();							//최신 버전
+	public boolean bSuccess = false;												//올바른 요청 여부
+	private String latestVersion = setLatestVersion();							//최신 버전
 	private TFTApiProcessor tap = new TFTApiProcessor(latestVersion);			//라이엇 API JSON 데이터
 	private PuuidDto puuidDto = new PuuidDto();									//라이엇 API puuid JSON 데이터
 	private ArrayList<String> matchIds = new ArrayList<>();						//라이엇 API matchId 배열

@@ -11,8 +11,8 @@ import static java.util.Map.entry;
 
 import org.springframework.web.client.RestTemplate;
 
-import com.spring.dto.tft.TFTChampion;
-import com.spring.dto.tft.TFTChampionDto;
+import com.spring.dto.tft.TFTUnit;
+import com.spring.dto.tft.TFTUnitDto;
 import com.spring.dto.tft.TFTItemDto;
 import com.spring.dto.tft.TFTQueue;
 import com.spring.dto.tft.TFTQueueDto;
@@ -34,7 +34,7 @@ public class TFTApiProcessor {	// 버전에 맞는 라이엇 API를 가져오는 클래스
 	public TFTQueueDto queue = new TFTQueueDto();				//매치 타입 정보, 번역 API
 	public TFTRegaliaDto regalia = new TFTRegaliaDto();			//티어 정보, 번역 API
 	public TFTTraitDto trait = new TFTTraitDto();				//특성 정보, 번역 API
-	public TFTChampionDto unit = new TFTChampionDto();			//유닛 정보, 번역 API
+	public TFTUnitDto unit = new TFTUnitDto();			//유닛 정보, 번역 API
 	public TFTItemDto item = new TFTItemDto();					//아이템 정보, 번역 API
 	public TFTTacticianDto tactician = new TFTTacticianDto();	//전설이(플레이어 캐릭터) 정보, 번역 API
 	public ProfileIconDto profileIcon = new ProfileIconDto();	//프로필 아이콘 정보, 번역 API
@@ -143,12 +143,12 @@ public class TFTApiProcessor {	// 버전에 맞는 라이엇 API를 가져오는 클래스
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			unit = restTemplate.getForObject(uri, TFTChampionDto.class);
+			unit = restTemplate.getForObject(uri, TFTUnitDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 		//라이엇 api에 거대 메크 로봇이 없기 때문에 직접 만들어줌(api자체 오류)
-		unit.data.put("TFT15_Galio", new TFTChampion("TFT15_Galio", "거대 메크 로봇", 9, "TFTTutorial_Galio.png"));
+		unit.data.put("TFT15_Galio", new TFTUnit("TFT15_Galio", "거대 메크 로봇", 9, "TFTTutorial_Galio.png"));
 	}
 	
 	//item 변수를 설정하는 함수

@@ -3,7 +3,7 @@ package com.spring.tft;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.spring.dto.tft.TFTChampion;
+import com.spring.dto.tft.TFTUnit;
 import com.spring.dto.tft.Unit;
 import com.spring.service.TFTApiProcessor;
 
@@ -21,9 +21,9 @@ public class TFTUnitInfo {
 	//unit, tap 을 받아와서 번역, 정리 후 저장하는 생성자 함수
 	public TFTUnitInfo(Unit unit, TFTApiProcessor tap) {
 		//빈 TFTChampion 생성
-		TFTChampion units = new TFTChampion();
+		TFTUnit units = new TFTUnit();
 		//tap.unit.data를 전부 돌며 key,value 형태를 반환
-		for (Map.Entry<String, TFTChampion> entry : tap.unit.data.entrySet()) { 
+		for (Map.Entry<String, TFTUnit> entry : tap.unit.data.entrySet()) { 
 			//유닛 map의 key값 앞에 maps/shipping~~/가 붙어있어 unit.character_id가 포함된 변수를 찾음
 			if (entry.getKey().toLowerCase().contains(unit.character_id.toLowerCase())) {
 				//units에 entry의 value값을 할당
@@ -43,7 +43,7 @@ public class TFTUnitInfo {
 		rarity = unit.rarity;
 		//tier에 unit.tier를 할당
 		tier = unit.tier;
-		//unit.itemNames가 비어있지 않을 때 imageList에 itemName, tap을 넣어 만든 TFTItemInfo 추가
+		//unit.itemNames가 비어있지 않을 때 imageList에 TFTItemInfo객체 추가
 		if (unit.itemNames.size() != 0) {
 			for (String itemName : unit.itemNames) {
 				itemList.add(new TFTItemInfo(itemName, tap));

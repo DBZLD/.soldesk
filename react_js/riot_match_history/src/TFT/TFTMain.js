@@ -13,81 +13,84 @@ function TFTMain() {
   const navigate = useNavigate();
 
   const [id, setId] = useState('');
-  const [tag, setTag] = useState('');
-  const [options, setOptions] = useState([]);
+  const [tag, setTag] = useState('');  
+  const [options, setOptions] = useState([]); // SearchDb 데이터
 
+  // 검색 시 실행되는 함수
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate(`/TFTRecord?id=${id}&tag=${tag}`);
+    navigate(`/TFTRecord?id=${id}&tag=${tag}`); // 매개변수 전달하면서 TFTRecord 페이지로 이동
   };
 
+  // 검색 내용 변경시 실행되는 함수
   const handleInputChange = async (e, newValue) => {
     let idValue = "";
     let tagValue = "";
 
     if (typeof newValue === "string") {
-      if (newValue.includes('#')) {
-        [idValue, tagValue = ""] = newValue.split('#');
-      } else {
-        idValue = newValue;
-        tagValue = '';
+      if (newValue.includes('#')) { // #을 포함할 시
+        [idValue, tagValue = ""] = newValue.split('#'); // #을 기점으로 앞은 아이디로 뒤는 태그로 할당
+      } else {  // # 미포함 시
+        idValue = newValue; // 전체를 아이디로 할당
+        tagValue = '';      // 태그는 빈 값
       }
-      setId(idValue);
+      setId(idValue);   
       setTag(tagValue);
 
-      try {
-        const response = await axios.get('http://localhost:8080/db/getSearchDB', {
-          params: { id: idValue, tag: tagValue }
+      try { 
+        const response = await axios.get('http://localhost:8080/db/getSearchDB', {  // spring에 DB에 접속하는 함수 호출 요청
+          params: { id: idValue, tag: tagValue }  // 매개변수로 id, tag 전달
         });
-        setOptions(response.data);
-      } catch (error) {
-        console.error("DB 저장 실패:", error);
+        setOptions(response.data);  // options 값에 받아온 데이터 할당
+      } catch (error) { // 에러 발생 시
+        console.error("DB 저장 실패:", error); //DB 저장 실패 에러 출력
       }
     }
   };
 
   return (
-    <Box className="body">
-      <RiotAppBar />
-      <Box className="main" sx={{ textAlign: "center", mt: 5 }}>
-        <Typography variant="h2" sx={{ fontWeight: 700, mb: 3 }}>
+    <Box className="body"> {/* 페이지 전체 박스 */}
+      <RiotAppBar /> {/* 상단 Appbar */}
+      <Box className="main" sx={{ textAlign: "center", mt: 5 }}> {/* 페이지 메인 박스 */}
+        <Typography variant="h2" sx={{ fontWeight: 700, mb: 3 }}> {/* 페이지 타이틀 */}
           TFT 전적 검색
         </Typography>
 
-        {/* 검색창 */}
-        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", justifyContent: "center", mb: 5 }}>
-          <Autocomplete
-            freeSolo
-            options={options}
-            disableClearable
-            getOptionLabel={(option) => {
+        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", justifyContent: "center", mb: 5 }}> {/* 페이지 검색 박스 */}
+          {/* 자동완성 */}
+          <Autocomplete 
+            freeSolo // 자동 완성과 다른 값 입력 가능
+            options={options} // 자동 완성 배열 설정
+            disableClearable  // 초기화 버튼 비활성화
+
+            getOptionLabel={(option) => { // option 표시 
               if (typeof option === "string") return option;
               if (option.id && option.tag) return `${option.id}#${option.tag}`;
               if (option.id) return option.id;
               return "";
             }}
-            onChange={(event, newValue) => {
-              if (!newValue) return;
-              let idValue = "";
+            onChange={(event, newValue) => { // 검색 창 내용 변경 시 
+              if (!newValue) return; // newValue가 존재하지 않을 시 종료 
+              let idValue = "";   
               let tagValue = "";
 
-              if (typeof newValue === "string") {
-                if (newValue.includes("#")) {
-                  [idValue, tagValue = ""] = newValue.split("#");
-                } else {
+              if (typeof newValue === "string") { // newValue의 타입이 string일때만 실행
+                if (newValue.includes("#")) {// #을 포함할 때
+                  [idValue, tagValue = ""] = newValue.split("#"); // #을 기점으로 앞은 id, 뒤는 tag로 설정
+                } else { // #을 포함하지 않을 때 
                   idValue = newValue;
                   tagValue = "";
                 }
-              } else if (newValue.id && newValue.tag) {
+              } else if (newValue.id && newValue.tag) { // newValue가 id, tag를 포함한 객체 형태로 들어왔을 때
                 idValue = newValue.id;
                 tagValue = newValue.tag;
               }
-              navigate(`/TFTRecord?id=${idValue}&tag=${tagValue}`);
+              navigate(`/TFTRecord?id=${idValue}&tag=${tagValue}`); // 매개변수 전달하면서 TFTRecord 페이지로 이동
             }}
-            onInputChange={handleInputChange}
-            renderOption={(props, option) => (
-              <Box component="li" {...props} sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                {option.icon && (
+            onInputChange={handleInputChange} // 입력 값 변경 시
+            renderOption={(props, option) => ( // 자동완성 리스트 설정
+              <Box component="li" {...props} sx={{ display: "flex", alignItems: "center", gap: 1 }}> {/* 자동완성 리스트 박스 */}
+                {option.icon && ( // 자동완성 리스트 아이콘 설정
                   <img
                     src={option.icon}
                     alt="icon"
@@ -95,22 +98,22 @@ function TFTMain() {
                   />
                 )}
                 <Box>
-                  <Typography sx={{ fontWeight: "bold", color:'rgb(70, 70, 70)' }}>
+                  <Typography sx={{ fontWeight: "bold", color:'black' }}> {/* 자동완성 리스트 아이디, 태그 설정 */}
                     {option.id}#{option.tag}
                   </Typography>
-                  {option.regalia && (
-                    <Typography variant="body2" color="gray">
+                  {option.regalia && ( // 자동완성 리스트 티어(설명) 설정
+                    <Typography variant="body2" color="rgb(70, 70, 70)">
                       {option.regalia}
                     </Typography>
                   )}
                 </Box>
               </Box>
             )}
-            PaperComponent={(props) => (
-              <Box {...props} sx={{ backgroundColor: 'rgba(126, 126, 182, 0.8)' }} />
+            PaperComponent={(props) => ( //자동완성 리스트 스타일
+              <Box {...props} sx={{ backgroundColor: 'rgba(202, 202, 255, 1)' }} />
             )}
-            renderInput={(params) => (
-              <TextField
+            renderInput={(params) => ( //검색창 설정
+              <TextField //검색창 디자인 설정
                 {...params}
                 label="아이디#태그"
                 variant="outlined"
@@ -126,7 +129,7 @@ function TFTMain() {
                 InputProps={{
                   ...params.InputProps,
                   endAdornment: (
-                    <InputAdornment position="end">
+                    <InputAdornment position="end"> {/* 검색 아이콘 설정 */}
                       <IconButton type="submit">
                         <SearchIcon sx={{ color:"rgba(54, 45, 104, 1)" }}/>
                       </IconButton>

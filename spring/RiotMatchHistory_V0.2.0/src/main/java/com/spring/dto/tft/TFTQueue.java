@@ -5,8 +5,8 @@ import com.spring.util.Image;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TFTQueue {
-	public String id;
-	public String name;
-	public String queueType;
-	public Image image;
+	public String id;		 //매치 타입 아이디
+	public String name;		 //매치 이름
+	public String queueType; //매치 타입
+	public Image image;		 //매치 이미지
 }
