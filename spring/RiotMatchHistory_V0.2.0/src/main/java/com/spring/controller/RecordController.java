@@ -26,6 +26,7 @@ public class RecordController {
 	public TFTRecordProcessor getTFTRecord(@RequestParam(value="playerID", defaultValue = "")
 	String playerID, @RequestParam(value="playerTag", defaultValue = "")String playerTag, Model model) {
 		TFTRecordProcessor trp = service.getTRP(playerID, playerTag);
+		log.info("getTFTRecord");
 		return trp;
 	}
 	

@@ -14,6 +14,7 @@ import MyPage from './MyPage';
 
 function Locate() {
   return (
+    // 네비게이션 경로 설정
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/TFTMain" element={<TFTMain />} />

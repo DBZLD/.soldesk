@@ -10,8 +10,8 @@ function RiotAppBar() {
   const location = useLocation(); 
 
   const isActive = (path) => location.pathname === path;
-  console.log(isLoggedIn);
-  console.log(userId);
+  //console.log(isLoggedIn);
+  //console.log(userId);
   return (
     <AppBar position="static" sx={{ backgroundColor: 'rgba(24, 14, 78, 1)' }}>
       <Toolbar sx={{ display: 'flex', alignItems: 'center', gap: 5 }}>

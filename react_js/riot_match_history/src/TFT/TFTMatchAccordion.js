@@ -3,11 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Collapse, IconButton, Box, Typography, Tooltip } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import './TFTAccordian.css';
-import '../reset.css';
 
 function TFTMatchAccordion({ data }) {
   const navigate = useNavigate();
-
   const [open, setOpen] = useState(false); //확장 여부
 
   function printUnitTier(count, unitRarity) { //유닛 성 수 출력 함수
@@ -23,20 +21,13 @@ function TFTMatchAccordion({ data }) {
       <Table>
         <TableBody>
           <TableRow sx={{ height: '50px' }}> {/* 1행 */}
-            {/* 1행 1열(등수) */}
-            <TableCell className={`playerPlacement${data.playerInfos[data.myIndex].placement}`} sx={{ textAlign: "center", fontWeight: '800' }}>
+            <TableCell className={`playerPlacement${data.playerInfos[data.myIndex].placement}`} sx={{ textAlign: "center", fontWeight: '800' }}> {/* 1행 1열(등수) */}
               #{data.playerInfos[data.myIndex].placement} {/* 등수 텍스트 */}
             </TableCell>
-            {/* 1행 2열(매치 타입, 소요시간) */}
-            <TableCell sx={{ color: 'rgb(170, 170, 170)' }} colSpan={3}>
+            <TableCell sx={{ color: 'rgb(170, 170, 170)' }} colSpan={3}> {/* 1행 2,3,4열(매치 타입, 소요시간) */}
               {data.queueType} | {data.playerInfos[data.myIndex].timeElemented} | {data.gamePassedtime} {/* 매치 타입, 게임 시간, 게임 경과 시간 */}
             </TableCell>
-            {/* 1행 3열(테이블 확장 버튼) */}
-            <TableCell rowSpan={2} className={`playerPlacement${data.playerInfos[data.myIndex].placement}`} // 2행 병합
-              sx={{
-                verticalAlign: "bottom",
-                width: "15px"
-              }}>
+            <TableCell rowSpan={2} className={`playerPlacement${data.playerInfos[data.myIndex].placement}`} sx={{ verticalAlign: "bottom", width: "15px" }}> {/* 1,2행 5열(테이블 확장 버튼) */}
               <IconButton //확장 아이콘
                 aria-label="expand"
                 size="small"
@@ -46,49 +37,51 @@ function TFTMatchAccordion({ data }) {
               </IconButton>
             </TableCell>
           </TableRow>
+
           <TableRow sx={{ height: '90px' }}> {/* 2행 */}
-            {/* 2행 1열(플레이어 정보) */}
-            <TableCell sx={{ width: '7%' }}>
+            <TableCell sx={{ width: '7%' }}> {/* 2행 1열(플레이어 정보) */}
               <Box sx={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'rgba(24, 14, 78, 1)' }}>
-                {/* 플레이어 전설이 */}
-                <Tooltip title={data.playerInfos[data.myIndex].tacticianName}>
-                  <img src={data.playerInfos[data.myIndex].tacticianImgURL} alt="tactician" style={{ width: 50, height: 50, borderRadius: '50%', border: '3px solid' }} /> {/* 전설이 이미지 */}
+                <Tooltip title={data.playerInfos[data.myIndex].tacticianName}> {/* 플레이어 전설이 툴팁 */}
+                  <Box component="img"
+                    src={data.playerInfos[data.myIndex].tacticianImgURL} alt="tactician" // 플레이어 전설이 이미지
+                    sx={{ width: 50, height: 50, borderRadius: '50%', border: '3px solid' }}
+                  />
                 </Tooltip>
-                {/* 플레이어 레벨 */}
-                <Typography className="playerLevel">
-                  {data.playerInfos[data.myIndex].level} {/* 레벨 텍스트 */}
+                <Typography sx={{ width: 20, height: 20, position: 'absolute', left: '63%', top: '57%', textAlign: 'center', backgroundColor: 'rgba(200,200,200,1)', color: 'rgba(24,14,78,1)', border: '2px solid', borderRadius: '50%', fontSize: 12 }}>
+                  {data.playerInfos[data.myIndex].level} {/* 플레이어 레벨 텍스트 */}
                 </Typography>
               </Box>
-
             </TableCell>
-            {/* 2행 2열(특성) */}
-            <TableCell sx={{ width: '16%' }}>
+
+            <TableCell sx={{ width: '16%' }}> {/* 2행 2열(특성) */}
               <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                {/* 특성 배열 돌면서 모두 출력 */}
-                {data.playerInfos[data.myIndex].traitList.slice(0, data.playerInfos[data.myIndex].traitList.length).map((trait, index) => (
-                  <Tooltip title={trait.name}>
-                    <img key={index} className={`traitImg traitTier${trait.style}`} src={trait.imgURL} alt="traitImg" /> {/* 특성 이미지 */}
+                {/* traitList 돌면서 모두 출력 */}
+                {data.playerInfos[data.myIndex].traitList.map((trait, index) => (
+                  <Tooltip key={index} title={trait.name}> {/* 특성 툴팁 */}
+                    <Box component="img" className={`traitTier${trait.style}`} src={trait.imgURL} // 특성 이미지
+                      alt="traitImg" sx={{ width: '25px', height: '25px', margin: '3px', borderRadius: '50%' }}
+                    />
                   </Tooltip>
                 ))}
               </Box>
             </TableCell>
-            {/* 2행 3열(유닛) */}
-            <TableCell sx={{ width: '53%' }}>
+
+            <TableCell sx={{ width: '53%' }}> {/* 2행 3열(유닛) */}
               <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
-                {/* 유닛 배열 돌면서 모두 출력 */}
-                {data.playerInfos[data.myIndex].unitList.slice(0, data.playerInfos[data.myIndex].unitList.length).map((unit, index) => (
-                  <Box sx={{ width: '50px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                {data.playerInfos[data.myIndex].unitList.map((unit, index) => (
+                  <Box key={index} sx={{ width: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                     {printUnitTier(unit.tier, unit.rarity)} {/* 유닛 성 수 */}
                     <Tooltip title={unit.name}>
-                      <Box className={`unitImg unitRarity${unit.rarity}`}>
-                        <img key={index} className="unitSprite" src={unit.imgURL} alt="unitImg" /> {/* 유닛 이미지 */}
+                      <Box className={`unitRarity${unit.rarity}`} sx={{ width: 37, height: 37, overflow: 'hidden', position: 'relative', border: '3px solid', borderRadius: '10%' }}>
+                        <Box component="img" src={unit.imgURL} alt="unitImg"
+                          sx={{ width: 100, height: 100, objectFit: 'none', objectPosition: '-130px 0px', transform: 'scale(0.37)', transformOrigin: 'top left', display: 'block' }}
+                        />
                       </Box>
                     </Tooltip>
-                    <Box sx={{ width: '39px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      {/* 유닛 아이템 배열 돌면서 모두 출력 */}
-                      {unit.itemList.slice(0, unit.itemList.length).map((item, index) => (
-                        <Tooltip title={item.name}>
-                          <img key={index} className="itemImg" src={item.imgURL} alt="itemImg" /> {/* 아이템 이미지 */}
+                    <Box sx={{ width: 39, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      {unit.itemList.map((item, idx) => (
+                        <Tooltip key={idx} title={item.name}>
+                          <Box component="img" src={item.imgURL} alt="itemImg" sx={{ width: 13, height: 13 }} />
                         </Tooltip>
                       ))}
                     </Box>
@@ -96,15 +89,14 @@ function TFTMatchAccordion({ data }) {
                 ))}
               </Box>
             </TableCell>
-            {/* 2행 4열(함께 매칭된 플레이어) */}
-            <TableCell sx={{ width: '20%' }}>
+
+            <TableCell sx={{ width: '20%' }}> {/* 2행 4열(함께 매칭된 플레이어) */}
               <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', color: 'rgb(170, 170, 170)' }}>
-                {/* 플레이어 배열 돌면서 모두 출력 */}
-                {data.playerInfos.slice(0, data.playerInfos.length).map((player, index) => (
+                {data.playerInfos.map((player, index) => (
                   <Box key={index} sx={{ width: '50%', display: 'flex', flexDirection: 'row', mb: '5px' }}>
-                    <img className="matchmateIcon" src={player.tacticianImgURL} alt="tacticianImg" /> {/*플레이어 아이콘 이미지 */}
-                    {/* 아이디 누르면 해당 플레이어 전적 페이지로 이동 */}
-                    <Typography className="matchmateName" onClick={() => navigate(`/TFTRecord?id=${player.playerId}&tag=${player.playerTag}`)}>
+                    <Box component="img" src={player.tacticianImgURL} alt="tacticianImg" sx={{ width: 15, height: 15, borderRadius: '50%', marginRight: '4px', border: '1px, solid, rgba(24,14,78,1)' }} /> {/*플레이어 아이콘 이미지 */}
+                    <Typography sx={{ width: 'auto', cursor: 'pointer', fontSize: 'x-small', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                      onClick={() => navigate(`/TFTRecord?id=${player.playerId}&tag=${player.playerTag}`)}>
                       {player.playerId} {/* 플레이어 아이디 */}
                     </Typography>
                   </Box>
@@ -114,8 +106,7 @@ function TFTMatchAccordion({ data }) {
           </TableRow>
 
           {open && ( //open이 true일때
-            // 확장 테이블 설정
-            <TableRow>
+            <TableRow> {/* 확장 테이블 */}
               <TableCell colSpan={5} sx={{ paddingBottom: 0, paddingTop: 0, color: "rgb(170, 170, 170)" }}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   <Box margin={2}>
@@ -123,9 +114,8 @@ function TFTMatchAccordion({ data }) {
                       일자 | {data.gameDatetime} / 버전 | {data.gameVersion}
                     </Typography>
                     <Table size="small" aria-label="expanded table">
-                      {/* 테이블 상단 */}
                       <TableHead>
-                        <TableRow sx={{ "& th, &td": { color: "rgb(170, 170, 170)" } }}>
+                        <TableRow sx={{ "& th, & td": { color: "rgb(170, 170, 170)" } }}>
                           <TableCell sx={{ width: '6%', textAlign: "center" }}>등수</TableCell>
                           <TableCell sx={{ width: '14%', textAlign: "center" }}>플레이어</TableCell>
                           <TableCell sx={{ width: '7%', textAlign: "center" }}>라운드</TableCell>
@@ -134,72 +124,71 @@ function TFTMatchAccordion({ data }) {
                           <TableCell sx={{ width: '6%' }}>업적</TableCell>
                         </TableRow>
                       </TableHead>
-                      {/* 테이블 하단 */}
                       <TableBody>
-                        {/* 플레이어 배열 돌면서 모두 출력 */}
-                        {data.playerInfos.slice(0, data.playerInfos.length).map((player, index) => (
-                          <TableRow>
-                            {/* 1행(등수) */}
-                            <TableCell sx={{ color: "rgb(170, 170, 170)", textAlign: "center" }}>{player.placement}</TableCell> {/* 등수 텍스트 */}
-                            {/* 2행(플레이어) */}
-                            <TableCell sx={{ color: "rgb(170, 170, 170)" }}>
+                        {data.playerInfos.map((player, index) => (
+                          <TableRow key={index}>
+                            <TableCell sx={{ color: "rgb(170, 170, 170)", textAlign: "center" }}>{player.placement}</TableCell> {/* 1행(등수) */}
+                            <TableCell sx={{ color: "rgb(170, 170, 170)" }}> {/* 2행(플레이어) */}
                               <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', color: 'navy' }}>
                                 <Tooltip title={player.tacticianName}> {/* 플레이어 전설이 툴팁 */}
-                                  <img className="exPlayerTactician" src={player.tacticianImgURL} alt="tactician" /> {/* 플레이어 전설이 이미지 */}
+                                  <Box component="img" src={player.tacticianImgURL} alt="tactician" sx={{ width: 30, height: 30, border: '2px solid', borderRadius: '50%' }} />
                                 </Tooltip>
-                                <Box className="exPlayerLevel">{player.level}</Box> {/* 플레이어 레벨 텍스트 */}
-                                <Typography className="exPlayerId" onClick={() => navigate(`/TFTRecord?id=${player.playerId}&tag=${player.playerTag}`)}>
-                                  {player.playerId}</Typography> {/* 플레이어 아이디 텍스트 */}
+                                <Box sx={{ width: 15, height: 15, position: 'absolute', left: '12%', top: '57%', textAlign: 'center', backgroundColor: 'gray', border: '2px solid', borderRadius: '50%', fontSize: 'x-small', fontWeight: 700 }}>
+                                  {player.level} {/* 플레이어 레벨 텍스트 */}
+                                </Box>
+                                <Typography sx={{ fontSize: 13, color: 'rgb(170,170,170)', marginLeft: '13px', cursor: 'pointer' }}
+                                  onClick={() => navigate(`/TFTRecord?id=${player.playerId}&tag=${player.playerTag}`)}>
+                                  {player.playerId} {/* 플레이어 아이디 텍스트 */}
+                                </Typography>
                               </Box>
                             </TableCell>
-                            {/* 3행(라운드) */}
-                            <TableCell sx={{ color: "rgb(170, 170, 170)", textAlign: "center" }}>
-                              {player.lastRound}<br />{player.timeElemented} {/* 플레이어 생존 라운드, 시간 */}
-                            </TableCell>
-                            {/* 4행(특성) */}
-                            <TableCell sx={{ color: "rgb(170, 170, 170)" }}>
-                              <Box className="exTraitCell">
-                                {/* 플레이어 특성 배열 돌면서 모두 출력 */}
-                                {player.traitList.slice(0, player.traitList.length).map((trait, index) => (
-                                  <Tooltip title={trait.name}> {/* 특성 툴팁 */}
-                                    <img key={index} className={`exTraitImg traitTier${trait.style}`} src={trait.imgURL} alt="exTraitImg" /> {/* 특성 이미지 */}
+
+                            <TableCell sx={{ color: "rgb(170,170,170)", textAlign: 'center' }}>{player.lastRound}<br />{player.timeElemented}</TableCell> {/* 3행(라운드) */}
+
+                            <TableCell sx={{ color: "rgb(170,170,170)" }}> {/* 4행(특성) */}
+                              <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                                {player.traitList.map((trait, idx) => (
+                                  <Tooltip key={idx} title={trait.name}>
+                                    <Box component="img" className={`traitTier${trait.style}`} src={trait.imgURL} alt="exTraitImg" sx={{ width: '17px', height: '17px', m: '2px', mt: '6px', borderRadius: '50%' }} />
                                   </Tooltip>
                                 ))}
                               </Box>
                             </TableCell>
-                            {/* 5행(유닛) */}
-                            <TableCell sx={{ color: "rgb(170, 170, 170)" }}>
-                              <Box className="exUnitCell">
-                                {/* 플레이어 유닛 배열 돌면서 모두 출력 */}
-                                {player.unitList.slice(0, player.unitList.length).map((unit, index) => (
-                                  <Box className="exUnitBox">
+
+                            <TableCell sx={{ color: "rgb(170,170,170)" }}> {/* 5행(유닛) */}
+                              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                                {player.unitList.map((unit, idx) => (
+                                  <Box key={idx} sx={{ width: 'auto', display: 'flex', margin: '2px', flexDirection: 'column', alignItems: 'center' }}>
                                     {printExUnitTier(unit.tier, unit.rarity)} {/* 유닛 성 수 텍스트 */}
-                                    <Tooltip title={unit.name}> {/* 유닛 툴팁 */}
-                                      <Box className={`exUnitImg unitRarity${unit.rarity}`}>
-                                        <img key={index} className="exUnitSprite" src={unit.imgURL} alt="exUnitImg" /> {/* 유닛 이미지 */}
+                                    <Tooltip title={unit.name}>
+                                      <Box className={`unitRarity${unit.rarity}`} sx={{ width: '30px', height: '30px', overflow: 'hidden', position: 'relative', border: '2px solid', borderRadius: '10%' }}>
+                                        <Box component="img" src={unit.imgURL} alt="exUnitImg" sx={{ width: 100, height: 100, objectFit: 'none', objectPosition: '-130px 0px', transform: 'scale(0.3)', transformOrigin: 'top left', display: 'block' }} />
                                       </Box>
                                     </Tooltip>
-                                    <Box>
-                                      <Box className="exItemBox">
-                                        {/* 유닛 아이템 배열 돌면서 모두 출력 */}
-                                        {unit.itemList.slice(0, unit.itemList.length).map((item, index) => (
-                                          <Tooltip title={item.name}> {/* 아이템 툴팁 */}
-                                            <img key={index} className="exItemImg" src={item.imgURL} alt="exItemImg" /> {/* 아이템 이미지 */}
-                                          </Tooltip>
-                                        ))}
-                                      </Box>
+                                    <Box sx={{ width: 36, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                      {unit.itemList.map((item, iidx) => (
+                                        <Tooltip key={iidx} title={item.name}>
+                                          <Box component="img" src={item.imgURL} alt="exItemImg" sx={{ width: 12, height: 12 }} />
+                                        </Tooltip>
+                                      ))}
                                     </Box>
                                   </Box>
                                 ))}
                               </Box>
                             </TableCell>
-                            {/* 6행(업적) */}
-                            <TableCell sx={{ color: "rgb(170, 170, 170)" }}>
-                              <Tooltip title="입힌 피해량"> {/* 남은 골드 툴팁 */}
-                                {player.totalDamage} {/* 남은 골드 텍스트 */}
-                              </Tooltip><br/>
-                              <Tooltip title="남은 골드"> {/* 남은 골드 툴팁 */}
-                                {player.goldLeft} {/* 남은 골드 텍스트 */}
+
+                            <TableCell sx={{ color: "rgb(170,170,170)" }}> {/* 6행(업적) */}
+                              <Tooltip title="입힌 피해량">
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                  <Box component="img" src="/resources/TotalDamageImg.png" alt="totalDamage" sx={{ width: 16, height: 16, borderRadius: '50%', mr: '5px' }} /> {/* 입힌 피해량 아이콘 */}
+                                  {player.totalDamage}
+                                </Box>
+                              </Tooltip>
+                              <Tooltip title="남은 골드">
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                  <Box component="img" src="/resources/LeftGoldImg.png" alt="leftGold" sx={{ width: 13, height: 13, borderRadius: '50%', mr: '5px' }} /> {/* 남은 골드 아이콘 */}
+                                  {player.goldLeft}
+                                </Box>
                               </Tooltip>
                             </TableCell>
                           </TableRow>

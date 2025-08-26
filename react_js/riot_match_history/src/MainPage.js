@@ -26,52 +26,25 @@ function MainPage() {
   ];
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        minHeight: '100vh',
-        backgroundColor: 'rgb(41, 41, 41)',
-        color: 'rgb(170, 170, 170)',
-        textAlign: 'center',
-      }}
-    >
+    <Box sx={{ width: '100%', minHeight: '100vh', backgroundColor: 'rgb(41, 41, 41)', color: 'rgb(170, 170, 170)', textAlign: 'center', }}>
       {/* 타이틀 */}
-      <Typography
-        variant="h2"
-        sx={{ fontSize: 70, fontWeight: 800, pt: 5, pb: 5 }}
-      >
+      <Typography variant="h2" sx={{ fontSize: 70, fontWeight: 800, pt: 5, pb: 5 }}>
         라이엇 전적 검색
       </Typography>
 
       {/* 메뉴 리스트 */}
       <ImageList cols={4} rowHeight={250} sx={{ justifyItems: 'center' }}>
+        {/*itemData를 돌면서 전체 출력 */}
         {itemData.map((item) => (
           <ImageListItem key={item.img}>
-            <Link
-              href={item.nav}
-              underline="none"
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                fontSize: 40,
-                color: 'inherit',
-              }}
+            <Link href={item.nav} underline="none"
+              sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 40, color: 'inherit', }}
             >
-              <Box
-                component="img"
-                src={`${item.img}?w=300&h=170&fit=crop&auto=format`}
-                alt={item.title}
-                loading="lazy"
-                sx={{
-                  width: 300,
-                  height: 170,
-                  borderRadius: 2,
-                  mb: 1,
-                }}
+              <Box component="img" src={`${item.img}?w=300&h=170&fit=crop&auto=format`} alt={item.title} loading="lazy" // 카테고리 이미지 
+                sx={{ width: 300, height: 170, borderRadius: 2, mb: 1, }}
               />
               <Typography variant="h4" sx={{ fontSize: 40, fontWeight: 700 }}>
-                {item.title}
+                {item.title} {/* 카테고리 이름 */}
               </Typography>
             </Link>
           </ImageListItem>

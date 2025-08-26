@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class TFTRecordProcessor {
-	public boolean bSuccess = false;											//올바른 요청 여부
+	public boolean bSuccess = true;											//올바른 요청 여부
 	private String latestVersion = setLatestVersion();							//최신 버전
 	private TFTApiProcessor tap = new TFTApiProcessor(latestVersion);			//라이엇 API JSON 데이터
 	private PuuidDto puuidDto = new PuuidDto();									//라이엇 API puuid JSON 데이터
@@ -118,8 +118,8 @@ public class TFTRecordProcessor {
 	public void setMatchIds() {
 		//API_URL 할당
 		String API_URL = String.format(
-				"https://asia.api.riotgames.com/tft/match/v1/matches/by-puuid/%s/ids?start=0&count=%d&api_key=%s",
-				puuidDto.puuid, Common.MATCH_COUNT, Common.API_KEY);
+				"https://asia.api.riotgames.com/tft/match/v1/matches/by-puuid/%s/ids?start=0&startTime=%s&count=%d&api_key=%s",
+				puuidDto.puuid, Common.SET15_START, Common.MATCH_COUNT, Common.API_KEY);
 		//RestTemplate(Spring에서의 HTTP 통신 도구) 생성
 		RestTemplate restTemplate = new RestTemplate();
 		//API_URL로 접속 후 matchIds에 JSON 데이터 할당
@@ -133,6 +133,7 @@ public class TFTRecordProcessor {
 			//요청이 잘못되었을 경우 예외 처리
 			e.printStackTrace();
 		}
+		//test용 matchId : KR_7769892440
 	}
 
 	//matchIds로 라이엇 API에서 matchDto JSON 데이터를 얻어오는 함수

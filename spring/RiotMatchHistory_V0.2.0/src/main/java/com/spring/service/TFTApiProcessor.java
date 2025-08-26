@@ -148,7 +148,7 @@ public class TFTApiProcessor {	// 버전에 맞는 라이엇 API를 가져오는 클래스
 			e.printStackTrace();
 		}
 		//라이엇 api에 거대 메크 로봇이 없기 때문에 직접 만들어줌(api자체 오류)
-		unit.data.put("TFT15_Galio", new TFTUnit("TFT15_Galio", "거대 메크 로봇", 9, "TFTTutorial_Galio.png"));
+		unit.data.put("TFT15_Galio", new TFTUnit("TFT15_Galio", "거대 메크 로봇", 9, "TFTTutorial_Galio.png", Common.UNITS_URL));
 	}
 	
 	//item 변수를 설정하는 함수
