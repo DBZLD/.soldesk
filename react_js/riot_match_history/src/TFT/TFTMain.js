@@ -107,7 +107,7 @@ function TFTMain() {
               </Box>
             )}
             PaperComponent={(props) => ( //자동완성 리스트 스타일
-              <Box {...props} sx={{ backgroundColor: 'rgba(218, 218, 253, 1)' }} />
+              <Box {...props} sx={{ backgroundColor: 'rgba(222, 222, 253, 1)' }} />
             )}
             renderInput={(params) => ( //검색창 설정
               <TextField //검색창 디자인 설정

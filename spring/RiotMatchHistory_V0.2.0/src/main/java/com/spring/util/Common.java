@@ -2,12 +2,12 @@ package com.spring.util;
 
 public class Common {
 	//상수를 모아놓은 클래스
-	public static final String API_KEY = "RGAPI-f8f2d5f1-5610-4a6a-81f6-906c2398b49b"; //라이엇 API 키(API 접속 시 필요)
+	public static final String API_KEY = "RGAPI-ec708cc8-a67a-4146-b142-59684e926e99"; //라이엇 API 키(API 접속 시 필요)
 	public static final String REGIONS = "ko_KR";						//지역(API 접속 시 필요)
 	
 	public static final Integer MATCH_COUNT = 5;						//API로 가져올 매치 수
 	
-	public static final String UNITS_URL = "tft-champion";			//이미지URL 종류(챔피언)
+	public static final String UNITS_URL = "tft-champion";				//이미지URL 종류(유닛)
 	public static final String ITEMS_URL = "tft-item";					//이미지URL 종류(아이템)
 	public static final String QUEUES_URL = "tft-queues";				//이미지URL 종류(매치 타입)
 	public static final String REGALIA_URL = "tft-regalia";				//이미지URL 종류(티어)

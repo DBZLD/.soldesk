@@ -3,10 +3,11 @@ import { createContext, useState, useEffect } from 'react';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [userId, setUserId] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [riotAccount, setRiotAccount] = useState('');
+  const [userId, setUserId] = useState('');  //페이지 계정 아이디
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  //로그인 여부
+  const [riotAccount, setRiotAccount] = useState(''); //페이지 계정 라이엇 아이디
 
+  // 페이지 변경 시에 기존 로그인 정보 유지
   useEffect(() => {
     const savedUserId = localStorage.getItem('userId');
     const savedIsLoggedIn = localStorage.getItem('isLoggedIn');
@@ -20,11 +21,11 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn) { // 로그인시 userId, isLogginedIn, riotAccount값 설정
       localStorage.setItem('userId', userId);
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('riotAccount', riotAccount);
-    } else {
+    } else { // 비로그인시 초기화
       localStorage.removeItem('userId');
       localStorage.removeItem('isLoggedIn');
       localStorage.removeItem('riotAccount');

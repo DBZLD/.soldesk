@@ -2,6 +2,7 @@ import { createTheme } from '@mui/material/styles';
 import '@fontsource/hahmlet';
 
 const theme = createTheme({
+  //사이트 기본 폰트 설정
   typography: {
     fontFamily: 'Hahmlet, serif',
     fontWeightLight: 600,   
@@ -11,14 +12,13 @@ const theme = createTheme({
       color: 'rgba(200, 200, 200, 1)',  
     },
   },
+  
+  //사이트 검색창 기본 디자인 설정
   components: {
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
           color: "rgb(200, 200, 200)",
-          "& fieldset": { borderColor: "rgba(54, 45, 104, 1)", borderWidth: 3 },
-          "&:hover fieldset": { borderColor: "rgba(54, 45, 104, 1)" },
-          "&.Mui-focused fieldset": { borderColor: "rgba(24, 14, 78, 1)" },
         },
       },
     },
