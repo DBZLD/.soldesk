@@ -19,14 +19,14 @@ function RiotAppBar() {
           라이엇 전적 검색
         </Typography>
 
-        {/* 리그 오브 레전드 메인 페이지로 이동 버튼 */}
-        <Typography variant="h6" onClick={() => navigate(`/LOLMain`)} sx={{ cursor: 'pointer', backgroundColor: isActive('/LOLMain') ? 'rgba(87, 78, 126, 1)' : 'transparent', padding: '12px' }}>
-          리그 오브 레전드
-        </Typography>
-
         {/* 전략적 팀 전투 메인 페이지로 이동 버튼 */}
         <Typography variant="h6" onClick={() => navigate(`/TFTMain`)} sx={{ cursor: 'pointer', backgroundColor: isActive('/TFTMain') ? 'rgba(87, 78, 126, 1)' : 'transparent', padding: '12px', }} >
           전략적 팀 전투
+        </Typography>
+
+        {/* 리그 오브 레전드 메인 페이지로 이동 버튼 */}
+        <Typography variant="h6" onClick={() => navigate(`/LOLMain`)} sx={{ cursor: 'pointer', backgroundColor: isActive('/LOLMain') ? 'rgba(87, 78, 126, 1)' : 'transparent', padding: '12px' }}>
+          리그 오브 레전드
         </Typography>
 
         {/* 발로란트 메인 페이지로 이동 버튼 */}

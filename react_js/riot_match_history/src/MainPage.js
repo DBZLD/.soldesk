@@ -4,14 +4,14 @@ import { Box, Typography, ImageList, ImageListItem, Link } from '@mui/material';
 function MainPage() {
   const itemData = [
     {
-      img: 'https://cdn.apnews.kr/news/photo/202005/20200527_1_bodyimg_856029.PNG',
-      title: '리그 오브 레전드',
-      nav: '/LOLMain',
-    },
-    {
       img: 'https://www.riotgames.com/darkroom/2880/fab68f870f6da8998086165e608ea621:4daaca1e4523ad006c3f73be050aebb2/tft.jpg',
       title: '전략적 팀 전투',
       nav: '/TFTMain',
+    },
+    {
+      img: 'https://cdn.apnews.kr/news/photo/202005/20200527_1_bodyimg_856029.PNG',
+      title: '리그 오브 레전드',
+      nav: '/LOLMain',
     },
     {
       img: 'https://cdn.m-i.kr/news/photo/202209/951041_714391_5730.jpg',

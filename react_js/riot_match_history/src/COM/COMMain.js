@@ -1,5 +1,5 @@
 import React from 'react';
-import RiotAppBar from '../RiotAppBar';
+import RiotAppBar from '../Util/RiotAppBar';
 
 function COMMain() {
 

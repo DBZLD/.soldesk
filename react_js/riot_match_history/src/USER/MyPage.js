@@ -1,5 +1,5 @@
 import { Typography, Box } from '@mui/material';
-import RiotAppBar from './RiotAppBar';
+import RiotAppBar from '../Util/RiotAppBar';
 import './reset.css';
 import './index.css';
 

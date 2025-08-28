@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, TextField, IconButton, InputAdornment, Autocomplete, Typography, Button, Skeleton } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import axios from 'axios';
 import TFTMatchAccordion from './TFTMatchAccordion';
-import RiotAppBar from '../RiotAppBar';
+import RiotAppBar from '../Util/RiotAppBar';
 import '../reset.css';
-import './TFTcommon.css';
 
 function TFTRecord() {
   const navigate = useNavigate();
@@ -181,7 +180,7 @@ function TFTRecord() {
                         component="img"
                         src={option.icon}
                         alt="icon"
-                        className="profileIcon"
+                        sx={{  width: '32px', height: '32px', borderRadius: '50%' }}
                       />
                     )}
                     <Box>

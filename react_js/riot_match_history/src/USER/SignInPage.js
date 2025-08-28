@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { Box, TextField, Button, Typography, Container, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
-import RiotAppBar from './RiotAppBar';
+import RiotAppBar from '../Util/RiotAppBar';
 import axios from 'axios';
 import './reset.css';
 import './index.css';

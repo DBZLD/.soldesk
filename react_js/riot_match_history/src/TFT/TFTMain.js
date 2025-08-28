@@ -1,5 +1,4 @@
-// TFTMain.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RiotAppBar from '.././RiotAppBar';
 import { Box, IconButton, InputAdornment, Autocomplete, TextField, Typography } from '@mui/material';
@@ -7,7 +6,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import axios from 'axios';
 import '../reset.css';
 import '../index.css';
-import './TFTcommon.css';
 
 function TFTMain() {
   const navigate = useNavigate();

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RiotAppBar from '.././RiotAppBar';
 import { Box, TextField, IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
-
+import RiotAppBar from '../Util/RiotAppBar';
 import '../reset.css';
 import '../index.css';
-import './LOLcommon.css';
 
 function LOLMain() {
   const navigate = useNavigate();
