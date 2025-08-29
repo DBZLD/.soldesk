@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+<!-- 참고: 빈 = 스프링이 싱글톤 방식으로 생성해서 알아서 관리하는 객체 -->
+
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 내가 추가한거 -->
+	<!-- 커넥션 풀 - 아파치 - Commons DBCP 2.8.0 아파치꺼 썼음. 히카리 등등 여러가지 있음. -->
+	
+<!-- 	DataSource 란?  “데이터의 출처”, “데이터로 가는 길”이라는 의미. -->
+<!-- 	즉, DB에 접근할 수 있는 연결(Connection)의 공급원이라는 뜻 -->
+	
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">	
+<!-- 		destroy-method="close" >> 서버 종료 시 커넥션 풀 정리 -->
+		
+
+		<!-- 시작 -->
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/riot_match_history"></property>
+		<!-- 끝 -->
+
+		<property name="username" value="root" /><!-- db 계정에 맞게 수정 -->
+		<property name="password" value="root" /><!-- db 계정에 맞게 수정 -->
+	</bean>
+
+	<!-- 내가 추가한거 -->
+	<!-- SQLSessionFactiory -->
+<!-- 		이 설정이 바로: -->
+		
+<!-- 		"MyBatis야, DB 연결할 땐 이 dataSource를 써!" -->
+		
+<!-- 		라고 알려주는 부분	 -->
+<!-- 	이 id 값은 스프링에 약속되어있는 id임. 마이바티스와 연결하는. -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+	<!-- 내가 추가한거 -->
+	<!-- mybatis - mapper 설정 -->
+
+		<!-- 이 태그의 의미 :	 -->
+		<!-- "이 패키지 안에 있는 Mapper 인터페이스들을 스프링이 자동으로 찾아서, -->
+		<!-- sqlSessionFactory를 이용해서 MyBatis와 연결하라" -->
+		<!-- 라는 뜻. -->
+	
+	<mybatis-spring:scan
+		base-package="com.spring.mapper" /><!-- 본인의 프로젝트 패키지명에 맞게 수정 -->
+
+	<!-- 내가 추가한거 -->
+	<!-- <context:component-scan base-package="org.zerock.sample"> </context:component-scan> -->
+		
+	<!-- 내가 추가한거 -->
+
+	<context:component-scan base-package="com.spring.service">
+	</context:component-scan>
+
+	
+</beans>
