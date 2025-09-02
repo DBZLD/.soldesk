@@ -1,16 +1,15 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import MainPage from './MainPage';
-import TFTMain from './TFT/TFTMain';
-import TFTRecord from './TFT/TFTRecord';
-import LOLMain from './LOL/LOLMain';
-import LOLRecord from './LOL/LOLRecord';
-import VALMain from './VAL/VALMain';
-import VALRecord from './VAL/VALRecord';
-import COMMain from './COM/COMMain';
-import SignInPage from './SignInPage';
-import SignUpPage from './SignUpPage';
-import MyPage from './MyPage';
+import MainPage from '../MainPage';
+import TFTMain from '../TFT/TFTMain';
+import TFTRecord from '../TFT/TFTRecord';
+import LOLMain from '../LOL/LOLMain';
+import LOLRecord from '../LOL/LOLRecord';
+import VALMain from '../VAL/VALMain';
+import VALRecord from '../VAL/VALRecord';
+import COMMain from '../COM/COMMain';
+import SignInPage from '../USER/SignInPage';
+import SignUpPage from '../USER/SignUpPage';
+import MyPage from '../USER/MyPage';
 
 function Locate() {
   return (

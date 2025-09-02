@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.service.TFTRecordProcessor;
+import com.spring.service.LOLApiProcessor;
+import com.spring.service.LOLRecordProcessor;
 import com.spring.service.MatchInfosService;
 import com.spring.service.TFTApiProcessor;
 
@@ -34,5 +36,20 @@ public class RecordController {
 	@RequestMapping("/TFTApi")
 	public TFTApiProcessor getTFTApi(@RequestParam(value="version", defaultValue = "15.16.1")String version) {
 		return service.getTAP(version);
+	}
+	
+	// 라이엇 id와 tag를 받아오고 플레이어의 LOL정보들이 들어있는 LOLRecordProcessor 반환
+	@RequestMapping("/getLOLRecord")							
+	public LOLRecordProcessor getLOLRecord(@RequestParam(value="playerID", defaultValue = "")
+	String playerID, @RequestParam(value="playerTag", defaultValue = "")String playerTag, Model model) {
+		LOLRecordProcessor lrp = service.getLRP(playerID, playerTag);
+		log.info("getLOLRecord");
+		return lrp;
+	}
+	
+	// 버전을 받아오고 버전에 맞는 LOL 라이엇 api가 들어있는 LOLApiProcessor 반환
+	@RequestMapping("/LOLApi")
+	public LOLApiProcessor getLOLApi(@RequestParam(value="version", defaultValue = "15.16.1")String version) {
+		return service.getLAP(version);
 	}
 }

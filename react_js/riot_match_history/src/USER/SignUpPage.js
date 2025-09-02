@@ -3,8 +3,8 @@ import { Box, TextField, Button, Typography, Container, Alert } from '@mui/mater
 import { useNavigate } from 'react-router-dom';
 import RiotAppBar from '../Util/RiotAppBar';
 import axios from 'axios';
-import './reset.css';
-import './index.css';
+import '../reset.css';
+import '../index.css';
 
 function SignUpPage() {
   const navigate = useNavigate();

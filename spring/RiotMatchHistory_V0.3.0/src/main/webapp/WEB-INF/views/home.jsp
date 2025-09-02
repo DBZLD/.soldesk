@@ -13,17 +13,20 @@
 <h1>라이엇 전적 api창</h1>
 <hr>
 <h2>전적 api 보기</h2>
-<form action="${cp}/riot/getTFTRecord">
+<form method="get">
 <input name="playerID" placeholder="아이디">
 <input name="playerTag" placeholder="태그">
-<input type="submit" value = "api보기">
+<input type="submit" value = "TFT api보기" formaction="${cp}/riot/getTFTRecord">
+<input type="submit" value = "LOL api보기" formaction="${cp}/riot/getLOLRecord">
 </form>
-<a href="${cp}/riot/getTFTRecord?playerID=dbzld&playerTag=9476">내계정 api</a>
+<a href="${cp}/riot/getTFTRecord?playerID=dbzld&playerTag=9476">내계정 TFT api</a>
+<a href="${cp}/riot/getLOLRecord?playerID=dbzld&playerTag=9476">내계정 LOL api</a>
 <h2>데이터 api보기</h2>
 <form action="/riot/TFTApi">
 <input name="version" placeholder="버전(ex.15.16.1)">
 <input type="submit" value = "api보기">
 </form>
+<h2>DB 관리</h2>
 <form action="/db/addAccount">
 <input name="id" placeholder="아이디">
 <input name="tag" placeholder="태그">

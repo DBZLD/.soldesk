@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, TextField, Box } from '@mui/material';
 import { UserContext } from './UserContext';
-import './reset.css';
+import '../reset.css';
 
 function RiotAppBar() {
   const navigate = useNavigate();

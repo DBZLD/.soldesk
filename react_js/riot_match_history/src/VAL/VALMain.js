@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RiotAppBar from '.././RiotAppBar';
+import RiotAppBar from '../Util/RiotAppBar';
 import { Box, TextField, IconButton, InputAdornment } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 

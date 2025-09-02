@@ -6,4 +6,10 @@ public interface MatchInfosService {
 	
 	//버전을 받아오고 라이엇 api를 받아온 후 재가공한 JSON 데이터를 모은 TFTApiProcessor를 반환
 	public TFTApiProcessor getTAP(String version);
+	
+	// 플레이어 id, tag를 받아오고 플레이어 정보 api를 받아온 후 재가공한 JSON 데이터를 모은 LOLRecordProcessor를 반환
+	public LOLRecordProcessor getLRP(String playerId, String playerTag);
+	
+	//버전을 받아오고 라이엇 api를 받아온 후 재가공한 JSON 데이터를 모은 LOLApiProcessor를 반환
+	public LOLApiProcessor getLAP(String version);
 }

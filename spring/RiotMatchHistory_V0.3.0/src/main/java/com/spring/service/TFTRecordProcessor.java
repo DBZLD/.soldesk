@@ -14,9 +14,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.spring.dto.tft.MatchDto;
 import com.spring.dto.tft.RankDto;
-import com.spring.tft.TFTMatchInfo;
-import com.spring.tft.TFTPlayerProfileInfo;
-import com.spring.tft.TFTPlayerRankInfos;
+import com.spring.dto.tft.TFTMatchInfo;
+import com.spring.dto.tft.TFTPlayerProfileInfo;
+import com.spring.dto.tft.TFTPlayerRankInfos;
 import com.spring.util.PuuidDto;
 import com.spring.util.Common;
 import com.spring.util.ProfileDto;
@@ -25,14 +25,14 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 public class TFTRecordProcessor {
-	public boolean bSuccess = true;											//올바른 요청 여부
-	private String latestVersion = setLatestVersion();							//최신 버전
-	private TFTApiProcessor tap = new TFTApiProcessor(latestVersion);			//라이엇 API JSON 데이터
-	private PuuidDto puuidDto = new PuuidDto();									//라이엇 API puuid JSON 데이터
-	private ArrayList<String> matchIds = new ArrayList<>();						//라이엇 API matchId 배열
-	private ArrayList<MatchDto> matchDto = new ArrayList<>();					//라이엇 API match JSON 데이터
-	private ArrayList<RankDto> rankDto = new ArrayList<>();						//라이엇 API rank JSON 데이터
-	private ProfileDto profileDto = new ProfileDto();							//라이엇 API profile JSON 데이터
+	public boolean bSuccess = true;										//올바른 요청 여부
+	private String latestVersion = setLatestVersion();					//최신 버전
+	private TFTApiProcessor tap = new TFTApiProcessor(latestVersion);	//라이엇 API JSON 데이터
+	private PuuidDto puuidDto = new PuuidDto();							//라이엇 API puuid JSON 데이터
+	private ArrayList<String> matchIds = new ArrayList<>();				//라이엇 API matchId 배열
+	private ArrayList<MatchDto> matchDto = new ArrayList<>();			//라이엇 API match JSON 데이터
+	private ArrayList<RankDto> rankDto = new ArrayList<>();				//라이엇 API rank JSON 데이터
+	private ProfileDto profileDto = new ProfileDto();					//라이엇 API profile JSON 데이터
 	
 	public TFTPlayerRankInfos playerRankInfo = new TFTPlayerRankInfos();		//API 정리, 번역한 플레이어 랭크 JSON 데이터
 	public TFTPlayerProfileInfo playerProfileInfo = new TFTPlayerProfileInfo();	//API 정리, 번역한 플레이어 프로필 JSON 데이터
@@ -57,7 +57,6 @@ public class TFTRecordProcessor {
 	
 	//라이엇 API에서 최신 버전을 받아오는 함수
 	public String setLatestVersion() {
-		//빈 String 배열 생성
 		ArrayList<String> versionList = new ArrayList<String>();
 		//API_URL 설정
 		String API_URL = "https://ddragon.leagueoflegends.com/api/versions.json";
@@ -140,7 +139,7 @@ public class TFTRecordProcessor {
 	public void setMatchDto() {
 		//RestTemplate(Spring에서의 HTTP 통신 도구) 생성
 		RestTemplate restTemplate = new RestTemplate();
-		//matchDto 배열 생성
+		//matchInfos 생성
 		ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
 		//받아온 matchIds의 크기만큼 반복
 		for (int i = 0; i < matchIds.size(); i++) {

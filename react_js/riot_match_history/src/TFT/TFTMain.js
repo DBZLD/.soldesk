@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RiotAppBar from '.././RiotAppBar';
+import RiotAppBar from '../Util/RiotAppBar';
 import { Box, IconButton, InputAdornment, Autocomplete, TextField, Typography } from '@mui/material';
 import SearchIcon from "@mui/icons-material/Search";
 import axios from 'axios';
