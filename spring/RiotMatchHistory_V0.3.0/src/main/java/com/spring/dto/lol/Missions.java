@@ -1,6 +1,6 @@
 package com.spring.dto.lol;
 
-public class Missions {
+public class Missions { // 플레이어 미션 정보를 저장하는 클래스
     public int playerScore0;
     public int playerScore1;
     public int playerScore2;

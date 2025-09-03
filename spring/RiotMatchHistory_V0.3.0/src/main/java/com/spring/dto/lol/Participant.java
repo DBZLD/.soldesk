@@ -1,162 +1,165 @@
 package com.spring.dto.lol;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public class Participant { // 매치의 플레이어 상세 정보가 들어있는 클래스
+	//플레이어 정보
+	public String puuid;                      // 플레이어 puuid
+	public String summonerId;                 // 소환사 ID
+	public String riotIdGameName;             // 라이엇 게임 닉네임
+	public String riotIdTagline;              // 라이엇 태그라인
+	public int summonerLevel;                 // 소환사 레벨
+    public int profileIcon;                   // 프로필 아이콘 ID
+    public int participantId;                 // 플레이어 ID
+    
+    //플레이어 매치 통계
+    public int championId;                    // 챔피언 ID
+    public String championName;               // 챔피언 이름
+    public int champLevel;                    // 챔피언 레벨
+    public int champExperience;               // 챔피언 경험치
+    public int championTransform;             // 챔피언 변신 상태 (케인 용)
+    public String individualPosition;         // 포지션(top, mid, etc)
+    public String lane;                       // 라인 (TOP, MID, etc)
+    public String role;                       // 역할 (TOP, JUNGLE, etc)
+    public int kills;                         // 킬 수
+    public int deaths;                        // 사망 횟수
+    public int assists;                       // 어시스트 횟수
+    public int killingSprees;                 // 연속 킬 수
+    public int totalAllyJungleMinionsKilled;  // 아군 정글 몬스터 처치 수
+    public int totalEnemyJungleMinionsKilled; // 적 정글 몬스터 처치 수
+    public int totalMinionsKilled;            // 총 미니언 처치 수
+    public int largestCriticalStrike;         // 최대 치명타
+    public int largestKillingSpree;           // 최대 연속 킬
+    public int largestMultiKill;              // 최대 멀티킬
+    public int longestTimeSpentLiving;        // 최장 생존 시간
+    public String teamPosition;               // 팀 포지션 (TOP, MID, etc)
+    public int timeCCingOthers;               // 군중 제어(Crowd Control) 시간
+    public int timePlayed;                    // 플레이 시간 (초)
+    public int totalTimeCCDealt;              // 총 군중 제어 시간
+    public int totalTimeSpentDead;            // 사망으로 보낸 시간
+    public int tripleKills;                   // 트리플킬 수
+    public int quadraKills;                   // 쿼드라킬 수
+    public int pentaKills;                    // 펜타킬 수
+    public int doubleKills;                   // 더블킬 수
+    public Perks perks;                       // 룬 정보
+    public int spell1Casts;                   // q 사용 횟수
+    public int spell2Casts;                   // w 사용 횟수
+    public int spell3Casts;                   // e 사용 횟수
+    public int spell4Casts;                   // r 사용 횟수
+    public int summoner1Casts;                // 소환사 주문1 사용 횟수
+    public int summoner1Id;                   // 소환사 주문1 ID
+    public int summoner2Casts;                // 소환사 주문2 사용 횟수
+    public int summoner2Id;                   // 소환사 주문2 ID
+    public Challenges challenges;             // 챌린지 정보
+    //골드, 아이템
+    public int goldEarned;                    // 획득 골드
+    public int goldSpent;                     // 사용 골드
+    public int item0;                         // 장비 슬롯 0
+    public int item1;                         // 장비 슬롯 1
+    public int item2;                         // 장비 슬롯 2
+    public int item3;                         // 장비 슬롯 3
+    public int item4;                         // 장비 슬롯 4
+    public int item5;                         // 장비 슬롯 5
+    public int item6;                         // 장비 슬롯 6 (장신구)
+    public int itemsPurchased;                // 총 구매 아이템 수
+    public int consumablesPurchased;          // 소비 아이템 구매 횟수
+    
+    // 핑
+    public int allInPings;                    // 사용한 총공격 핑 횟수
+    public int assistMePings;                 // 사용한 지원 핑 횟수
+    public int basicPings;                    // 사용한 기본 핑 횟수
+    public int commandPings;                  // 사용한 명령 핑 횟수
+    public int dangerPings;                   // 사용한 위험 핑 횟수
+    public int enemyMissingPings;             // 사용한 적 실종 핑 횟수
+    public int enemyVisionPings;              // 사용한 와드 발견 핑 횟수
+    public int getBackPings;                  // 사용한 위험 핑 횟수
+    public int holdPings;                     // 사용한 대기 요청 핑 횟수
+    public int needVisionPings;               // 사용한 시야 요청 핑 횟수
+    public int onMyWayPings;                  // 사용한 이동 핑 횟수
+    public int pushPings;                     // 사용한 push 핑 횟수
+    public int visionClearedPings;            // 사용한 시야 제거 요청 핑 횟수
+    public int retreatPings;                  // 사용한 후퇴 요청 핑 횟수
+    
+    //피해량, 회복량, 받은 피해량, 경감한 피해량
+    public int totalDamageDealt;              // 총 피해량
+    public int totalDamageDealtToChampions;   // 챔피언에게 가한 총 피해량
+    public int totalDamageTaken;              // 받은 피해량
+    public int damageSelfMitigated;           // 경감한 피해량
+    public int totalHeal;                     // 총 회복량
+    public int totalDamageShieldedOnTeammates;// 아군 보호막 총 흡수량
+    public int totalHealsOnTeammates;         // 아군 회복량
+    public int physicalDamageDealt;           // 가한 물리 피해량
+    public int physicalDamageDealtToChampions;// 챔피언에게 입힌 물리 피해량
+    public int physicalDamageTaken;           // 받은 물리 피해량
+    public int magicDamageDealt;              // 가한 마법 피해량
+    public int magicDamageDealtToChampions;   // 챔피언에게 입힌 마법 피해량
+    public int magicDamageTaken;              // 총 받은 마법 피해량
+    public int trueDamageDealt;               // 총 고정 피해량
+    public int trueDamageDealtToChampions;    // 챔피언에게 입힌 고정 피해량
+    public int trueDamageTaken;               // 받은 고정 피해량
+    public int damageDealtToBuildings;        // 구조물에 입힌 피해량
+    public int damageDealtToObjectives;       // 오브젝트에 입힌 피해량
+    public int damageDealtToTurrets;          // 포탑에 입힌 피해량
 
-public class Participant {
-	@JsonProperty("PlayerScore0")
-    public int playerScore0;
-    @JsonProperty("PlayerScore1")
-    public int playerScore1;
-    @JsonProperty("PlayerScore10")
-    public int playerScore10;
-    @JsonProperty("PlayerScore11")
-    public int playerScore11;
-    @JsonProperty("PlayerScore2")
-    public int playerScore2;
-    @JsonProperty("PlayerScore3")
-    public int playerScore3;
-    @JsonProperty("PlayerScore4")
-    public int playerScore4;
-    @JsonProperty("PlayerScore5")
-    public int playerScore5;
-    @JsonProperty("PlayerScore6")
-    public int playerScore6;
-    @JsonProperty("PlayerScore7")
-    public int playerScore7;
-    @JsonProperty("PlayerScore8")
-    public int playerScore8;
-    @JsonProperty("PlayerScore9")
-    public int playerScore9;
-    public int allInPings;
-    public int assistMePings;
-    public int assists;
-    public int baronKills;
-    public int basicPings;
-    public Challenges challenges;
-    public int champExperience;
-    public int champLevel;
-    public int championId;
-    public String championName;
-    public int championTransform;
-    public int commandPings;
-    public int consumablesPurchased;
-    public int damageDealtToBuildings;
-    public int damageDealtToObjectives;
-    public int damageDealtToTurrets;
-    public int damageSelfMitigated;
-    public int dangerPings;
-    public int deaths;
-    public int detectorWardsPlaced;
-    public int doubleKills;
-    public int dragonKills;
-    public boolean eligibleForProgression;
-    public int enemyMissingPings;
-    public int enemyVisionPings;
-    public boolean firstBloodAssist;
-    public boolean firstBloodKill;
-    public boolean firstTowerAssist;
-    public boolean firstTowerKill;
-    public boolean gameEndedInEarlySurrender;
-    public boolean gameEndedInSurrender;
-    public int getBackPings;
-    public int goldEarned;
-    public int goldSpent;
-    public int holdPings;
-    public String individualPosition;
-    public int inhibitorKills;
-    public int inhibitorTakedowns;
-    public int inhibitorsLost;
-    public int item0;
-    public int item1;
-    public int item2;
-    public int item3;
-    public int item4;
-    public int item5;
-    public int item6;
-    public int itemsPurchased;
-    public int killingSprees;
-    public int kills;
-    public String lane;
-    public int largestCriticalStrike;
-    public int largestKillingSpree;
-    public int largestMultiKill;
-    public int longestTimeSpentLiving;
-    public int magicDamageDealt;
-    public int magicDamageDealtToChampions;
-    public int magicDamageTaken;
-    public Missions missions;
-    public int needVisionPings;
-    public int neutralMinionsKilled;
-    public int nexusKills;
-    public int nexusLost;
-    public int nexusTakedowns;
-    public int objectivesStolen;
-    public int objectivesStolenAssists;
-    public int onMyWayPings;
-    public int participantId;
-    public int pentaKills;
-    public Perks perks;
-    public int physicalDamageDealt;
-    public int physicalDamageDealtToChampions;
-    public int physicalDamageTaken;
-    public int placement;
-    public int playerAugment1;
-    public int playerAugment2;
-    public int playerAugment3;
-    public int playerAugment4;
-    public int playerAugment5;
-    public int playerAugment6;
-    public int playerSubteamId;
-    public int profileIcon;
-    public int pushPings;
-    public String puuid;
-    public int quadraKills;
-    public int retreatPings;
-    public String riotIdGameName;
-    public String riotIdTagline;
-    public String role;
-    public int sightWardsBoughtInGame;
-    public int spell1Casts;
-    public int spell2Casts;
-    public int spell3Casts;
-    public int spell4Casts;
-    public int subteamPlacement;
-    public int summoner1Casts;
-    public int summoner1Id;
-    public int summoner2Casts;
-    public int summoner2Id;
-    public String summonerId;
-    public int summonerLevel;
-    public String summonerName;
-    public boolean teamEarlySurrendered;
-    public int teamId;
-    public String teamPosition;
-    public int timeCCingOthers;
-    public int timePlayed;
-    public int totalAllyJungleMinionsKilled;
-    public int totalDamageDealt;
-    public int totalDamageDealtToChampions;
-    public int totalDamageShieldedOnTeammates;
-    public int totalDamageTaken;
-    public int totalEnemyJungleMinionsKilled;
-    public int totalHeal;
-    public int totalHealsOnTeammates;
-    public int totalMinionsKilled;
-    public int totalTimeCCDealt;
-    public int totalTimeSpentDead;
-    public int totalUnitsHealed;
-    public int tripleKills;
-    public int trueDamageDealt;
-    public int trueDamageDealtToChampions;
-    public int trueDamageTaken;
-    public int turretKills;
-    public int turretTakedowns;
-    public int turretsLost;
-    public int unrealKills;
-    public int visionClearedPings;
-    public int visionScore;
-    public int visionWardsBoughtInGame;
-    public int wardsKilled;
-    public int wardsPlaced;
-    public boolean win;
+    //오브젝트, 구조물
+    public boolean firstBloodAssist;          // 첫 킬 어시스트 여부
+    public boolean firstBloodKill;            // 첫 킬 여부
+    public boolean firstTowerAssist;          // 첫 포탑 어시스트 여부
+    public boolean firstTowerKill;            // 첫 포탑 파괴 여부
+    public int objectivesStolen;              // 오브젝트 스틸 수
+    public int objectivesStolenAssists;       // 오브젝트 스틸 어시스트 수
+    public int turretKills;                   // 포탑 처치 수
+    public int turretTakedowns;               // 포탑 제거 횟수
+    public int turretsLost;                   // 잃은 포탑 수
+    public int baronKills;                    // 바론 처치 횟수
+    public int dragonKills;                   // 드래곤 처치 수
+    public int neutralMinionsKilled;          // 중립 몬스터 처치 수
+    public int inhibitorKills;                // 억제기 파괴 수
+    public int inhibitorTakedowns;            // 억제기 막타 횟수
+    public int inhibitorsLost;                // 잃은 억제기 수
+    public int nexusKills;                    // 넥서스 파괴 수
+    public int nexusLost;                     // 잃은 넥서스 수
+    public int nexusTakedowns;                // 넥서스 파괴관여
+    
+    //시야
+    public int detectorWardsPlaced;           // 제어 와드 설치 수
+    public int sightWardsBoughtInGame;        // 시야용 와드 구매 수
+    public int visionScore;                   // 시야 점수
+    public int visionWardsBoughtInGame;       // 시야용 와드 구매 수
+    public int wardsKilled;                   // 와드 제거 수
+    public int wardsPlaced;                   // 와드 설치 수
+    
+    //팀
+    public int teamId;                        // 팀 ID
+    public boolean gameEndedInEarlySurrender; // 조기 항복으로 종료 여부
+    public boolean gameEndedInSurrender;      // 항복으로 종료 여부
+    public boolean teamEarlySurrendered;      // 팀 조기 항복 여부
+    public boolean win;                       // 승리 여부
+    
+    //용도 불명
+    public int PlayerScore0;                  // 플레이어 점수 0?
+    public int PlayerScore1;                  // 플레이어 점수 1?
+    public int PlayerScore2;                  // 플레이어 점수 2?
+    public int PlayerScore3;                  // 플레이어 점수 3?
+    public int PlayerScore4;                  // 플레이어 점수 4?
+    public int PlayerScore5;                  // 플레이어 점수 5?
+    public int PlayerScore6;                  // 플레이어 점수 6?
+    public int PlayerScore7;                  // 플레이어 점수 7?
+    public int PlayerScore8;                  // 플레이어 점수 8?
+    public int PlayerScore9;                  // 플레이어 점수 9?
+    public int PlayerScore10;                 // 플레이어 점수 10?
+    public int PlayerScore11;                 // 플레이어 점수 11?
+    public boolean eligibleForProgression;    // 프로그레션 진행 가능 여부?
+    public int subteamPlacement;              // 서브팀 순위?
+    public int placement;                     // 경기 순위?
+    public int playerAugment1;                // 플레이어 보조 능력치 1?
+    public int playerAugment2;                // 플레이어 보조 능력치 2?
+    public int playerAugment3;                // 플레이어 보조 능력치 3?
+    public int playerAugment4;                // 플레이어 보조 능력치 4?
+    public int playerAugment5;                // 플레이어 보조 능력치 5?
+    public int playerAugment6;                // 플레이어 보조 능력치 6?
+    public int playerSubteamId;               // 서브 팀 ID?
+    public Missions missions;                 // 미션 정보?
+    public String summonerName;               // 소환사 이름?
+    public int totalUnitsHealed;              // 회복한 유닛 수?
+    public int unrealKills;                   // Unreal 킬 수?
 }
+

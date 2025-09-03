@@ -1,11 +1,11 @@
 package com.spring.dto.lol;
 public class Objectives{
-    public Atakhan atakhan;
-    public Baron baron;
-    public Champion champion;
-    public Dragon dragon;
-    public Horde horde;
-    public Inhibitor inhibitor;
-    public RiftHerald riftHerald;
-    public Tower tower;
+    public Objective atakhan;	 // ¾ÆÅ¸Ä­
+    public Objective baron;		 // ³»¼Å ³²ÀÛ
+    public Objective champion;	 // Ã¨ÇÇ¾ð
+    public Objective dragon;	 // µå·¡°ï
+    public Objective horde;		 // °øÇã À¯Ãæ
+    public Objective inhibitor;	 // ¾ïÁ¦±â
+    public Objective riftHerald; // Çù°îÀÇ Àü·É
+    public Objective tower;		 // Å¸¿ö
 }
