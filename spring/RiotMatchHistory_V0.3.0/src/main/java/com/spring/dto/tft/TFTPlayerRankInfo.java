@@ -18,7 +18,7 @@ public class TFTPlayerRankInfo {
 	public String imgURL;	//랭크 이미지 링크
 
 	//rankDto, tap을 받아와서 번역, 정리 후 저장하는 생성자 함수
-	public TFTPlayerRankInfo(RankDto rankDto, TFTApiProcessor tap) {
+	public TFTPlayerRankInfo(TFTRankDto rankDto, TFTApiProcessor tap) {
 		//type에 rankDto.queueType을 할당
 		type = rankDto.queueType;
 		//랭크 타입이 turbo인지 여부를 판단해서 isTurbo에 할당

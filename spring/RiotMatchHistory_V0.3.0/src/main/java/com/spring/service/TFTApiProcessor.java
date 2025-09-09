@@ -17,8 +17,8 @@ import com.spring.dto.tft.TFTItemDto;
 import com.spring.dto.tft.TFTQueue;
 import com.spring.dto.tft.TFTQueueDto;
 import com.spring.dto.tft.TFTRegalia;
-import com.spring.dto.tft.TFTRegaliaApiDto;
 import com.spring.dto.tft.TFTRegaliaDto;
+import com.spring.dto.tft.TFTRegaliaInfoDto;
 import com.spring.dto.tft.TFTTacticianDto;
 import com.spring.dto.tft.TFTTraitDto;
 import com.spring.util.Common;
@@ -32,7 +32,7 @@ public class TFTApiProcessor {	// 버전에 맞는 라이엇 API를 가져오는 클래스
 	
 	public String version;										// 게임 버전
 	public TFTQueueDto queue = new TFTQueueDto();				// 매치 타입 정보, 번역 API
-	public TFTRegaliaDto regalia = new TFTRegaliaDto();			// 티어 정보, 번역 API
+	public TFTRegaliaInfoDto regalia = new TFTRegaliaInfoDto();			// 티어 정보, 번역 API
 	public TFTTraitDto trait = new TFTTraitDto();				// 특성 정보, 번역 API
 	public TFTUnitDto unit = new TFTUnitDto();					// 유닛 정보, 번역 API
 	public TFTItemDto item = new TFTItemDto();					// 아이템 정보, 번역 API
@@ -60,7 +60,7 @@ public class TFTApiProcessor {	// 버전에 맞는 라이엇 API를 가져오는 클래스
 	
 	// version을 매개 변수로 받는 생성자 함수
 	public TFTApiProcessor(String version) {
-		this.version = version;	// 매개 변수로 받은 version을 this.version으로 설정
+		this.version = version;
 		setQueue();				// queue 변수를 설정
 		setRegalia();			// regalia 변수를 설정
 		setTrait();				// trait 변수를 설정
@@ -95,14 +95,14 @@ public class TFTApiProcessor {	// 버전에 맞는 라이엇 API를 가져오는 클래스
 	
 	// regalia 변수를 설정하는 함수
 	public void setRegalia() {
-		TFTRegaliaApiDto regaliaShort = new TFTRegaliaApiDto();
+		TFTRegaliaDto regaliaShort = new TFTRegaliaDto();
 		String API_URL = String.format("https://ddragon.leagueoflegends.com/cdn/%s/data/%s/tft-regalia.json",
 				version,Common.REGIONS);
 		URI uri = null;
 		RestTemplate restTemplate = new RestTemplate();
 		try {
 			uri = new URI(API_URL);
-			regaliaShort = restTemplate.getForObject(uri, TFTRegaliaApiDto.class);
+			regaliaShort = restTemplate.getForObject(uri, TFTRegaliaDto.class);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}

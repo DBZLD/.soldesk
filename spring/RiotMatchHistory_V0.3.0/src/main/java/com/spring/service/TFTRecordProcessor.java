@@ -13,7 +13,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.spring.dto.tft.MatchDto;
-import com.spring.dto.tft.RankDto;
+import com.spring.dto.tft.TFTRankDto;
 import com.spring.dto.tft.TFTMatchInfo;
 import com.spring.dto.tft.TFTPlayerProfileInfo;
 import com.spring.dto.tft.TFTPlayerRankInfos;
@@ -31,7 +31,7 @@ public class TFTRecordProcessor {
 	private PuuidDto puuidDto = new PuuidDto();							// 라이엇 API puuid JSON 데이터
 	private ArrayList<String> matchIds = new ArrayList<>();				// 라이엇 API matchId 배열
 	private ArrayList<MatchDto> matchDto = new ArrayList<>();			// 라이엇 API match JSON 데이터
-	private ArrayList<RankDto> rankDto = new ArrayList<>();				// 라이엇 API rank JSON 데이터
+	private ArrayList<TFTRankDto> rankDto = new ArrayList<>();				// 라이엇 API rank JSON 데이터
 	private ProfileDto profileDto = new ProfileDto();					// 라이엇 API profile JSON 데이터
 	
 	public TFTPlayerRankInfos playerRankInfo = new TFTPlayerRankInfos();		// API 정리, 번역한 플레이어 랭크 JSON 데이터
@@ -170,8 +170,8 @@ public class TFTRecordProcessor {
 		// API_URL로 접속 후 받아온 JSON 데이터를 rankDto에 할당
 		try {
 			URI uri = new URI(API_URL);
-			ResponseEntity<ArrayList<RankDto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
-					new ParameterizedTypeReference<ArrayList<RankDto>>() {
+			ResponseEntity<ArrayList<TFTRankDto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
+					new ParameterizedTypeReference<ArrayList<TFTRankDto>>() {
 					});
 			rankDto = response.getBody();
 		} catch (URISyntaxException e) {
@@ -205,7 +205,7 @@ public class TFTRecordProcessor {
 	}
 	
 	// rankDto의 정보 중 queueType에 맞는 정보를 반환
-	private RankDto getRank(String queueType) {
+	private TFTRankDto getRank(String queueType) {
 		// queueType에 맞는 정보의 index를 받아옴(비존재시 -1 반환)
 		int index = findRankIndex(queueType);
 		
@@ -214,7 +214,7 @@ public class TFTRecordProcessor {
 			return rankDto.get(index);
 		}
 		// 존재하지 않다면 provisional(랭크 없음)객체를 만들어서 반환
-		RankDto provisional = new RankDto();
+		TFTRankDto provisional = new TFTRankDto();
 		provisional.queueType = queueType;
 		
 		if(queueType.equals(Common.TFT_TURBO)){

@@ -12,19 +12,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.spring.dto.lol.LOLRankDto;
 import com.spring.dto.lol.MatchDto;
+import com.spring.dto.lol.MatchTimeLineDto;
 import com.spring.util.Common;
 import com.spring.util.ProfileDto;
 import com.spring.util.PuuidDto;
 
 public class LOLRecordProcessor {
-	public boolean bSuccess = true; 									// 올바른 요청 여부
-	public String latestVersion = setLatestVersion(); 					// 최신 버전
+	public boolean bSuccess = true; 								 	// 올바른 요청 여부
+	public String latestVersion = setLatestVersion(); 				 	// 최신 버전
 	public LOLApiProcessor lap = new LOLApiProcessor(latestVersion); 	// 라이엇 API JSON 데이터
-	public PuuidDto puuidDto = new PuuidDto(); 							// 라이엇 API puuid JSON 데이터
-	public ArrayList<String> matchIds = new ArrayList<>(); 				// 라이엇 API matchId 배열
-	public ArrayList<MatchDto> matchDto = new ArrayList<>();			// 라이엇 API match JSON 데이터
-	public ProfileDto profileDto = new ProfileDto(); 					// 라이엇 API profile JSON 데이터
+	public PuuidDto puuidDto = new PuuidDto(); 						 	// 라이엇 API puuid JSON 데이터
+	public ArrayList<String> matchIds = new ArrayList<>(); 			 	// 라이엇 API matchId 배열
+	public ArrayList<MatchDto> matchDto = new ArrayList<>(); 		 	// 라이엇 API match JSON 데이터
+	public ArrayList<LOLRankDto> rankDto = new ArrayList<>();		 	// 라이엇 API rank JSON 데이터
+	public ProfileDto profileDto = new ProfileDto(); 				 	// 라이엇 API profile JSON 데이터
+	public ArrayList<MatchTimeLineDto> timeLineDto = new ArrayList<>(); // 라이엇 API timeline JSON 데이터
 	
 	// 플레이어 id, tag를 받아서 bSuccess를 설정하고 JSON 데이터를 만드는 생성자 함수
 	public LOLRecordProcessor(String playerId, String playerTag) {
@@ -35,9 +39,12 @@ public class LOLRecordProcessor {
 			setMatchIds();
 			setMatchDto();
 			setProfileDto();
+			setRankDto();
+			setTimeLineDto();
 		}
 	}
-
+	
+	// 라이엇 api에서 최신 버전 가지고 오는 함수
 	public String setLatestVersion() {
 		ArrayList<String> versionList = new ArrayList<String>();
 		// API_URL 설정
@@ -119,30 +126,51 @@ public class LOLRecordProcessor {
 		}
 		// test용 matchId : KR_7769892440
 	}
+
 	// matchIds로 라이엇 API에서 matchDto JSON 데이터를 얻어오는 함수
-		public void setMatchDto() {
-			// RestTemplate(Spring에서의 HTTP 통신 도구) 생성
-			RestTemplate restTemplate = new RestTemplate();
-			// matchInfos 생성
-			ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
-			// 받아온 matchIds의 크기만큼 반복
-			for (int i = 0; i < matchIds.size(); i++) {
-				// API_URL 할당
-				String API_URL = String.format("https://asia.api.riotgames.com/lol/match/v5/matches/%s?api_key=%s",
-						matchIds.get(i), Common.API_KEY);
-				// API_URL에 접속해서 받아온 JSON 데이터를 matchInfo에 할당 후 matchInfo를 matchInfos에 추가
-				try {
-					URI uri = new URI(API_URL);
-					MatchDto matchInfo = restTemplate.getForObject(uri, MatchDto.class);
-					matchInfos.add(matchInfo);
-				} catch (URISyntaxException e) {
-					// 요청이 잘못되었을 경우 예외 처리
-					e.printStackTrace();
-				}
+	public void setMatchDto() {
+		// RestTemplate(Spring에서의 HTTP 통신 도구) 생성
+		RestTemplate restTemplate = new RestTemplate();
+		ArrayList<MatchDto> matchInfos = new ArrayList<MatchDto>();
+		
+		for (int i = 0; i < matchIds.size(); i++) {
+			// API_URL 할당
+			String API_URL = String.format("https://asia.api.riotgames.com/lol/match/v5/matches/%s?api_key=%s",
+					matchIds.get(i), Common.API_KEY);
+			// API_URL에 접속해서 받아온 JSON 데이터를 matchInfo에 할당 후 matchInfo를 matchInfos에 추가
+			try {
+				URI uri = new URI(API_URL);
+				MatchDto matchInfo = restTemplate.getForObject(uri, MatchDto.class);
+				matchInfos.add(matchInfo);
+			} catch (URISyntaxException e) {
+				// 요청이 잘못되었을 경우 예외 처리
+				e.printStackTrace();
 			}
-			//matchInfos의 값을 matchDto에 할당
-			this.matchDto = matchInfos;
 		}
+		// matchInfos의 값을 matchDto에 할당
+		this.matchDto = matchInfos;
+	}
+
+	// puuid로 라이엇 API에서 rankDto JSON 데이터를 얻어오는 함수
+	public void setRankDto() {
+		// API_URL 할당
+		String API_URL = String.format("https://kr.api.riotgames.com/lol/league/v4/entries/by-puuid/%s?api_key=%s",
+				puuidDto.puuid, Common.API_KEY);
+		// RestTemplate(Spring에서의 HTTP 통신 도구) 생성
+		RestTemplate restTemplate = new RestTemplate();
+		// API_URL로 접속 후 받아온 JSON 데이터를 rankDto에 할당
+		try {
+			URI uri = new URI(API_URL);
+			ResponseEntity<ArrayList<LOLRankDto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
+					new ParameterizedTypeReference<ArrayList<LOLRankDto>>() {
+					});
+			rankDto = response.getBody();
+		} catch (URISyntaxException e) {
+			// 요청이 잘못되었을 경우 예외 처리
+			e.printStackTrace();
+		}
+	}
+
 	// puuid로 라이엇 API에서 profileDto JSON 데이터를 얻어오는 함수
 	public void setProfileDto() {
 		// API_URL 할당
@@ -157,6 +185,28 @@ public class LOLRecordProcessor {
 		} catch (URISyntaxException e) {
 			// 요청이 잘못되었을 경우 예외 처리
 			e.printStackTrace();
+		}
+	}
+	
+	// puuid로 라이엇 API에서 timeLineDto JSON 데이터를 얻어오는 함수
+	public void setTimeLineDto() {
+		// RestTemplate(Spring에서의 HTTP 통신 도구) 생성
+		RestTemplate restTemplate = new RestTemplate();
+		ArrayList<MatchTimeLineDto> timeLineList = new ArrayList<>();
+		
+		for (int i = 0; i < matchIds.size(); i++) {
+			// API_URL 할당
+			String API_URL = String.format("https://asia.api.riotgames.com/lol/match/v5/matches/%s/timeline?api_key=%s",
+					matchIds.get(i), Common.API_KEY);
+			// API_URL에 접속해서 받아온 JSON 데이터를 timeLine에 할당 후 timeLine를 timeLineList에 추가
+			try {
+				URI uri = new URI(API_URL);
+				MatchTimeLineDto timeLine = restTemplate.getForObject(uri, MatchTimeLineDto.class);
+				timeLineList.add(timeLine);
+			} catch (URISyntaxException e) {
+				// 요청이 잘못되었을 경우 예외 처리
+				e.printStackTrace();
+			}
 		}
 	}
 }

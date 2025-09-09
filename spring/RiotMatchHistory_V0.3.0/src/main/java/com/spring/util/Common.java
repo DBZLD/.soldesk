@@ -2,7 +2,7 @@ package com.spring.util;
 
 public class Common {
 	//상수를 모아놓은 클래스
-	public static final String API_KEY = "RGAPI-71d7f5b1-864a-4c46-a0c0-4cc50134781a"; //라이엇 API 키(API 접속 시 필요)
+	public static final String API_KEY = "RGAPI-66dd83f4-1505-4bd5-a4d4-f85a9ed23740"; //라이엇 API 키(API 접속 시 필요)
 	public static final String REGIONS = "ko_KR";						//지역(API 접속 시 필요)
 	
 	public static final Integer MATCH_COUNT = 10;						//API로 가져올 매치 수

@@ -1,8 +1,7 @@
 
 package com.spring.dto.tft;
 
-public class RankDto {
-
+public class TFTRankDto {
 	public String puuid;		//플레이어 puuid
 	public String leagueId;		//리그 아이디
 	public String queueType;	//고유 UUID
