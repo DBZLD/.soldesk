@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class MetadataTimeLineDto {
+public class TimeLineMetadataDto {
     private String dataVersion;
     private String matchId;
     private List<String> participants;

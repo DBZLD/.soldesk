@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class MatchTimeLineDto {
-    private MetadataTimeLineDto metadata;
-    private InfoTimeLineDto info;
+    private TimeLineMetadataDto metadata;
+    private TimeLineInfoDto info;
 }

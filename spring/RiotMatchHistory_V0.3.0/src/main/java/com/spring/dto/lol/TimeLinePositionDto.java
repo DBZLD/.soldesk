@@ -3,7 +3,7 @@ package com.spring.dto.lol;
 import lombok.Data;
 
 @Data
-class PositionDto {
+public class TimeLinePositionDto {
     private int x;
     private int y;
 }

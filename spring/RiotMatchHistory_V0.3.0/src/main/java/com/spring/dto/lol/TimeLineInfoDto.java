@@ -5,11 +5,11 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-class InfoTimeLineDto {
+public class TimeLineInfoDto {
     private String endOfGameResult;
     private long frameInterval;
     private long gameId;
-    private List<ParticipantTimeLineDto> participants;
-    private List<FramesTimeLineDto> frames;
+    private List<TimeLineParticipantDto> participants;
+    private List<TimeLineFramesDto> frames;
 
 }

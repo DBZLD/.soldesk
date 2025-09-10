@@ -3,7 +3,7 @@ package com.spring.dto.lol;
 import lombok.Data;
 
 @Data
-class DamageStatsDto {
+public class TimeLineDamageStatsDto {
     private int magicDamageDone;
     private int magicDamageDoneToChampions;
     private int magicDamageTaken;
