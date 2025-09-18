@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class TimeLineParticipantFrameDto {
-    private ChampionStatsDto championStats;
+    private TimeLineChampionStatsDto championStats;
     private int currentGold;
     private TimeLineDamageStatsDto damageStats;
     private int goldPerSecond;

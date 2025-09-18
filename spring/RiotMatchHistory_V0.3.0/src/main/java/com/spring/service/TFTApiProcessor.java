@@ -32,7 +32,7 @@ public class TFTApiProcessor {	// 버전에 맞는 라이엇 API를 가져오는 클래스
 	
 	public String version;										// 게임 버전
 	public TFTQueueDto queue = new TFTQueueDto();				// 매치 타입 정보, 번역 API
-	public TFTRegaliaInfoDto regalia = new TFTRegaliaInfoDto();			// 티어 정보, 번역 API
+	public TFTRegaliaInfoDto regalia = new TFTRegaliaInfoDto(); // 티어 정보, 번역 API
 	public TFTTraitDto trait = new TFTTraitDto();				// 특성 정보, 번역 API
 	public TFTUnitDto unit = new TFTUnitDto();					// 유닛 정보, 번역 API
 	public TFTItemDto item = new TFTItemDto();					// 아이템 정보, 번역 API

@@ -3,7 +3,7 @@ package com.spring.dto.lol;
 import lombok.Data;
 
 @Data
-class ChampionStatsDto {
+class TimeLineChampionStatsDto {
     private int abilityHaste;
     private int abilityPower;
     private int armor;
