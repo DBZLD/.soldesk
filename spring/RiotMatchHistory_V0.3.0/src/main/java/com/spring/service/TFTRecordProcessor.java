@@ -249,7 +249,7 @@ public class TFTRecordProcessor {
 	// matchDto, puuid를 이용해서 번역 및 필요한 정보들만 모아 정리한 matchInfos를 설정하는 함수
 	public void setMatchInfos() {
 		for (int i = 0; i < matchIds.size(); i++) {
-			matchInfo.add(new TFTMatchInfo(matchDto.get(i), playerProfileInfo.puuid));
+			matchInfo.add(new TFTMatchInfo(matchDto.get(i), puuidDto.puuid));
 		}
 	}
 }

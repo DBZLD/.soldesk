@@ -1,6 +1,6 @@
 package com.spring.dto.lol;
 
-public class LOLRankDto {
+public class RankDto {
 	public String puuid;		// 플레이어 puuid
 	public String leagueId;		// 리그 아이디
 	public String queueType;	// 매치 타입
