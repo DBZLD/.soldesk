@@ -1,5 +1,6 @@
 package com.spring.dto.lol;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
@@ -11,9 +12,9 @@ public class LOLMatchInfo {
 	private Integer gameDuration;
 	private String gameVersion;
 	private Integer playerIndex;
-	private List<LOLMatchParticipant> matchParticipants;
-	private List<LOLMatchTeam> teams;
-	
+	private List<LOLMatchParticipant> matchParticipants = new ArrayList<LOLMatchParticipant>();
+	private List<LOLMatchTeam> teams = new ArrayList<LOLMatchTeam>();
+	private LOLTimeLineInfo timeLine;
 	
 	public LOLMatchInfo(MatchDto match, MatchTimeLineDto timeLine, String puuid) {
 		this.queueId = match.info.queueId;
@@ -24,6 +25,9 @@ public class LOLMatchInfo {
 			if(match.metadata.participants.get(i).equals(puuid)) {
 				this.playerIndex = i;
 			}
+		}
+		for(Participant part : match.info.participants) {
+			matchParticipants.add(new LOLMatchParticipant(part));
 		}
 	}
 	

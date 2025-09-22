@@ -50,6 +50,7 @@ public class LOLRecordProcessor {
 			setTimeLineDto();
 
 			setPlayerInfo();
+			setMatchInfo();
 		}
 	}
 
@@ -250,10 +251,13 @@ public class LOLRecordProcessor {
 
 		return pIndex;
 	}
-
+	
+	//플레이어 프로필 데이터 모음
 	public void setPlayerInfo() {
 		playerInfo = new LOLPlayerInfo(puuidDto, profileDto, getRank(Common.SOLO_RANK), getRank(Common.FLEX_RANK));
 	}
+	
+	// 매치 데이터 모음
 	public void setMatchInfo() {
 		for(int i = 0; i < matchIds.size(); i++) {
 			matchInfo.add(new LOLMatchInfo(matchDto.get(i), timeLineDto.get(i), puuidDto.puuid));
