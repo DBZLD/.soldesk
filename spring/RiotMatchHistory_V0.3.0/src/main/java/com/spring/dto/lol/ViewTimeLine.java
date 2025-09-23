@@ -1,5 +1,5 @@
 package com.spring.dto.lol;
 
-public class LOLPerksInfo {
+public class ViewTimeLine {
 
 }

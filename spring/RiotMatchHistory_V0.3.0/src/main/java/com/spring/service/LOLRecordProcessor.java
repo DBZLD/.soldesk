@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.spring.dto.lol.LOLMatchInfo;
-import com.spring.dto.lol.LOLPlayerInfo;
+import com.spring.dto.lol.ViewMatch;
+import com.spring.dto.lol.ViewPlayer;
 import com.spring.dto.lol.RankDto;
 import com.spring.dto.lol.MatchDto;
 import com.spring.dto.lol.MatchTimeLineDto;
@@ -35,8 +35,8 @@ public class LOLRecordProcessor {
 	public ProfileDto profileDto = new ProfileDto(); // 라이엇 API profile JSON 데이터
 	private ArrayList<MatchTimeLineDto> timeLineDto = new ArrayList<>(); // 라이엇 API timeline JSON 데이터
 
-	public LOLPlayerInfo playerInfo = new LOLPlayerInfo(); // 라이엇 API 데이터중 플레이어 프로필 관련 사용할 것만 정리
-	public ArrayList<LOLMatchInfo> matchInfo = new ArrayList<>(); 	// 라이엇 API 데이터중 매치 관련 사용할 것만 정리
+	public ViewPlayer playerInfo = new ViewPlayer(); // 라이엇 API 데이터중 플레이어 프로필 관련 사용할 것만 정리
+	public ArrayList<ViewMatch> matchInfo = new ArrayList<>(); 	// 라이엇 API 데이터중 매치 관련 사용할 것만 정리
 	// 플레이어 id, tag를 받아서 bSuccess를 설정하고 JSON 데이터를 만드는 생성자 함수
 	public LOLRecordProcessor(String playerId, String playerTag) {
 		// 라이엇 API에서 플레이어 id, tag를 이용해서 puuid를 받으면 bSuccess를 true로 설정
@@ -254,13 +254,13 @@ public class LOLRecordProcessor {
 	
 	//플레이어 프로필 데이터 모음
 	public void setPlayerInfo() {
-		playerInfo = new LOLPlayerInfo(puuidDto, profileDto, getRank(Common.SOLO_RANK), getRank(Common.FLEX_RANK));
+		playerInfo = new ViewPlayer(puuidDto, profileDto, getRank(Common.SOLO_RANK), getRank(Common.FLEX_RANK));
 	}
 	
 	// 매치 데이터 모음
 	public void setMatchInfo() {
 		for(int i = 0; i < matchIds.size(); i++) {
-			matchInfo.add(new LOLMatchInfo(matchDto.get(i), timeLineDto.get(i), puuidDto.puuid));
+			matchInfo.add(new ViewMatch(matchDto.get(i), timeLineDto.get(i), puuidDto.puuid));
 		}
 	}
 }

@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import lombok.Data;
 
 @Data
-public class LOLMatchParticipant {
+public class ViewMatchParticipant {
 
 	private String id;						// 플레이어 아아디
 	private String tag;						// 플레이어 태그
 	private Integer summonerLevel;			// 플레이어 레벨
 	private Integer profileIcon;			// 플레이어 아이콘
-		
+	
 	private String position;				// 포지션(정글, 미드)
 	private Integer champId;				// 챔피언 아이디
 	private String champName;				// 챔피언 이름
 	private Integer champLevel;				// 챔피언 레벨
-	private ArrayList<LOLItemInfo> items;	// 아이템 목록(0~6, 6번은 장신구)
-	private LOLPerksInfo perks;				// 룬
+	private ArrayList<ViewItem> items = new ArrayList<ViewItem>();	// 아이템 목록(0~6, 6번은 장신구)
+	private ViewPerks perks;				// 룬
 	private Integer summoner1Id;			// 플레이어 스펠(D)
 	private Integer summoner2Id;			// 플레이어 스펠(F)
 
@@ -34,10 +34,9 @@ public class LOLMatchParticipant {
 	private Integer magicDamage;			// 가한 마법 피해량
 	private Integer trueDamage;				// 기힌 고정 피해량
 	private Integer totalDamageObject;		// 오브젝트에게 가한 피해량
-
+	private Integer teamId;					// 팀 아이디
 	
-	private String teamId;
-	public LOLMatchParticipant(Participant part) {
+	public ViewMatchParticipant(Participant part) {
 		this.id = part.riotIdGameName;
 		this.tag = part.riotIdTagline;
 		this.summonerLevel = part.summonerLevel;
@@ -47,16 +46,16 @@ public class LOLMatchParticipant {
 		this.champId = part.championId;
 		this.champName = part.championName;
 		this.champLevel = part.champLevel;
-		items.add(new LOLItemInfo(part.item0));
-		items.add(new LOLItemInfo(part.item1));
-		items.add(new LOLItemInfo(part.item2));
-		items.add(new LOLItemInfo(part.item3));
-		items.add(new LOLItemInfo(part.item4));
-		items.add(new LOLItemInfo(part.item5));
-		items.add(new LOLItemInfo(part.item6));
+		items.add(new ViewItem(part.item0));
+		items.add(new ViewItem(part.item1));
+		items.add(new ViewItem(part.item2));
+		items.add(new ViewItem(part.item3));
+		items.add(new ViewItem(part.item4));
+		items.add(new ViewItem(part.item5));
+		items.add(new ViewItem(part.item6));
 		this.summoner1Id = part.summoner1Id;
 		this.summoner2Id = part.summoner2Id;
-		
+		this.perks = new ViewPerks(part.perks);
 		this.kills = part.kills;
 		this.deaths = part.deaths;
 		this.assists = part.assists;
@@ -70,5 +69,6 @@ public class LOLMatchParticipant {
 		this.magicDamage = part.magicDamageDealtToChampions;
 		this.trueDamage = part.trueDamageDealtToChampions;
 		this.totalDamageObject = part.damageDealtToObjectives;
+		this.teamId = part.teamId;
 	}
 }

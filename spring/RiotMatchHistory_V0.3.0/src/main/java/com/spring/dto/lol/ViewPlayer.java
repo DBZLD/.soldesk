@@ -6,24 +6,24 @@ import com.spring.util.PuuidDto;
 import lombok.Data;
 
 @Data
-public class LOLPlayerInfo {
+public class ViewPlayer {
 	private String id;
 	private String tag;
 	private String puuid;
 	private String profileIcon;
 	private String level;
-	private LOLRankInfo soloRank;
-	private LOLRankInfo flexRank;
+	private ViewRank soloRank;
+	private ViewRank flexRank;
 	
-	public LOLPlayerInfo(PuuidDto puuid, ProfileDto profile, RankDto solo, RankDto flex) {
+	public ViewPlayer(PuuidDto puuid, ProfileDto profile, RankDto solo, RankDto flex) {
 		this.puuid = puuid.puuid;
 		this.id = puuid.gameName;
 		this.tag = puuid.tagLine;
 		this.profileIcon = profile.profileIconId;
 		this.level = profile.summonerLevel;
-		this.soloRank = new LOLRankInfo(solo);
-		this.flexRank = new LOLRankInfo(flex);
+		this.soloRank = new ViewRank(solo);
+		this.flexRank = new ViewRank(flex);
 	}
-	public LOLPlayerInfo() {
+	public ViewPlayer() {
 	}
 }

@@ -3,7 +3,7 @@ package com.spring.dto.lol;
 import lombok.Data;
 
 @Data
-public class LOLRankInfo {
+public class ViewRank {
 	private String queueType;
 	private String tier;
 	private String rank;
@@ -11,7 +11,7 @@ public class LOLRankInfo {
 	private Integer wins;
 	private Integer losses;
 	
-	public LOLRankInfo(RankDto rank) {
+	public ViewRank(RankDto rank) {
 		this.queueType = rank.queueType;
 		this.tier = rank.tier;
 		this.rank = rank.rank;
@@ -19,6 +19,6 @@ public class LOLRankInfo {
 		this.wins = rank.wins;
 		this.losses = rank.losses;
 	}
-	public LOLRankInfo() {
+	public ViewRank() {
 	}
 }
