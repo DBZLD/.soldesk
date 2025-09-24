@@ -1,6 +1,7 @@
 package com.spring.dto.lol;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import lombok.Data;
 
@@ -16,7 +17,9 @@ public class ViewMatchTeam {
 		for(Ban ban : team.bans) {
 			this.bans.add(new ViewBan(ban));
 		}
-		//todo
+		for(Map.Entry<String, FeatState> entry : team.feats.entrySet()) {
+			this.feats.add(new ViewFeats(entry.getValue()));
+		}
 	}
 	
 	public ViewMatchTeam() {

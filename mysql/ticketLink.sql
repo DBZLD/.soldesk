@@ -1,0 +1,37 @@
+create database tl default character set utf8mb4;
+
+use tl;
+
+CREATE TABLE IF NOT EXISTS performance (
+  per_num       BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  per_id		VARCHAR(200) NOT NULL UNIQUE, 
+  per_title     VARCHAR(200) NOT NULL,
+  per_startD    DATE         NOT NULL,
+  per_endD      DATE         NOT NULL,
+  per_place     VARCHAR(100) NOT NULL,
+  per_runT      VARCHAR(50),
+  per_sche      TEXT,
+  per_price     VARCHAR(100),
+  per_genre     VARCHAR(50),
+  per_poster    VARCHAR(1000),
+  per_address   VARCHAR(255),
+  per_latitude  DECIMAL(11,8),
+  per_longitude DECIMAL(11,8),
+  per_region    VARCHAR(50),
+  per_rank      INT,
+  created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+select *from performance;
+delete from performance;
+drop table performance;
+
+CREATE TABLE IF NOT EXISTS performance_ticket (
+  ticket_id   BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  per_num      BIGINT UNSIGNED NOT NULL,
+  ticket_name VARCHAR(200),
+  ticket_url  VARCHAR(1000),
+  FOREIGN KEY (per_num) REFERENCES performance(per_num) ON DELETE CASCADE
+);
+select *from performance_ticket;
+delete from performance_ticket;
+drop table performance_ticket;
