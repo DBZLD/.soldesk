@@ -4,7 +4,11 @@ use tl;
 
 CREATE TABLE IF NOT EXISTS performance (
   per_num       BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  per_id		VARCHAR(200) NOT NULL UNIQUE, 
+  per_id		VARCHAR(200) NOT NULL UNIQUE,
+  per_requestD  DATE NOT NULL DEFAULT (CURRENT_DATE),
+  per_genreC	VARCHAR(50) DEFAULT NULL,
+  per_regionC	VARCHAR(50) DEFAULT NULL,
+  per_requestT	VARCHAR(50) DEFAULT NULL,
   per_title     VARCHAR(200) NOT NULL,
   per_startD    DATE         NOT NULL,
   per_endD      DATE         NOT NULL,
@@ -18,8 +22,7 @@ CREATE TABLE IF NOT EXISTS performance (
   per_latitude  DECIMAL(11,8),
   per_longitude DECIMAL(11,8),
   per_region    VARCHAR(50),
-  per_rank      INT,
-  created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  per_rank      INT
 );
 select *from performance;
 delete from performance;
