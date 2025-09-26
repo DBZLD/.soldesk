@@ -5,13 +5,13 @@ use tl;
 CREATE TABLE IF NOT EXISTS performance (
   per_num       BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   per_id		VARCHAR(200) NOT NULL UNIQUE,
-  per_requestD  DATE NOT NULL DEFAULT (CURRENT_DATE),
+  per_requestD  VARCHAR(50) DEFAULT (CURRENT_DATE),
   per_genreC	VARCHAR(50) DEFAULT NULL,
   per_regionC	VARCHAR(50) DEFAULT NULL,
   per_requestT	VARCHAR(50) DEFAULT NULL,
   per_title     VARCHAR(200) NOT NULL,
-  per_startD    DATE         NOT NULL,
-  per_endD      DATE         NOT NULL,
+  per_startD    VARCHAR(50) NOT NULL,
+  per_endD      VARCHAR(50)	NOT NULL,
   per_place     VARCHAR(100) NOT NULL,
   per_runT      VARCHAR(50),
   per_sche      TEXT,
@@ -29,7 +29,7 @@ delete from performance;
 drop table performance;
 
 CREATE TABLE IF NOT EXISTS performance_ticket (
-  ticket_id   BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  ticket_num   BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   per_num      BIGINT UNSIGNED NOT NULL,
   ticket_name VARCHAR(200),
   ticket_url  VARCHAR(1000),
