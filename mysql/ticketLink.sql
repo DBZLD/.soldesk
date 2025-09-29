@@ -4,8 +4,9 @@ use tl;
 
 CREATE TABLE IF NOT EXISTS performance (
   per_num       BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  per_id		VARCHAR(200) NOT NULL UNIQUE,
+  per_id		VARCHAR(200) NOT NULL,
   per_requestD  VARCHAR(50) DEFAULT (CURRENT_DATE),
+  per_updateD	VARCHAR(50) NOT NULL,
   per_genreC	VARCHAR(50) DEFAULT NULL,
   per_regionC	VARCHAR(50) DEFAULT NULL,
   per_requestT	VARCHAR(50) DEFAULT NULL,
@@ -27,7 +28,7 @@ CREATE TABLE IF NOT EXISTS performance (
 select *from performance;
 delete from performance;
 drop table performance;
-
+insert into performance(per_id, per_requestD, per_title, per_startD, per_endD, per_place) value("P1234", "20250929", "test", "test", "test", "test"); 
 CREATE TABLE IF NOT EXISTS performance_ticket (
   ticket_num   BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   per_num      BIGINT UNSIGNED NOT NULL,
