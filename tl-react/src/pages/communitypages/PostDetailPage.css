@@ -1,0 +1,117 @@
+  #pageLayout {
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0px 0px 270px;
+  }
+
+  #postLayout {
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    /* margin-bottom: 5px; */
+    border-bottom: 1px grey;
+  }
+
+  #post_head {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  #post_writer {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+
+  #post_date {
+    font-weight: 350;
+    font-size: 14px;
+  }
+
+  #ph_1 {
+    display: flex;
+    gap: 30px;
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+
+  #post_title {
+    width: 500px;
+    font-size: 23px;
+    font-weight: 500;
+    margin: 15px 0px 15px 0px;
+
+  }
+
+  #post_body {
+    margin-bottom: 10px;
+  }
+
+
+
+  .p_i {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid black;
+  }
+
+  .p_n {
+    color: black;
+
+  }
+
+  .p_b {
+    width: 60px;
+    height: 25px;
+    border-radius: 15px;
+    background-color: navy;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 420px;
+  }
+
+  .post_title {
+    font-size: 20px;
+    margin: 15px 0px 0px 10px;
+
+  }
+
+  .post_img {
+    width: 650px;
+    height: 450px;
+    margin: 10px 0px 0px 0px;
+    border-radius: 10px;
+  }
+
+  #pdp_react {
+    display: flex;
+    height: 30px;
+  }
+
+  .pdp_re {
+    all: unset;
+    appearance: none;
+    cursor: pointer;
+    width: 50px;
+    height: 25px;
+    border-radius: 20px;
+    border: 1px solid black;
+    font-size: 13px;
+    font-weight: 400;
+    color: black;
+    margin: 10px 0px 0px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pdp_re_img {
+    width: 20px;
+    height: 20px;
+  }
