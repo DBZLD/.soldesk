@@ -39,5 +39,6 @@ delete from performance_ticket;
 drop table performance_ticket;
 
 -- insert into performance(per_id, per_title, per_startD, per_endD, per_place, per_updateD) value("P1234", "test", "2025", "2025.10.01", "test", "test");
--- select count(*)from performance where per_genreC = "GGGA" and per_requestT = "";
+ select count(*)from performance where per_requestT = "rankConcert";
+ select *from performance where per_requestT = "rank";
 -- select* from performance where per_runT = "1시간";
